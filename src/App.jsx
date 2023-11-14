@@ -5,9 +5,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import "./App.scss";
 function App() {
-<<<<<<< Updated upstream
-  return <>Hei</>;
-=======
   return (
     <>
       <BrowserRouter>
@@ -19,7 +16,6 @@ function App() {
       </BrowserRouter>
     </>
   );
->>>>>>> Stashed changes
 }
 
 export default App;

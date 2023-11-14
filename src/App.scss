@@ -1,0 +1,13 @@
+:root {
+}
+
+.MuiButton-root.MuiButtonBase-root {
+  font-size: 28px;
+  &.primary {
+    background-color: red;
+  }
+
+  &.secondary {
+    background-color: green;
+  }
+}

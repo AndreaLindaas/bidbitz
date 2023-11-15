@@ -1,6 +1,11 @@
 :root {
+  --background: #dde9f6;
+  --hover: #e50f21;
+  --button: #456a55;
 }
-
+body {
+  margin: 0;
+}
 .MuiButton-root.MuiButtonBase-root {
   font-size: 28px;
   &.primary {

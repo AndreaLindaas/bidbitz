@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import "./Home.scss";
+import MediaCard from "../components/card/card";
 export default function Home() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function Home() {
           to your new house. Not into buying?Sell almost anything you want!
         </p>
       </div>
+      <MediaCard />
     </>
   );
 }

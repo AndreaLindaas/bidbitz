@@ -21,8 +21,11 @@ export default function Header() {
   return (
     <div>
       <nav>
-        <div className="menu-bar" onClick={toggleMenu}>
+        <Link to="/">
           <span className="logo">BidBitz</span>
+        </Link>
+
+        <div className="menu-bar" onClick={toggleMenu}>
           <MenuIcon />
         </div>
         <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>

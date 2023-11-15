@@ -3,15 +3,20 @@
 }
 nav {
   background-color: var(--background);
-}
-.menu-bar {
   .logo {
-    font-size: 30px;
-  }
-  svg {
-    font-size: 50px;
     position: absolute;
-    right: 10px;
+    left: 20px;
+    top: 20px;
+    font-size: 20px;
+    color: black;
+  }
+  .menu-bar {
+    text-align: right;
+    padding-top: 10px;
+    svg {
+      font-size: 40px;
+      margin-right: 10px;
+    }
   }
 }
 .menu-list {

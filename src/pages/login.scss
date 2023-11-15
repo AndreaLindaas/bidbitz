@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+}
+form {
+  margin: 0 auto;
+  width: 270px;
+  .MuiButton-root.MuiButtonBase-root {
+    background-color: var(--button);
+    margin-top: 30px;
+  }
+}
+.text-login {
+  text-align: center;
+}

@@ -2,13 +2,13 @@ import { TextField } from "@mui/material";
 import "./login.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-export default function Login() {
+export default function Register() {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
   };
   return (
     <>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form onSubmit={handleOnSubmit}>
         <div>
           <TextField
@@ -32,7 +32,7 @@ export default function Login() {
       </form>
       <p className="text-login">
         Don't have an account?
-        <Link to="/register">
+        <Link to="#">
           <span>Sign up here!</span>
         </Link>
       </p>

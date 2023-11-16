@@ -1,10 +1,11 @@
 import { TextField } from "@mui/material";
-import "./login.scss";
+import "./Login.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 export default function Login() {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    console.log(event.target.elements);
   };
   return (
     <>

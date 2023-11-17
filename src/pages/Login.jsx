@@ -6,7 +6,7 @@ import { API_URL } from "../lib/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ export default function Login() {
       const data = await res.json();
 
       if (data.statusCode > 300) {
-        throw new Error(data.status + ". Please try again");
+        setErrorMessage(data.errors[0].message);
       } else {
         navigate("/");
       }
@@ -39,11 +39,9 @@ export default function Login() {
       localStorage.setItem("avatar", data.avatar);
     } catch (error) {
       console.warn("An error occurred", error);
-      setError(error);
     }
   };
 
-  if (error) return <div>An error occurred: {error?.message}</div>;
   return (
     <>
       <h1>Login</h1>
@@ -76,6 +74,7 @@ export default function Login() {
           <span>Sign up here!</span>
         </Link>
       </p>
+      {errorMessage}
     </>
   );
 }

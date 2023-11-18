@@ -8,7 +8,6 @@ export default function Listings() {
     fetch(`${API_URL}/listings/?_bids=true`, {})
       .then((response) => response.json())
       .then((listings) => {
-        console.log(listings);
         setListings(listings);
       });
   }, []);

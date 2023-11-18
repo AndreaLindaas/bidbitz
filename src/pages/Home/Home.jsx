@@ -1,11 +1,8 @@
 import "./Home.scss";
-import MediaCard from "../../components/listing/listing";
-import { API_URL } from "../../lib/constants";
-import { useState } from "react";
-import Listings from "../../components/listings/listings";
-export default function Home() {
-  console.log(`${API_URL}/listings/`);
 
+import Listings from "../../components/listings/listings";
+
+export default function Home() {
   return (
     <>
       <div className="introduction-container">
@@ -18,7 +15,6 @@ export default function Home() {
         </p>
       </div>
       <Listings />
-      <MediaCard />
     </>
   );
 }

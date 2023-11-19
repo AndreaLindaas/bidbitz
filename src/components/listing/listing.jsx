@@ -18,7 +18,7 @@ export default function Listing(props) {
     const lastBid = listing.bids[listing.bids.length - 1];
 
     if (lastBid) {
-      return <div>{lastBid.amount} Credits</div>;
+      return <span>{lastBid.amount} Credits</span>;
     }
     return null;
   };
@@ -44,8 +44,9 @@ export default function Listing(props) {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {lastBid()}
-
-            <div>{listing._count.bids} Bids</div>
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {listing._count.bids} Bids
           </Typography>
         </CardContent>
       </Card>

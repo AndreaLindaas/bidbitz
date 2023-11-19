@@ -1,8 +1,14 @@
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-export default function PlaceBid() {
+
+export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");
+
+  console.log(props);
+  const placeBidClicked = () => {
+    console.log("halllooooo");
+  };
 
   if (userEmail) {
     return (
@@ -14,7 +20,11 @@ export default function PlaceBid() {
           type="number"
         />
         <div>
-          <Button className="primary bid-btn" variant="contained">
+          <Button
+            onClick={placeBidClicked}
+            className="primary bid-btn"
+            variant="contained"
+          >
             Place bid
           </Button>
         </div>

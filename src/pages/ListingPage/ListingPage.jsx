@@ -4,28 +4,35 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./ListingPage.scss";
 import PlaceBid from "../../components/placeBid/placeBid";
+import Moment from "react-moment";
 
-useEffect;
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [highestBid, setHighestBid] = useState(0);
   const params = useParams();
-  console.log(params.listingId);
+
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}/?_bids=true&_seller=true`)
       .then((response) => response.json())
       .then((l) => {
-        console.log(l);
         setlisting(l);
+
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    lastBid();
+  }, [listing]);
+
   const showMainImage = () => {
     if (listing.media && listing.media.length > 0) {
       return listing.media[0];
     }
     return "https://www.crazychap.com/uploads/no-banner.jpg";
   };
+
   const lastBid = () => {
     if (!listing.bids) {
       return null;
@@ -33,6 +40,7 @@ export default function ListingPage() {
     const lastBid = listing.bids[listing.bids.length - 1];
 
     if (lastBid) {
+      setHighestBid(lastBid.amount);
       return (
         <div>
           <span className="cb-color">Current Bid:</span>
@@ -47,8 +55,13 @@ export default function ListingPage() {
     const bids = listing.bids.map((bid) => {
       return (
         <li key={bid.id}>
-          {bid.created}
-          {bid.amount} Credits
+          <span className="single-bid">
+            <span className="bold-credit"> {bid.amount} Credits</span>
+            <span> {bid.bidderName}</span>
+          </span>
+          <span className="bid-date">
+            <Moment format="hh:mm DD/MM/YYYY">{new Date().getTime()}</Moment>
+          </span>
         </li>
       );
     });
@@ -68,23 +81,29 @@ export default function ListingPage() {
     <div className="listing-container">
       <img src={showMainImage()} alt="" />
       <h1>{listing.title}</h1>
+      <div className="seller-container">
+        <div className="seller-bold">Seller</div>
+        <Link to="#">
+          <div className="seller">
+            <img src={sellerImage()} alt="" />
+            <div>{listing.seller.name}</div>
+          </div>
+        </Link>
+      </div>
       <div className="bid-ends">
         <div>{listing.endsAt}</div>
       </div>
       <div className="bid">
-        <div>{lastBid()}</div>
+        <div>{highestBid}</div>
         <div>{listing._count.bids} Bids</div>
-        <PlaceBid />
+        <PlaceBid highestBid={highestBid} />
       </div>
-      <div>
-        <img src={sellerImage()} alt="" />
-        <div>{listing.seller.name}</div>
-        <Link to="#">View sellers profile</Link>
-      </div>
-      <h3>Description</h3>
+
+      <h2>Description:</h2>
       <p>{listing.description}</p>
-      <div>
+      <div className="bids">
         <h3>All bids</h3>
+
         <ul>{allBids()}</ul>
       </div>
     </div>

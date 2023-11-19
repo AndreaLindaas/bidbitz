@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target.elements);
+
     const { email, password } = event.target.elements;
     const payload = {
       email: email.value,

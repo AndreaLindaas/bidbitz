@@ -9,6 +9,9 @@ body {
 main {
   margin: 20px;
 }
+li {
+  list-style-type: none;
+}
 .MuiButton-root.MuiButtonBase-root {
   &.primary {
     background-color: var(--button);

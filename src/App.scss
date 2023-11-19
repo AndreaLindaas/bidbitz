@@ -1,14 +1,17 @@
 :root {
   --background: #dde9f6;
   --button: #669bd9;
+  --bid: #f7f8fa;
 }
 body {
   margin: 0;
 }
+main {
+  margin: 20px;
+}
 .MuiButton-root.MuiButtonBase-root {
-  font-size: 28px;
   &.primary {
-    background-color: red;
+    background-color: var(--button);
   }
 
   &.secondary {

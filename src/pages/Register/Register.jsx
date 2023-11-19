@@ -1,42 +1,38 @@
 import { TextField } from "@mui/material";
-import "./Login.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { API_URL } from "../lib/constants";
+import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-export default function Login() {
+export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    const { email, password, name, url } = event.target.elements;
     console.log(event.target.elements);
-    const { email, password } = event.target.elements;
+
     const payload = {
+      name: name.value,
       email: email.value,
       password: password.value,
+      url: url.value,
     };
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
-          "Content-type": "application/json; charset=UTF-8",
+          "Content-type": "application/json",
         },
       });
+      const resJSON = await res.json();
 
-      const data = await res.json();
-
-      if (data.statusCode > 300) {
-        setErrorMessage(data.errors[0].message);
+      if (resJSON.statusCode > 300) {
+        setErrorMessage(resJSON.errors[0].message);
       } else {
-        navigate("/");
+        navigate("/login");
       }
-
-      localStorage.setItem("access_token", data.accessToken);
-      localStorage.setItem("user_email", data.email);
-      localStorage.setItem("credits", data.credits);
-      localStorage.setItem("avatar", data.avatar);
     } catch (error) {
       console.warn("An error occurred", error);
     }
@@ -44,8 +40,17 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form onSubmit={handleOnSubmit}>
+        <div>
+          <TextField
+            id="standard-basic"
+            name="name"
+            label="Name"
+            variant="standard"
+            fullWidth
+          />
+        </div>
         <div>
           <TextField
             id="standard-basic"
@@ -64,17 +69,26 @@ export default function Login() {
             fullWidth
           />
         </div>
+        <div>
+          <TextField
+            id="standard-basic"
+            name="url"
+            label="Url"
+            variant="standard"
+            fullWidth
+          />
+        </div>
         <Button type="submit" variant="contained">
           Login
         </Button>
       </form>
+      {errorMessage}
       <p className="text-login">
-        Don't have an account?
-        <Link to="/register">
-          <span>Sign up here!</span>
+        Allredy have an account?
+        <Link to="#">
+          <span>Login here!</span>
         </Link>
       </p>
-      {errorMessage}
     </>
   );
 }

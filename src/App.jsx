@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import "./App.scss";
 import Register from "./pages/Register/Register";
 import ListingPage from "./pages/ListingPage/ListingPage";
+import CreateListing from "./pages/CreateListing/CreateListing";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" index element={<Home />}></Route>
+            <Route path="/create" element={<CreateListing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/listing/:listingId" element={<ListingPage />} />

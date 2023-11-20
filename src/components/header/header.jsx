@@ -37,6 +37,9 @@ export default function Header() {
               <Link to="/">Home</Link>
             </div>
             <div>
+              <Link to="/create">Create listing</Link>
+            </div>
+            <div>
               <Link to="#">Sell items</Link>
             </div>
             <div>

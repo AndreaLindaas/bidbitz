@@ -2,9 +2,13 @@ import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+PlaceBid.propTypes = {
+  highestBid: PropTypes.string,
+};
 export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");
   const accessToken = localStorage.getItem("access_token");
@@ -17,6 +21,10 @@ export default function PlaceBid(props) {
     const amount = event.target.elements;
     const bidAmount = amount.amount.value;
     console.log(props);
+
+    if (bidAmount <= props.highestBid) {
+      return;
+    }
 
     try {
       const res = await fetch(`${API_URL}/listings/${params.listingId}/bids`, {
@@ -38,10 +46,6 @@ export default function PlaceBid(props) {
     } catch (error) {
       console.warn("An error occurred", error);
     }
-    if (bidAmount > props) {
-      bidAmount;
-    }
-    return <div>Amount to small</div>;
   };
 
   if (userEmail) {

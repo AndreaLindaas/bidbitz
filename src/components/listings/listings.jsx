@@ -5,7 +5,10 @@ import Listing from "../listing/listing";
 export default function Listings() {
   const [listings, setListings] = useState([]);
   useEffect(() => {
-    fetch(`${API_URL}/listings/?_bids=true`, {})
+    fetch(
+      `${API_URL}/listings/?_bids=true&limit=10&sort=endsAt&sortOrder=asc&_active=true`,
+      {}
+    )
       .then((response) => response.json())
       .then((listings) => {
         setListings(listings);

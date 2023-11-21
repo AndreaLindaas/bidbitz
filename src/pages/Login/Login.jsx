@@ -38,6 +38,7 @@ export default function Login() {
       localStorage.setItem("user_email", data.email);
       localStorage.setItem("credits", data.credits);
       localStorage.setItem("avatar", data.avatar);
+      localStorage.setItem("name", data.name);
     } catch (error) {
       console.warn("An error occurred", error);
     }
@@ -53,6 +54,7 @@ export default function Login() {
             name="email"
             label="Email"
             type="email"
+            placeholder="...@stud.noroff.no"
             variant="standard"
             fullWidth
           />
@@ -63,6 +65,7 @@ export default function Login() {
             name="password"
             label="Password"
             type="password"
+            placeholder="Password"
             variant="standard"
             fullWidth
           />

@@ -43,7 +43,7 @@ export default function Header() {
               <Link to="#">Sell items</Link>
             </div>
             <div>
-              <Link to="#">Logout</Link>
+              <Link to="/logout">Logout</Link>
             </div>
           </div>
         </Drawer>

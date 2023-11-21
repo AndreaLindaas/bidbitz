@@ -4,6 +4,7 @@ import { API_URL } from "../../lib/constants";
 import { useNavigate } from "react-router-dom";
 export default function CreateListing() {
   const navigate = useNavigate();
+
   const createTheListing = (event) => {
     event.preventDefault();
 
@@ -28,6 +29,7 @@ export default function CreateListing() {
       .then((response) => response.json())
       .then((data) => {
         console.log("her er data", data);
+
         navigate("/listing/" + data.id);
       })
       .catch((error) => {

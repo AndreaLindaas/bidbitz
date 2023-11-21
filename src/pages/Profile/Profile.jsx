@@ -6,14 +6,17 @@ import Button from "@mui/material/Button";
 import { API_URL } from "../../lib/constants";
 import { useEffect } from "react";
 import { useState } from "react";
+import "./Profile.scss";
+import Listing from "../../components/listing/listing";
 export default function Profile() {
   const [profile, setProfile] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
-    console.log(profile);
-    fetch(`${API_URL}/profiles/${name}`, {
+
+    fetch(`${API_URL}/profiles/${name}?_listings=true`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${accessToken}`,
@@ -22,31 +25,67 @@ export default function Profile() {
       .then((response) => response.json())
       .then((l) => {
         setProfile(l);
-        console.log(profile);
+        setIsLoading(false);
+        console.log(l);
       });
   }, []);
+  const profileImage = () => {
+    if (profile.avatar) {
+      return profile.avatar;
+    }
+    return "https://www.kindpng.com/picc/m/9-93879_computer-icons-user-image-person-silhouette-user-silhouettes.png";
+  };
+  const showWins = () => {
+    const wins = profile.wins.length;
+    return wins;
+  };
+
+  const renderMyListings = () => {
+    return profile.listings.map((listing) => {
+      return <Listing listing={listing} key={listing.id} />;
+    });
+  };
+
+  if (isLoading) {
+    return <div></div>;
+  }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 70, height: 70 }}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {profile.name}
-        </Typography>
-        <Button variant="contained" size="small">
-          Change Avatar
-        </Button>
-        <Typography variant="body2" color="text.secondary">
-          {profile.credits}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Won
-        </Typography>
-      </CardContent>
-    </Card>
+    <>
+      <Card sx={{ maxWidth: 345 }}>
+        <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
+        <CardContent>
+          <Typography
+            className="name"
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
+            {profile.name}
+          </Typography>
+          <Button variant="contained" size="small">
+            Change Avatar
+          </Button>
+          <div className="credit-won">
+            <Typography variant="body2" color="text.secondary">
+              Credits
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
+              Won
+            </Typography>
+          </div>
+          <div className="credit-won-result">
+            <Typography variant="body2" color="text.secondary">
+              {profile.credits}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {showWins()}
+            </Typography>
+          </div>
+        </CardContent>
+      </Card>
+      {renderMyListings()}
+    </>
   );
 }

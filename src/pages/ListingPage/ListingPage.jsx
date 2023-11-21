@@ -68,15 +68,16 @@ export default function ListingPage() {
     return bids.reverse();
   };
 
-  if (isLoading) {
-    return <div></div>;
-  }
   const sellerImage = () => {
     if (listing.seller.avatar) {
       return listing.seller.avatar;
     }
     return "https://www.crazychap.com/uploads/no-banner.jpg";
   };
+
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <div className="listing-container">
       <img src={showMainImage()} alt="" />

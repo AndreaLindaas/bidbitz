@@ -15,10 +15,12 @@ export default function Listing(props) {
   }
 
   const lastBid = () => {
-    const lastBid = listing.bids[listing.bids.length - 1];
+    if (listing.bids) {
+      const lastBid = listing.bids[listing.bids.length - 1];
 
-    if (lastBid) {
-      return <span>{lastBid.amount} Credits</span>;
+      if (lastBid) {
+        return <span>{lastBid.amount} Credits</span>;
+      }
     }
     return null;
   };
@@ -45,9 +47,11 @@ export default function Listing(props) {
           <Typography variant="body2" color="text.secondary">
             {lastBid()}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {listing._count.bids} Bids
-          </Typography>
+          {listing._count && (
+            <Typography variant="body2" color="text.secondary">
+              {listing._count.bids} Bids
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Link>

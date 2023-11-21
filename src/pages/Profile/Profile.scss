@@ -1,0 +1,23 @@
+.MuiPaper-root {
+  .MuiAvatar-root.MuiAvatar-circular {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .MuiCardContent-root {
+    .MuiTypography-root.name {
+      text-align: center;
+    }
+    button {
+      margin: 0 auto;
+      display: flex;
+    }
+    .credit-won {
+      display: flex;
+      justify-content: space-around;
+    }
+    .credit-won-result {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}

@@ -1,17 +1,18 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar } from "@mui/material";
+import { Avatar, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { API_URL } from "../../lib/constants";
 import { useEffect } from "react";
 import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
+
 export default function Profile() {
   const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isInputVisible, setIsInputVisible] = useState(false);
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
@@ -46,6 +47,10 @@ export default function Profile() {
     });
   };
 
+  const showInput = () => {
+    console.log("hei");
+  };
+
   if (isLoading) {
     return <div></div>;
   }
@@ -63,9 +68,10 @@ export default function Profile() {
           >
             {profile.name}
           </Typography>
-          <Button variant="contained" size="small">
+          <Button variant="contained" size="small" onClick={showInput}>
             Change Avatar
           </Button>
+
           <div className="credit-won">
             <Typography variant="body2" color="text.secondary">
               Credits

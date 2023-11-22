@@ -1,4 +1,6 @@
 .MuiPaper-root {
+  margin: 20px 0;
+
   .MuiAvatar-root.MuiAvatar-circular {
     margin: 0 auto;
     margin-top: 20px;
@@ -14,6 +16,12 @@
     .credit-won {
       display: flex;
       justify-content: space-around;
+      p {
+        font-weight: bold;
+        color: black;
+        margin-top: 20px;
+        font-size: 20px;
+      }
     }
     .credit-won-result {
       display: flex;

@@ -1,0 +1,76 @@
+.listing-container {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+  .bid-ends {
+    background-color: var(--background);
+    padding: 30px 0;
+    margin: 0 auto;
+  }
+  .cb-color {
+    color: grey;
+  }
+  .credit-nr {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .bid {
+    background-color: var(--bid);
+    padding: 30px 0 50px 0;
+    margin: 0px auto 30px auto;
+  }
+
+  .primary.bid-btn {
+    margin-top: 30px;
+  }
+  .seller-container {
+    border-bottom: solid 1px var(--background);
+    border-top: solid 1px var(--background);
+    padding: 20px 0;
+    margin-bottom: 30px;
+  }
+  .seller-bold {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  .seller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 60px;
+    }
+  }
+  .single-bid {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bids {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    h3 {
+      text-align: center;
+    }
+    ul {
+      padding: 0;
+      li {
+        padding: 10px;
+      }
+      li:nth-child(odd) {
+        background: var(--bid);
+      }
+    }
+    .bold-credit {
+      font-weight: bold;
+    }
+  }
+  .bid-date {
+    color: grey;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,23 @@
+:root {
+  --background: #dde9f6;
+  --button: #669bd9;
+  --bid: #f7f8fa;
+}
+body {
+  margin: 0;
+}
+main {
+  margin: 20px;
+}
+li {
+  list-style-type: none;
+}
+.MuiButton-root.MuiButtonBase-root {
+  &.primary {
+    background-color: var(--button);
+  }
+
+  &.secondary {
+    background-color: grey;
+  }
+}

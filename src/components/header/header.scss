@@ -1,0 +1,29 @@
+:root {
+  --background: #dde9f6;
+}
+nav {
+  background-color: var(--background);
+  .logo {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 20px;
+    color: black;
+  }
+  .menu-bar {
+    text-align: right;
+    padding-top: 10px;
+    height: 56px;
+    svg {
+      font-size: 40px;
+      margin-right: 10px;
+    }
+  }
+}
+.menu-list {
+  text-align: right;
+  margin-right: 10px;
+  div {
+    padding: 10px 0;
+  }
+}

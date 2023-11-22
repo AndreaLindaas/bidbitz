@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, TextField } from "@mui/material";
+import { Avatar, Box, Modal, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { API_URL } from "../../lib/constants";
 import { useEffect } from "react";
@@ -12,7 +12,8 @@ import Listing from "../../components/listing/listing";
 export default function Profile() {
   const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
+
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
@@ -36,6 +37,12 @@ export default function Profile() {
     }
     return "https://www.kindpng.com/picc/m/9-93879_computer-icons-user-image-person-silhouette-user-silhouettes.png";
   };
+  const avatarModalOpen = () => {
+    setIsChangeModalAvatarOpen(true);
+  };
+  const avatarModalClose = () => {
+    setIsChangeModalAvatarOpen(false);
+  };
   const showWins = () => {
     const wins = profile.wins.length;
     return wins;
@@ -47,8 +54,10 @@ export default function Profile() {
     });
   };
 
-  const showInput = () => {
-    console.log("hei");
+  const changeAvatarUrl = (event) => {
+    event.preventDefault();
+    const urlChange = event.target.elements.urlChange;
+    console.log(urlChange.value);
   };
 
   if (isLoading) {
@@ -65,11 +74,10 @@ export default function Profile() {
             gutterBottom
             variant="h5"
             component="div"
-            kat={profile.name}
           >
             {profile.name}
           </Typography>
-          <Button variant="contained" size="small" onClick={showInput}>
+          <Button variant="contained" size="small" onClick={avatarModalOpen}>
             Change Avatar
           </Button>
 
@@ -93,6 +101,43 @@ export default function Profile() {
         </CardContent>
       </Card>
       {renderMyListings()}
+      <Modal
+        open={isChangeModalAvatarOpen}
+        onClose={avatarModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modal">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Change Avatar url
+          </Typography>
+          <form onSubmit={changeAvatarUrl}>
+            <TextField
+              id="standard-basic"
+              label="Avatar url"
+              type="text"
+              variant="standard"
+              fullWidth
+              name="urlChange"
+            />
+
+            <div>
+              <Button type="submit" variant="contained" size="small">
+                Change Avatar
+              </Button>
+
+              <Button
+                variant="contained"
+                className="secondary"
+                size="small"
+                onClick={avatarModalClose}
+              >
+                Close
+              </Button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </>
   );
 }

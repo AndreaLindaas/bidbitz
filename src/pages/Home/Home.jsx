@@ -1,12 +1,8 @@
 import "./Home.scss";
 
 import Listings from "../../components/listings/listings";
-import PropTypes from "prop-types";
-Home.propTypes = {
-  kat: PropTypes.string,
-};
-export default function Home(props) {
-  console.log(props.kat);
+
+export default function Home() {
   return (
     <>
       <div className="introduction-container">

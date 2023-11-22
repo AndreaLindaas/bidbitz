@@ -65,6 +65,7 @@ export default function Profile() {
             gutterBottom
             variant="h5"
             component="div"
+            kat={profile.name}
           >
             {profile.name}
           </Typography>

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Drawer } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./header.scss";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const accessToken = localStorage.getItem("access_token");
   const toggleMenu = () => {
     if (menuOpen) {
       setMenuOpen(false);
@@ -17,37 +18,60 @@ export default function Header() {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+  if (accessToken) {
+    return (
+      <div>
+        <nav>
+          <Link to="/">
+            <span className="logo">BidBitz</span>
+          </Link>
 
-  return (
-    <div>
-      <nav>
-        <Link to="/">
-          <span className="logo">BidBitz</span>
-        </Link>
-
-        <div className="menu-bar" onClick={toggleMenu}>
-          <MenuIcon />
-        </div>
-        <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
-          <div className="menu-list">
-            <div>
-              <Link to="/login">Login</Link>
-            </div>
-            <div>
-              <Link to="/">Home</Link>
-            </div>
-            <div>
-              <Link to="/create">Create listing</Link>
-            </div>
-            <div>
-              <Link to="#">Sell items</Link>
-            </div>
-            <div>
-              <Link to="/logout">Logout</Link>
-            </div>
+          <div className="menu-bar" onClick={toggleMenu}>
+            <MenuIcon />
           </div>
-        </Drawer>
-      </nav>
-    </div>
-  );
+
+          <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
+            <div className="menu-list">
+              <div>
+                <Link to="/">Home</Link>
+              </div>
+              <div>
+                <Link to="/profile">Profile</Link>
+              </div>
+              <div>
+                <Link to="/create">Sell items</Link>
+              </div>
+              <div>
+                <Link to="/logout">Logout</Link>
+              </div>
+            </div>
+          </Drawer>
+        </nav>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <nav>
+          <Link to="/">
+            <span className="logo">BidBitz</span>
+          </Link>
+
+          <div className="menu-bar" onClick={toggleMenu}>
+            <MenuIcon />
+          </div>
+          <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
+            <div className="menu-list">
+              <div>
+                <Link to="/login">Login</Link>
+              </div>
+              <div>
+                <Link to="/">Home</Link>
+              </div>
+            </div>
+          </Drawer>
+        </nav>
+      </div>
+    );
+  }
 }

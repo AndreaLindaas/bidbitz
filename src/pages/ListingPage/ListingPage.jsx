@@ -3,7 +3,7 @@ import { API_URL } from "../../lib/constants";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./ListingPage.scss";
-import PlaceBid from "../../components/placeBid/placeBid";
+import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
 
 export default function ListingPage() {

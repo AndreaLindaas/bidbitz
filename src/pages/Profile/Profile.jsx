@@ -13,7 +13,7 @@ export default function Profile() {
   const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
-
+  const [newProfileAvatar, setNewProfileAvatar] = useState("");
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
@@ -28,7 +28,6 @@ export default function Profile() {
       .then((l) => {
         setProfile(l);
         setIsLoading(false);
-        console.log(l);
       });
   }, []);
   const profileImage = () => {
@@ -54,10 +53,36 @@ export default function Profile() {
     });
   };
 
+  const avatarUrlChanged = (event) => {
+    console.log();
+    setNewProfileAvatar(event.target.value);
+  };
+
   const changeAvatarUrl = (event) => {
     event.preventDefault();
     const urlChange = event.target.elements.urlChange;
-    console.log(urlChange.value);
+
+    const payload = {
+      avatar: urlChange.value,
+    };
+
+    const accessToken = localStorage.getItem("access_token");
+    fetch(`${API_URL}/profiles/${profile.name}/media`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        localStorage.setItem("avatar", result.avatar);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log("noe gikk galt", error);
+      });
   };
 
   if (isLoading) {
@@ -109,16 +134,23 @@ export default function Profile() {
       >
         <Box className="modal">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Change Avatar url
+            Change Avatar
           </Typography>
+          <Avatar
+            alt=""
+            src={newProfileAvatar}
+            sx={{ width: 70, height: 70 }}
+          />
           <form onSubmit={changeAvatarUrl}>
             <TextField
+              onChange={avatarUrlChanged}
               id="standard-basic"
               label="Avatar url"
               type="text"
               variant="standard"
               fullWidth
               name="urlChange"
+              defaultValue={profile.avatar}
             />
 
             <div>

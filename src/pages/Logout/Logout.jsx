@@ -8,6 +8,7 @@ export default function Logout() {
     localStorage.removeItem("user_email");
     localStorage.removeItem("credits");
     localStorage.removeItem("avatar");
+    localStorage.removeItem("name");
     navigate("/");
   });
   return <div>Logging you out.</div>;

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 PlaceBid.propTypes = {
-  highestBid: PropTypes.string,
+  highestBid: PropTypes.number,
 };
 export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");

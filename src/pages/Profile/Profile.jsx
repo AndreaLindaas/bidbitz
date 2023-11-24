@@ -27,6 +27,7 @@ export default function Profile() {
       .then((response) => response.json())
       .then((l) => {
         setProfile(l);
+        setNewProfileAvatar(l.avatar);
         setIsLoading(false);
       });
   }, []);

@@ -39,6 +39,10 @@ export default function Header() {
                 <Link to="/profile">Profile</Link>
               </div>
               <div>
+                <Link to="/all-listings">Listings</Link>
+              </div>
+
+              <div>
                 <Link to="/create">Sell items</Link>
               </div>
               <div>

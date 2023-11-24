@@ -2,6 +2,8 @@ import "./Home.scss";
 import { useEffect, useState } from "react";
 import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
+import Search from "../../components/search/search";
+
 export default function Home() {
   const [info, setInfo] = useState({});
   const name = localStorage.getItem("name");
@@ -47,6 +49,7 @@ export default function Home() {
       </div>
       <div>{showInfoOnHomePage()}</div>
       <div className="listings-container">
+        <Search />
         <Listings />
       </div>
     </>

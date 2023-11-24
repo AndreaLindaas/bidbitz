@@ -9,5 +9,16 @@
     margin: 10px 0 0 0;
   }
 }
+
 .listings-container {
+}
+.info-home {
+  display: flex;
+  justify-content: space-evenly;
+  height: 18px;
+  padding: 30px;
+  background-color: var(--bid);
+  div {
+    font-weight: bold;
+  }
 }

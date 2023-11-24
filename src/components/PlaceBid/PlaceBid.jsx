@@ -41,7 +41,7 @@ export default function PlaceBid(props) {
       if (data.statusCode > 300) {
         setErrorMessage(data.errors[0].message);
       } else {
-        navigate("#");
+        window.location.reload();
       }
     } catch (error) {
       console.warn("An error occurred", error);

@@ -1,19 +1,23 @@
-import { TextField, Button } from "@mui/material";
-
-export default function Search() {
+import { TextField } from "@mui/material";
+import PropTypes from "prop-types";
+Search.propTypes = {
+  doSearch: PropTypes.func,
+};
+export default function Search(props) {
+  const { doSearch } = props;
+  const preformSearch = (event) => {
+    const search = event.target.value;
+    doSearch(search);
+  };
   return (
     <>
-      <form>
-        <TextField
-          name="search"
-          id="outlined-basic"
-          label="Search"
-          variant="outlined"
-        />
-        <Button variant="contained" className="secondary">
-          Search
-        </Button>
-      </form>
+      <TextField
+        name="search"
+        id="outlined-basic"
+        label="Filter"
+        variant="outlined"
+        onKeyUp={preformSearch}
+      />
     </>
   );
 }

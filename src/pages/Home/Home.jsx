@@ -49,7 +49,6 @@ export default function Home() {
       </div>
       <div>{showInfoOnHomePage()}</div>
       <div className="listings-container">
-        <Search />
         <Listings />
       </div>
     </>

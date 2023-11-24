@@ -2,11 +2,20 @@ import { useEffect } from "react";
 import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import Listing from "../listing/listing";
-export default function Listings() {
+import PropTypes from "prop-types";
+Listings.propTypes = {
+  searchWord: PropTypes.string,
+  limit: PropTypes.number,
+};
+export default function Listings(props) {
   const [listings, setListings] = useState([]);
+  const { searchWord, limit } = props;
+
   useEffect(() => {
     fetch(
-      `${API_URL}/listings/?_bids=true&limit=10&sort=endsAt&sortOrder=asc&_active=true`,
+      `${API_URL}/listings/?_bids=true&limit=${
+        limit ? limit : 10
+      }&sort=endsAt&sortOrder=asc&_active=true`,
       {}
     )
       .then((response) => response.json())
@@ -16,7 +25,13 @@ export default function Listings() {
   }, []);
   const renderListings = () => {
     return listings.map((listing) => {
-      return <Listing listing={listing} key={listing.id} />;
+      if (searchWord) {
+        if (listing.title.toLowerCase().includes(searchWord.toLowerCase())) {
+          return <Listing listing={listing} key={listing.id} />;
+        }
+      } else {
+        return <Listing listing={listing} key={listing.id} />;
+      }
     });
   };
   return <>{renderListings()}</>;

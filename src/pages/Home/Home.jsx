@@ -27,8 +27,12 @@ export default function Home() {
       return (
         <>
           <div className="info-home">
-            <div>Hello {info.name}</div>
-            <div> You have {info.credits} credits</div>
+            <div>
+              Hello <span className="highlight">{info.name}</span>
+            </div>
+            <div>
+              You have <span className="highlight">{info.credits}</span> credits
+            </div>
           </div>
         </>
       );
@@ -48,9 +52,8 @@ export default function Home() {
         </p>
       </div>
       <div>{showInfoOnHomePage()}</div>
-      <div className="listings-container">
-        <Listings />
-      </div>
+
+      <Listings />
     </>
   );
 }

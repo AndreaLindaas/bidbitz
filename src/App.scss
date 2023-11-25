@@ -1,16 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 :root {
-  --background: #dde9f6;
+  --yellow: #ffd700;
   --button: #669bd9;
-  --bid: #f7f8fa;
+  --jet: #333;
+  --hot-pink: #ff96b4;
 }
 body {
   margin: 0;
+  font-family: "Poppins", sans-serif;
 }
-main {
-  margin: 20px;
-}
+
 li {
   list-style-type: none;
+}
+.highlight {
+  color: var(--hot-pink);
 }
 .MuiButton-root.MuiButtonBase-root {
   &.primary {

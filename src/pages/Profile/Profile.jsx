@@ -126,7 +126,7 @@ export default function Profile() {
           </div>
         </CardContent>
       </Card>
-      {renderMyListings()}
+      <div className="listings-container">{renderMyListings()}</div>
       <Modal
         open={isChangeModalAvatarOpen}
         onClose={avatarModalClose}

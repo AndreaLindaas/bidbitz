@@ -3,6 +3,7 @@ import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import Listing from "../listing/listing";
 import PropTypes from "prop-types";
+import "./listings.scss";
 Listings.propTypes = {
   searchWord: PropTypes.string,
   limit: PropTypes.number,
@@ -34,5 +35,5 @@ export default function Listings(props) {
       }
     });
   };
-  return <>{renderListings()}</>;
+  return <div className="listings-container">{renderListings()}</div>;
 }

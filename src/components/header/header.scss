@@ -2,11 +2,13 @@
   --background: #dde9f6;
 }
 nav {
-  background-color: var(--background);
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--yellow);
+  > a {
+    margin: 20px;
+  }
   .logo {
-    position: absolute;
-    left: 20px;
-    top: 20px;
     font-size: 20px;
     color: black;
   }
@@ -23,7 +25,23 @@ nav {
 .menu-list {
   text-align: right;
   margin-right: 10px;
-  div {
-    padding: 10px 0;
+  li {
+    margin: 20px;
+    a {
+      color: black;
+      text-decoration: none;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  nav {
+    .menu-bar {
+      padding-top: 0;
+      .menu-list {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+      }
+    }
   }
 }

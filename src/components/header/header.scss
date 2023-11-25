@@ -16,11 +16,15 @@ nav {
     text-align: right;
     padding-top: 10px;
     height: 56px;
+
     svg {
       font-size: 40px;
       margin-right: 10px;
     }
   }
+}
+.menu-mobile {
+  background-color: var(--jet);
 }
 .menu-list {
   text-align: right;
@@ -28,19 +32,26 @@ nav {
   li {
     margin: 20px;
     a {
-      color: black;
+      color: var(--yellow);
       text-decoration: none;
     }
   }
 }
+
 @media screen and (min-width: 768px) {
   nav {
     .menu-bar {
       padding-top: 0;
+
       .menu-list {
         display: flex;
         justify-content: space-between;
         margin: 0;
+        li {
+          a {
+            color: black;
+          }
+        }
       }
     }
   }

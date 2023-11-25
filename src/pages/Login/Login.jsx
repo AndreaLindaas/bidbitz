@@ -31,14 +31,13 @@ export default function Login() {
       if (data.statusCode > 300) {
         setErrorMessage(data.errors[0].message);
       } else {
-        navigate("/");
+        localStorage.setItem("access_token", data.accessToken);
+        localStorage.setItem("user_email", data.email);
+        localStorage.setItem("credits", data.credits);
+        localStorage.setItem("avatar", data.avatar);
+        localStorage.setItem("name", data.name);
+        window.location.href = "/";
       }
-
-      localStorage.setItem("access_token", data.accessToken);
-      localStorage.setItem("user_email", data.email);
-      localStorage.setItem("credits", data.credits);
-      localStorage.setItem("avatar", data.avatar);
-      localStorage.setItem("name", data.name);
     } catch (error) {
       console.warn("An error occurred", error);
     }

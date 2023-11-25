@@ -71,7 +71,9 @@ export default function Header() {
             </div>
 
             <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
-              <div onClick={closeMenu}>{renderMenuList()}</div>
+              <div className="menu-mobile" onClick={closeMenu}>
+                {renderMenuList()}
+              </div>
             </Drawer>
           </>
         )}

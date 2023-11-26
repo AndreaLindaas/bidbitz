@@ -11,6 +11,7 @@ import Logout from "./pages/Logout/Logout";
 import EditListing from "./pages/EditListing/EditListing";
 import Profile from "./pages/Profile/Profile";
 import AllListings from "./pages/AllListings/AllListings";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
             <Route path="/listing/edit/:listingId" element={<EditListing />} />
           </Routes>
         </main>
+        <Footer />
       </BrowserRouter>
     </>
   );

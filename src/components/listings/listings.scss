@@ -1,7 +1,41 @@
 .listings-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+
   > a {
     > div {
       margin: 20px 0;
+      width: 100%;
+      max-width: 500px;
+      .MuiCardMedia-root {
+        height: 200px;
+      }
+      .MuiCardContent-root {
+        background-color: var(--jet);
+        color: #fff;
+      }
+      p {
+        color: #fff;
+      }
+      .MuiTypography-root.MuiTypography-h5 {
+        height: 64px;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .listings-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    a div.MuiPaper-root {
+      width: 345px;
     }
   }
 }

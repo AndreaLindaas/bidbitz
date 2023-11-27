@@ -1,12 +1,14 @@
 .listing-container {
   text-align: center;
   img {
-    width: 100%;
+    width: 80%;
   }
   .bid-ends {
-    background-color: var(--background);
+    background-color: var(--yellow);
+    color: var(--jet);
     padding: 30px 0;
     margin: 0 auto;
+    width: 320px;
   }
   .cb-color {
     color: grey;
@@ -20,14 +22,24 @@
     background-color: var(--jet);
     padding: 30px 0 50px 0;
     margin: 0px auto 30px auto;
+    width: 320px;
+    span {
+      color: #fff;
+    }
+  }
+  .MuiFormControl-root.MuiTextField-root {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
   }
 
-  .primary.bid-btn {
+  .tertiary.bid-btn {
     margin-top: 30px;
+    color: var(--jet);
   }
   .seller-container {
-    border-bottom: solid 1px var(--background);
-    border-top: solid 1px var(--background);
+    border-bottom: solid 1px var(--jet);
+    border-top: solid 1px var(--jet);
     padding: 20px 0;
     margin-bottom: 30px;
   }
@@ -44,6 +56,10 @@
     img {
       width: 60px;
     }
+  }
+  .description {
+    width: 320px;
+    margin: 0 auto;
   }
   .single-bid {
     display: flex;
@@ -62,7 +78,7 @@
         padding: 10px;
       }
       li:nth-child(odd) {
-        background: var(--jet);
+        background: #f8f9fb;
       }
     }
     .bold-credit {

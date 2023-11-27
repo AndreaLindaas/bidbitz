@@ -92,7 +92,7 @@ export default function Profile() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card className="profile-card">
         <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
         <CardContent>
           <Typography

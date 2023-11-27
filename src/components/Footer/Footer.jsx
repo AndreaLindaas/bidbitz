@@ -1,7 +1,7 @@
 import "./Footer.scss";
 export default function Footer() {
   return (
-    <div className="footer">
+    <footer>
       <div>
         <h2>BidBitz</h2>
       </div>
@@ -13,6 +13,6 @@ export default function Footer() {
       <div>
         <div className="copyright">Copyright &copy; 2023</div>
       </div>
-    </div>
+    </footer>
   );
 }

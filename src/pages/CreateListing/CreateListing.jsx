@@ -4,22 +4,24 @@ import { API_URL } from "../../lib/constants";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import "./CreateListing.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreateListing() {
   const navigate = useNavigate();
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [media, setMedia] = useState([]);
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
   const [datePreview, setDatePreview] = useState("");
+
   const createTheListing = (event) => {
     event.preventDefault();
 
-    const { title, imageUrl, description, date } = event.target.elements;
+    const { title, description, date } = event.target.elements;
 
     const payload = {
       title: title.value,
-      media: [imageUrl.value],
+      media: media,
       description: description.value,
       endsAt: date.value,
     };
@@ -43,10 +45,18 @@ export default function CreateListing() {
         console.log("noe gikk galt", error);
       });
   };
-  const previewImage = (event) => {
-    const imageUrl = event.target.value;
 
-    setImagePreviewUrl(imageUrl);
+  const addImage = (event) => {
+    event.preventDefault();
+
+    const { imageUrl } = event.target.elements;
+
+    setMedia([...media, imageUrl.value]);
+  };
+  const showMediaUrl = () => {
+    return media.map((url, i) => {
+      return <li key={i}>{url}</li>;
+    });
   };
   const previewTitle = (event) => {
     const title = event.target.value;
@@ -60,11 +70,12 @@ export default function CreateListing() {
     const date = event.target.value;
     setDatePreview(date);
   };
+
   return (
     <>
       <h1>Create Listing</h1>
       <Card variant="outlined">
-        <form onSubmit={createTheListing}>
+        <form onSubmit={addImage}>
           <div>
             <TextField
               id="standard-basic"
@@ -75,9 +86,19 @@ export default function CreateListing() {
               required
               fullWidth
               margin="dense"
-              onChange={previewImage}
             />
           </div>
+          <Button
+            type="submit"
+            variant="contained"
+            className="secondary"
+            size="small"
+          >
+            Add
+          </Button>
+        </form>
+        <ul>{showMediaUrl()}</ul>
+        <form onSubmit={createTheListing}>
           <div>
             <TextField
               id="standard-basic"
@@ -126,8 +147,7 @@ export default function CreateListing() {
         </form>
       </Card>
       <Card variant="outlined" className="preview">
-        <img src={imagePreviewUrl} alt="" />
-        <h2>{titlePreview}</h2>
+        1{media}2<h2>{titlePreview}</h2>
         <p>{descriptionPreview}</p>
         <p>{datePreview}</p>
       </Card>

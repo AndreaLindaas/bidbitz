@@ -4,6 +4,8 @@
   --button: #669bd9;
   --jet: #333;
   --hot-pink: #ff96b4;
+  --sky-blue: #87ceeb;
+  --orange: #ffa500;
 }
 body {
   margin: 0;
@@ -25,5 +27,8 @@ li {
 
   &.secondary {
     background-color: grey;
+  }
+  &.tertiary {
+    background-color: var(--yellow);
   }
 }

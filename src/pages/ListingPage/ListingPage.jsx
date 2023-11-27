@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./ListingPage.scss";
 import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
+import Carousel from "react-material-ui-carousel";
 
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
@@ -26,11 +27,17 @@ export default function ListingPage() {
     lastBid();
   }, [listing]);
 
-  const showMainImage = () => {
+  const renderImages = () => {
     if (listing.media && listing.media.length > 0) {
-      return listing.media[0];
+      return listing.media.map((image, i) => {
+        return <img src={image} key={i} />;
+      });
     }
-    return "https://www.crazychap.com/uploads/no-banner.jpg";
+    return (
+      <div>
+        <img src="https://www.crazychap.com/uploads/no-banner.jpg" />
+      </div>
+    );
   };
 
   const lastBid = () => {
@@ -80,7 +87,8 @@ export default function ListingPage() {
   }
   return (
     <div className="listing-container">
-      <img src={showMainImage()} alt="" />
+      <Carousel height={300}>{renderImages()}</Carousel>
+
       <h1>{listing.title}</h1>
       <div className="seller-container">
         <div className="seller-bold">Seller</div>
@@ -95,13 +103,18 @@ export default function ListingPage() {
         <div>{listing.endsAt}</div>
       </div>
       <div className="bid">
-        <div>{highestBid}</div>
-        <div>{listing._count.bids} Bids</div>
+        <div className="highlight">
+          {highestBid} <span> Credits</span>
+        </div>
+        <div className="highlight">
+          {listing._count.bids} <span> Bids</span>
+        </div>
         <PlaceBid highestBid={highestBid} />
       </div>
-
-      <h2>Description:</h2>
-      <p>{listing.description}</p>
+      <div className="description">
+        <h2>Description</h2>
+        <p>{listing.description}</p>
+      </div>
       <div className="bids">
         <h3>All bids</h3>
 

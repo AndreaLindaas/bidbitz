@@ -21,7 +21,6 @@ export default function Listing(props) {
       if (lastBid) {
         return (
           <span>
-            {" "}
             <span className="highlight">{lastBid.amount}</span> Credits
           </span>
         );
@@ -38,8 +37,8 @@ export default function Listing(props) {
   };
 
   return (
-    <Link to={`/listing/${listing.id}`}>
-      <Card sx={{ maxWidth: 345 }}>
+    <Link className="listing-link" to={`/listing/${listing.id}`}>
+      <Card>
         <CardMedia image={getImage()} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

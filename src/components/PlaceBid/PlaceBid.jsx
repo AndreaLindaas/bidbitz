@@ -53,15 +53,15 @@ export default function PlaceBid(props) {
       <>
         <form onSubmit={placeBidClicked}>
           <TextField
-            id="standard-basic"
+            id="filled-basic"
             label="Amount"
             name="amount"
-            variant="standard"
+            variant="filled"
             type="number"
           />
           <div>
             <Button
-              className="primary bid-btn"
+              className="tertiary bid-btn"
               variant="contained"
               type="submit"
             >

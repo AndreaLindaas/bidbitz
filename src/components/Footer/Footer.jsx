@@ -11,7 +11,7 @@ export default function Footer() {
         <div>bidbitz@bid.com</div>
       </div>
       <div>
-        <div>Copyright &copy; 2023</div>
+        <div className="copyright">Copyright &copy; 2023</div>
       </div>
     </div>
   );

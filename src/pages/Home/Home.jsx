@@ -55,7 +55,7 @@ export default function Home() {
         </div>
       </div>
       <div>{showInfoOnHomePage()}</div>
-
+      <h2 className="hurry">Hurry up! this items is ending soon.</h2>
       <Listings />
     </>
   );

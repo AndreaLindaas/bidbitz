@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 PlaceBid.propTypes = {
   highestBid: PropTypes.number,
 };
+
 export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");
   const accessToken = localStorage.getItem("access_token");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
   const params = useParams();
 
   const placeBidClicked = async (event) => {
@@ -74,10 +73,12 @@ export default function PlaceBid(props) {
   }
   return (
     <>
-      <div>Do you want to bid on this item? Login to place a bid!</div>
+      <div className="want-tobid">
+        Do you want to bid on this item? Login to place a bid!
+      </div>
       <div>
         <Link to="/login">
-          <Button className="primary bid-btn" variant="contained">
+          <Button className="tertiary bid-btn" variant="contained">
             Login
           </Button>
         </Link>

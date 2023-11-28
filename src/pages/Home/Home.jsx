@@ -2,7 +2,6 @@ import "./Home.scss";
 import { useEffect, useState } from "react";
 import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
-import Search from "../../components/search/search";
 
 export default function Home() {
   const [info, setInfo] = useState({});
@@ -55,7 +54,8 @@ export default function Home() {
         </div>
       </div>
       <div>{showInfoOnHomePage()}</div>
-      <h2 className="hurry">Hurry up! this items is ending soon.</h2>
+      <p className="hurry">Hurry up! These items are ending soon.</p>
+
       <Listings />
     </>
   );

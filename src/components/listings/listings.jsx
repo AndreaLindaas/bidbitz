@@ -7,23 +7,25 @@ import "./listings.scss";
 Listings.propTypes = {
   searchWord: PropTypes.string,
   limit: PropTypes.number,
+  sortByFilter: PropTypes.string,
+  sortOrderFilter: PropTypes.string,
 };
 export default function Listings(props) {
   const [listings, setListings] = useState([]);
-  const { searchWord, limit } = props;
-
+  const { searchWord, limit, sortByFilter, sortOrderFilter } = props;
+  console.log(sortByFilter);
   useEffect(() => {
     fetch(
-      `${API_URL}/listings/?_bids=true&limit=${
-        limit ? limit : 10
-      }&sort=endsAt&sortOrder=asc&_active=true`,
+      `${API_URL}/listings/?_bids=true&limit=${limit ? limit : 10}&sort=${
+        sortByFilter ? sortByFilter : "endsAt"
+      }&sortOrder=${sortOrderFilter ? sortOrderFilter : "asc"}&_active=true`,
       {}
     )
       .then((response) => response.json())
       .then((listings) => {
         setListings(listings);
       });
-  }, []);
+  }, [sortByFilter, sortOrderFilter]);
   const renderListings = () => {
     return listings.map((listing) => {
       if (searchWord) {

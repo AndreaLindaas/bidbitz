@@ -12,7 +12,7 @@ export default function ListingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [highestBid, setHighestBid] = useState(0);
   const params = useParams();
-
+  const email = localStorage.getItem("user_email");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}/?_bids=true&_seller=true`)
       .then((response) => response.json())
@@ -67,7 +67,7 @@ export default function ListingPage() {
             <span> {bid.bidderName}</span>
           </span>
           <span className="bid-date">
-            <Moment format="hh:mm DD/MM/YYYY">{new Date().getTime()}</Moment>
+            <Moment format="HH:mm DD.MM.YYYY">{bid.created}</Moment>
           </span>
         </li>
       );
@@ -85,41 +85,71 @@ export default function ListingPage() {
   if (isLoading) {
     return <div></div>;
   }
-  return (
-    <div className="listing-container">
-      <Carousel height={300}>{renderImages()}</Carousel>
+  console.log(listing);
+  if (listing.seller.email == email) {
+    return (
+      <div className="listing-container">
+        <Carousel height={300}>{renderImages()}</Carousel>
 
-      <h1>{listing.title}</h1>
-      <div className="seller-container">
-        <div className="seller-bold">Seller</div>
-        <Link to="#">
-          <div className="seller">
-            <img src={sellerImage()} alt="" />
-            <div>{listing.seller.name}</div>
+        <h1>{listing.title}</h1>
+        <div className="seller-container">
+          <div className="seller-bold">Seller</div>
+          <Link to="#">
+            <div className="seller">
+              <img src={sellerImage()} alt="" />
+              <div>{listing.seller.name}</div>
+            </div>
+          </Link>
+        </div>
+
+        <div className="description">
+          <h2>Description</h2>
+          <p>{listing.description}</p>
+        </div>
+        <div className="bids">
+          <h3>All bids</h3>
+
+          <ul>{allBids()}</ul>
+        </div>
+      </div>
+    );
+  } else
+    return (
+      <div className="listing-container">
+        <Carousel height={300}>{renderImages()}</Carousel>
+
+        <h1>{listing.title}</h1>
+        <div className="seller-container">
+          <div className="seller-bold">Seller</div>
+          <Link to="#">
+            <div className="seller">
+              <img src={sellerImage()} alt="" />
+              <div>{listing.seller.name}</div>
+            </div>
+          </Link>
+        </div>
+        <div className="bid-ends">
+          <div>Ends at</div>
+          <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
+        </div>
+        <div className="bid">
+          <div className="highlight">
+            {highestBid} <span> Credits</span>
           </div>
-        </Link>
-      </div>
-      <div className="bid-ends">
-        <div>{listing.endsAt}</div>
-      </div>
-      <div className="bid">
-        <div className="highlight">
-          {highestBid} <span> Credits</span>
+          <div className="highlight">
+            {listing._count.bids} <span> Bids</span>
+          </div>
+          <PlaceBid highestBid={highestBid} />
         </div>
-        <div className="highlight">
-          {listing._count.bids} <span> Bids</span>
+        <div className="description">
+          <h2>Description</h2>
+          <p>{listing.description}</p>
         </div>
-        <PlaceBid highestBid={highestBid} />
-      </div>
-      <div className="description">
-        <h2>Description</h2>
-        <p>{listing.description}</p>
-      </div>
-      <div className="bids">
-        <h3>All bids</h3>
+        <div className="bids">
+          <h3>All bids</h3>
 
-        <ul>{allBids()}</ul>
+          <ul>{allBids()}</ul>
+        </div>
       </div>
-    </div>
-  );
+    );
 }

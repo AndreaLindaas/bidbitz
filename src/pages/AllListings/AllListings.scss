@@ -1,0 +1,13 @@
+.search {
+  margin: 30px auto 20px auto;
+  width: 200px;
+}
+.filter {
+  text-align: center;
+  .MuiFormControl-root {
+    margin: 5px;
+    .MuiInputBase-root .MuiSelect-select.MuiInputBase-input {
+      padding: 5px;
+    }
+  }
+}

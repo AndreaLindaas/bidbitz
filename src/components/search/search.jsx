@@ -14,7 +14,7 @@ export default function Search(props) {
       <TextField
         name="search"
         id="outlined-basic"
-        label="Filter"
+        label="Search"
         variant="outlined"
         onKeyUp={preformSearch}
       />

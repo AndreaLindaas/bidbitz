@@ -2,6 +2,7 @@ import Search from "../../components/search/search";
 import Listings from "../../components/listings/listings";
 import { useState } from "react";
 import Filter from "../../components/Filter/Filter";
+import "./AllListings.scss";
 export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
@@ -17,8 +18,12 @@ export default function AllListings() {
   };
   return (
     <>
-      <Search doSearch={search} />
-      <Filter sortBy={sortBy} sortOrder={sortOrder} />
+      <div className="search">
+        <Search doSearch={search} />
+      </div>
+      <div className="filter">
+        <Filter sortBy={sortBy} sortOrder={sortOrder} />{" "}
+      </div>
       <Listings
         limit={100}
         searchWord={searchWord}

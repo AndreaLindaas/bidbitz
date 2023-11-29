@@ -4,11 +4,11 @@ import { API_URL } from "../../lib/constants";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import "./CreateListing.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Carousel from "react-material-ui-carousel";
 
 export default function CreateListing() {
   const navigate = useNavigate();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [media, setMedia] = useState([]);
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
@@ -171,7 +171,8 @@ export default function CreateListing() {
         </form>
       </Card>
       <Card variant="outlined" className="preview">
-        {previewImage()}
+        {/* {previewImage()} */}
+        <Carousel height={300}>{previewImage()}</Carousel>
         <h2>{titlePreview}</h2>
         <p>{descriptionPreview}</p>
         <p>{datePreview}</p>

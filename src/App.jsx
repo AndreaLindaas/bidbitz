@@ -12,6 +12,7 @@ import EditListing from "./pages/EditListing/EditListing";
 import Profile from "./pages/Profile/Profile";
 import AllListings from "./pages/AllListings/AllListings";
 import Footer from "./components/Footer/Footer";
+
 function App() {
   return (
     <>

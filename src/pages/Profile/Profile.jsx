@@ -8,9 +8,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
-
+import { useNavigate } from "react-router-dom";
 export default function Profile() {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({});
+  const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
@@ -18,7 +20,7 @@ export default function Profile() {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
 
-    fetch(`${API_URL}/profiles/${name}?_listings=true`, {
+    fetch(`${API_URL}/profiles/${name}`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${accessToken}`,
@@ -28,7 +30,18 @@ export default function Profile() {
       .then((l) => {
         setProfile(l);
         setNewProfileAvatar(l.avatar);
-        setIsLoading(false);
+
+        fetch(`${API_URL}/profiles/${name}/listings/?_bids=true`, {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((a) => {
+            setListings(a);
+            setIsLoading(false);
+          });
       });
   }, []);
   const profileImage = () => {
@@ -47,15 +60,26 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
-
+  // const editListing = () => {
+  //   console.log("hei");
+  // };
   const renderMyListings = () => {
-    return profile.listings.map((listing) => {
-      return <Listing listing={listing} key={listing.id} />;
+    return listings.map((listing) => {
+      return (
+        <div key={listing.id}>
+          <Listing listing={listing} />
+          {/* <Button variant="contained" size="small" onClick={editListing()}>
+            Edit
+          </Button>
+          <Button variant="contained" size="small">
+            Delete
+          </Button> */}
+        </div>
+      );
     });
   };
 
   const avatarUrlChanged = (event) => {
-    console.log();
     setNewProfileAvatar(event.target.value);
   };
 

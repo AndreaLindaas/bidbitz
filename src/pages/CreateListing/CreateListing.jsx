@@ -53,10 +53,34 @@ export default function CreateListing() {
 
     setMedia([...media, imageUrl.value]);
   };
+  const removeItem = (event) => {
+    const index = event.target.dataset.index;
+    setMedia(media.filter((m, i) => i != index));
+  };
   const showMediaUrl = () => {
     return media.map((url, i) => {
-      return <li key={i}>{url}</li>;
+      return (
+        <li key={i}>
+          {url}
+          <Button
+            variant="contained"
+            className="secondary"
+            data-index={i}
+            size="small"
+            onClick={removeItem}
+          >
+            delete
+          </Button>
+        </li>
+      );
     });
+  };
+  const previewImage = () => {
+    if (media && media.length > 0) {
+      return media.map((image, i) => {
+        return <img src={image} key={i} />;
+      });
+    }
   };
   const previewTitle = (event) => {
     const title = event.target.value;
@@ -147,7 +171,8 @@ export default function CreateListing() {
         </form>
       </Card>
       <Card variant="outlined" className="preview">
-        1{media}2<h2>{titlePreview}</h2>
+        {previewImage()}
+        <h2>{titlePreview}</h2>
         <p>{descriptionPreview}</p>
         <p>{datePreview}</p>
       </Card>

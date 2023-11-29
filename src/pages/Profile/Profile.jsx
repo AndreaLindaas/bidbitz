@@ -9,6 +9,7 @@ import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Profile() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
@@ -60,20 +61,18 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
-  // const editListing = () => {
-  //   console.log("hei");
-  // };
+
   const renderMyListings = () => {
     return listings.map((listing) => {
       return (
         <div key={listing.id}>
           <Listing listing={listing} />
-          {/* <Button variant="contained" size="small" onClick={editListing()}>
-            Edit
-          </Button>
-          <Button variant="contained" size="small">
-            Delete
-          </Button> */}
+          <div>
+            <Link to={`/listing/edit/${listing.id}`}>Edit</Link>
+            <Button variant="contained" size="small">
+              Delete
+            </Button>
+          </div>
         </div>
       );
     });

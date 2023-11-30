@@ -8,10 +8,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
-import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 export default function Profile() {
-  const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +60,20 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
-
+  // const deleteListing = () => {
+  //   console.log("hei");
+  //   const accessToken = localStorage.getItem("access_token");
+  //   fetch(`${API_URL}/listings/${listing.id}`, {
+  //     method: "Delete",
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   }).then((response) => {
+  //     if (response.status < 300) {
+  //       // navigate({ to: "/" });
+  //     }
+  //   });
+  // };
   const renderMyListings = () => {
     return listings.map((listing) => {
       return (

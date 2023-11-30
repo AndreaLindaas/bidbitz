@@ -85,7 +85,7 @@ export default function ListingPage() {
   if (isLoading) {
     return <div></div>;
   }
-  console.log(listing);
+
   if (listing.seller.email == email) {
     return (
       <div className="listing-container">

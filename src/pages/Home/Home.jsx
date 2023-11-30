@@ -2,7 +2,7 @@ import "./Home.scss";
 import { useEffect, useState } from "react";
 import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
-
+import { Helmet } from "react-helmet";
 export default function Home() {
   const [info, setInfo] = useState({});
   const name = localStorage.getItem("name");
@@ -41,6 +41,9 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>BidBitz</title>
+      </Helmet>
       <div className="introduction-container">
         <div className="introduction">
           <p>Bidding with a bit of fun</p>
@@ -54,8 +57,12 @@ export default function Home() {
         </div>
       </div>
       <div>{showInfoOnHomePage()}</div>
-      <p className="hurry">Hurry up! These items are ending soon.</p>
-
+      <div className="hurry">
+        <p>
+          <span className="highlight">Hurry up!</span> These items are ending
+          soon.
+        </p>
+      </div>
       <Listings />
     </>
   );

@@ -12,9 +12,15 @@
     }
   }
 }
-p.hurry {
-  margin: 20px auto 10px auto;
-  width: 300px;
+.hurry {
+  background-color: var(--jet);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  p {
+    margin: 0;
+  }
 }
 .info-home {
   display: flex;
@@ -23,6 +29,7 @@ p.hurry {
   padding: 30px;
   background-color: var(--jet);
   color: #fff;
+  margin-bottom: 1px;
 }
 @media screen and (min-width: 768px) {
   .introduction-container {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./header.scss";
 import { useMediaQuery } from "@mui/material";
+import { Home, Person } from "@mui/icons-material";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("access_token");
@@ -24,12 +25,16 @@ export default function Header() {
           </li>
         )}
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            Home <Home />
+          </Link>
         </li>
         {accessToken && (
           <>
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">
+                Profile <Person />
+              </Link>
             </li>
             <li>
               <Link to="/all-listings">Listings</Link>

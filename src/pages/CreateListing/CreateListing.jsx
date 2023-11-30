@@ -61,7 +61,7 @@ export default function CreateListing() {
     return media.map((url, i) => {
       return (
         <li key={i}>
-          {url}
+          <img src={url} />
           <Button
             variant="contained"
             className="secondary"

@@ -86,70 +86,43 @@ export default function ListingPage() {
     return <div></div>;
   }
 
-  if (listing.seller.email == email) {
-    return (
-      <div className="listing-container">
-        <Carousel height={300}>{renderImages()}</Carousel>
+  return (
+    <div className="listing-container">
+      <Carousel height={300}>{renderImages()}</Carousel>
 
-        <h1>{listing.title}</h1>
-        <div className="seller-container">
-          <div className="seller-bold">Seller</div>
-          <Link to="#">
-            <div className="seller">
-              <img src={sellerImage()} alt="" />
-              <div>{listing.seller.name}</div>
-            </div>
-          </Link>
-        </div>
+      <h1>{listing.title}</h1>
 
-        <div className="description">
-          <h2>Description</h2>
-          <p>{listing.description}</p>
-        </div>
-        <div className="bids">
-          <h3>All bids</h3>
-
-          <ul>{allBids()}</ul>
-        </div>
-      </div>
-    );
-  } else
-    return (
-      <div className="listing-container">
-        <Carousel height={300}>{renderImages()}</Carousel>
-
-        <h1>{listing.title}</h1>
-        <div className="seller-container">
-          <div className="seller-bold">Seller</div>
-          <Link to="#">
-            <div className="seller">
-              <img src={sellerImage()} alt="" />
-              <div>{listing.seller.name}</div>
-            </div>
-          </Link>
-        </div>
-        <div className="bid-ends">
-          <div>Ends at</div>
-          <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
-        </div>
-        <div className="bid">
-          <div className="highlight">
-            {highestBid} <span> Credits</span>
+      <div className="seller-container">
+        <div className="seller-bold">Seller</div>
+        <Link to="#">
+          <div className="seller">
+            <img src={sellerImage()} alt="" />
+            <div>{listing.seller.name}</div>
           </div>
-          <div className="highlight">
-            {listing._count.bids} <span> Bids</span>
-          </div>
-          <PlaceBid highestBid={highestBid} />
-        </div>
-        <div className="description">
-          <h2>Description</h2>
-          <p>{listing.description}</p>
-        </div>
-        <div className="bids">
-          <h3>All bids</h3>
-
-          <ul>{allBids()}</ul>
-        </div>
+        </Link>
       </div>
-    );
+      <div className="bid-ends">
+        <div>Ends at</div>
+        <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
+      </div>
+      <div className="bid">
+        <div className="highlight">
+          {highestBid} <span> Credits</span>
+        </div>
+        <div className="highlight">
+          {listing._count.bids} <span> Bids</span>
+        </div>
+        {listing.seller.email !== email && <PlaceBid highestBid={highestBid} />}
+      </div>
+      <div className="description">
+        <h2>Description</h2>
+        <p>{listing.description}</p>
+      </div>
+      <div className="bids">
+        <h3>All bids</h3>
+
+        <ul>{allBids()}</ul>
+      </div>
+    </div>
+  );
 }

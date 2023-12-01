@@ -4,7 +4,7 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./header.scss";
 import { useMediaQuery } from "@mui/material";
-import { Home, Person } from "@mui/icons-material";
+import { Home, Person, Gavel, Logout, Login, Sell } from "@mui/icons-material";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("access_token");
@@ -21,30 +21,44 @@ export default function Header() {
       <ul className="menu-list">
         {!accessToken && (
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login">
+              <span> Login</span>
+              <Login />
+            </Link>
           </li>
         )}
+
         <li>
           <Link to="/">
-            Home <Home />
+            <span> Home</span> <Home />
           </Link>
         </li>
+
+        <li>
+          <Link to="/all-listings">
+            <span> All Auctions</span> <Gavel />
+          </Link>
+        </li>
+
         {accessToken && (
           <>
             <li>
               <Link to="/profile">
-                Profile <Person />
+                <span> Profile</span> <Person />
               </Link>
-            </li>
-            <li>
-              <Link to="/all-listings">Listings</Link>
             </li>
 
             <li>
-              <Link to="/create">Sell items</Link>
+              <Link to="/create">
+                <span> Sell items</span>
+                <Sell />
+              </Link>
             </li>
             <li>
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout">
+                <span> Logout</span>
+                <Logout />
+              </Link>
             </li>
           </>
         )}

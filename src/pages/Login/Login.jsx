@@ -1,13 +1,11 @@
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import "./Login.scss";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -45,42 +43,44 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="login">Login</h1>
-      <form onSubmit={handleOnSubmit}>
-        <div>
-          <TextField
-            id="standard-basic"
-            name="email"
-            label="Email"
-            type="email"
-            placeholder="...@stud.noroff.no"
-            variant="standard"
-            fullWidth
-          />
-        </div>
-        <div>
-          <TextField
-            id="standard-basic"
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Password"
-            variant="standard"
-            fullWidth
-          />
-        </div>
+      <div className="login">
+        <h1 className="login">Login</h1>
+        <form onSubmit={handleOnSubmit}>
+          <div>
+            <TextField
+              id="filled-basic"
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="...@stud.noroff.no"
+              variant="filled"
+              fullWidth
+            />
+          </div>
+          <div>
+            <TextField
+              id="filled-basic"
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="Password"
+              variant="filled"
+              fullWidth
+            />
+          </div>
 
-        <Button type="submit" variant="contained">
-          Login
-        </Button>
-      </form>
-      <p className="text-login">
-        Don't have an account?
-        <Link to="/register">
-          <span>Sign up here!</span>
-        </Link>
-      </p>
-      {errorMessage}
+          <Button type="submit" variant="contained" className="tertiary">
+            Login
+          </Button>
+        </form>
+        <p className="text-login">
+          Don't have an account?
+          <Link to="/register">
+            <span className="highlight"> Sign up here!</span>
+          </Link>
+        </p>
+        {errorMessage}
+      </div>
     </>
   );
 }

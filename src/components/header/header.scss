@@ -44,6 +44,9 @@ nav {
         font-size: 20px;
       }
     }
+    a:hover {
+      text-decoration: underline var(--hot-pink);
+    }
   }
 }
 

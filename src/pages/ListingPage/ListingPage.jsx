@@ -89,9 +89,7 @@ export default function ListingPage() {
   return (
     <div className="listing-container">
       <Carousel height={300}>{renderImages()}</Carousel>
-
       <h1>{listing.title}</h1>
-
       <div className="seller-container">
         <div className="seller-bold">Seller</div>
         <Link to="#">
@@ -120,7 +118,6 @@ export default function ListingPage() {
       </div>
       <div className="bids">
         <h3>All bids</h3>
-
         <ul>{allBids()}</ul>
       </div>
     </div>

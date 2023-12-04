@@ -1,11 +1,11 @@
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { API_URL } from "../../lib/constants";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import "./CreateListing.scss";
 import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
+import { DatePicker } from "@mui/x-date-pickers";
 
 export default function CreateListing() {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function CreateListing() {
           <img src={url} />
           <Button
             variant="contained"
-            className="secondary"
+            className="delete"
             data-index={i}
             size="small"
             onClick={removeItem}
@@ -90,44 +90,49 @@ export default function CreateListing() {
     const description = event.target.value;
     setDescriptionPreview(description);
   };
+
+  // Denne koden funker ikke
   const dateDescription = (event) => {
+    console.log(event);
+
     const date = event.target.value;
+
     setDatePreview(date);
   };
 
   return (
-    <>
-      <h1>Create Listing</h1>
+    <div className="create-listing">
       <Card variant="outlined">
+        <h1>Create Listing</h1>
         <form onSubmit={addImage}>
           <div>
             <TextField
-              id="standard-basic"
-              label="Image-url"
-              variant="standard"
+              id="filled-basic"
+              label="Pictures"
+              variant="filled"
               type="text"
               name="imageUrl"
-              required
               fullWidth
               margin="dense"
+              multiline
             />
           </div>
           <Button
             type="submit"
             variant="contained"
-            className="secondary"
+            className="tertiary"
             size="small"
           >
             Add
           </Button>
         </form>
-        <ul>{showMediaUrl()}</ul>
+        <ul className="show-media">{showMediaUrl()}</ul>
         <form onSubmit={createTheListing}>
           <div>
             <TextField
-              id="standard-basic"
+              id="filled-basic"
               label="Title"
-              variant="standard"
+              variant="filled"
               type="text"
               name="title"
               required
@@ -138,45 +143,53 @@ export default function CreateListing() {
           </div>
           <div>
             <TextField
-              id="standard-multiline-static"
+              id="filled-multiline-static"
               label="Description"
               multiline
               rows={4}
-              variant="standard"
+              variant="filled"
               type="text"
               name="description"
-              required
               fullWidth
               margin="dense"
               onChange={previewDescription}
             />
           </div>
-          <div className="bidend">Bid ends at:</div>
+          <div className="bidend">Auction ends at:</div>
           <div>
-            <TextField
-              id="standard-basic"
-              variant="standard"
+            <DatePicker required onChange={dateDescription} />
+            {/* <TextField
+              id="filled-basic"
+              variant="filled"
               type="date"
               name="date"
               required
               margin="dense"
-              onChange={dateDescription}
-            />
+             
+            /> */}
           </div>
           <div className="btn-align">
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" className="tertiary">
               Save
             </Button>
           </div>
         </form>
       </Card>
-      <Card variant="outlined" className="preview">
-        {/* {previewImage()} */}
-        <Carousel height={300}>{previewImage()}</Carousel>
-        <h2>{titlePreview}</h2>
-        <p>{descriptionPreview}</p>
-        <p>{datePreview}</p>
-      </Card>
-    </>
+      {(titlePreview ||
+        descriptionPreview ||
+        datePreview ||
+        media.length > 0) && (
+        <Card variant="outlined" className="preview">
+          <h2>Preview</h2>
+          <Carousel height={300}>{previewImage()}</Carousel>
+          <h2>{titlePreview}</h2>
+          <div className="description-date">
+            <p>{descriptionPreview}</p>
+
+            <p>{datePreview}</p>
+          </div>
+        </Card>
+      )}
+    </div>
   );
 }

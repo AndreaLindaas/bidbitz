@@ -1,11 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 :root {
   --yellow: #ffd700;
-  --button: #669bd9;
   --jet: #333;
   --hot-pink: #ff96b4;
-  --sky-blue: #87ceeb;
-  --orange: #ffa500;
+  --seasalt: #f8f9fb;
 }
 body {
   margin: 0;
@@ -31,5 +29,8 @@ li {
   &.tertiary {
     background-color: var(--yellow);
     color: var(--jet);
+  }
+  &.delete {
+    background-color: #e75c3c;
   }
 }

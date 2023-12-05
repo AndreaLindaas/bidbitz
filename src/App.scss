@@ -20,16 +20,14 @@ li {
 }
 .MuiButton-root.MuiButtonBase-root {
   &.primary {
-    background-color: var(--button);
+    background-color: var(--yellow);
+    color: var(--jet);
   }
 
   &.secondary {
     background-color: grey;
   }
-  &.tertiary {
-    background-color: var(--yellow);
-    color: var(--jet);
-  }
+
   &.delete {
     background-color: #e75c3c;
   }

@@ -23,7 +23,7 @@ export default function CreateListing() {
       title: title.value,
       media: media,
       description: description.value,
-      endsAt: date.value,
+      endsAt: date,
     };
 
     const accessToken = localStorage.getItem("access_token");
@@ -91,12 +91,8 @@ export default function CreateListing() {
     setDescriptionPreview(description);
   };
 
-  // Denne koden funker ikke
   const dateDescription = (event) => {
-    console.log(event);
-
-    const date = event.target.value;
-
+    const date = event.format("DD-MM-YYYY");
     setDatePreview(date);
   };
 
@@ -120,7 +116,7 @@ export default function CreateListing() {
           <Button
             type="submit"
             variant="contained"
-            className="tertiary"
+            className="primary"
             size="small"
           >
             Add
@@ -169,7 +165,7 @@ export default function CreateListing() {
             /> */}
           </div>
           <div className="btn-align">
-            <Button variant="contained" type="submit" className="tertiary">
+            <Button variant="contained" type="submit" className="primary">
               Save
             </Button>
           </div>

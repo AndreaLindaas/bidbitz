@@ -60,7 +60,7 @@ export default function PlaceBid(props) {
           />
           <div>
             <Button
-              className="tertiary bid-btn"
+              className="primary bid-btn"
               variant="contained"
               type="submit"
             >
@@ -78,7 +78,7 @@ export default function PlaceBid(props) {
       </div>
       <div>
         <Link to="/login">
-          <Button className="tertiary bid-btn" variant="contained">
+          <Button className="primary bid-btn" variant="contained">
             Login
           </Button>
         </Link>

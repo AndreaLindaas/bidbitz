@@ -68,7 +68,7 @@ export default function EditListing() {
           <img src={url} />
           <Button
             variant="contained"
-            className="secondary"
+            className="delete"
             data-index={i}
             size="small"
             onClick={removeItem}
@@ -80,25 +80,26 @@ export default function EditListing() {
     });
   };
   return (
-    <>
+    <div className="edit-listing">
       <h1>Edit Listing</h1>
       {showEdit && (
         <>
           <ul>{showMediaUrl()}</ul>
           <form onSubmit={addImage}>
             <TextField
-              id="standard-basic"
+              id="filled-basic"
               label="Url"
-              variant="standard"
+              variant="filled"
               type="text"
               name="imageUrl"
               fullWidth
               margin="dense"
+              multiline
             />
             <Button
               type="submit"
               variant="contained"
-              className="secondary"
+              className="primary"
               size="small"
             >
               Add
@@ -106,9 +107,9 @@ export default function EditListing() {
           </form>
           <form onSubmit={editListing}>
             <TextField
-              id="standard-basic"
+              id="filled-basic"
               label="Title"
-              variant="standard"
+              variant="filled"
               type="text"
               name="title"
               fullWidth
@@ -116,9 +117,9 @@ export default function EditListing() {
               defaultValue={listing.title}
             />
             <TextField
-              id="standard-basic"
+              id="filled-basic"
               label="Description"
-              variant="standard"
+              variant="filled"
               type="text"
               name="description"
               fullWidth
@@ -127,12 +128,12 @@ export default function EditListing() {
               multiline
             />
 
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" className="primary">
               Save
             </Button>
           </form>
         </>
       )}
-    </>
+    </div>
   );
 }

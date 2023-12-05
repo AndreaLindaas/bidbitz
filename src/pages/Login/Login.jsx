@@ -69,7 +69,7 @@ export default function Login() {
             />
           </div>
 
-          <Button type="submit" variant="contained" className="tertiary">
+          <Button type="submit" variant="contained" className="primary">
             Login
           </Button>
         </form>

@@ -26,6 +26,19 @@
     }
   }
 }
+.listings-container {
+  .relative {
+    position: relative;
+  }
+  .edit-delete-btn {
+    position: absolute;
+    top: 20px;
+
+    button {
+      margin-right: 5px;
+    }
+  }
+}
 .modal {
   position: absolute;
   top: 50%;

@@ -81,7 +81,7 @@ export default function Register() {
               fullWidth
             />
           </div>
-          <Button type="submit" variant="contained" className="tertiary">
+          <Button type="submit" variant="contained" className="primary">
             Sign up
           </Button>
         </form>

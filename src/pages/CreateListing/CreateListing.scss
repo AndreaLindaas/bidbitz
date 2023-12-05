@@ -8,6 +8,7 @@
   .MuiPaper-root.MuiPaper-outlined {
     background-color: var(--jet);
     color: #fff;
+    border-radius: 0;
     &.preview {
       background-color: #fff;
       color: #000;
@@ -16,6 +17,7 @@
       margin: 0 auto;
       margin-bottom: 20px;
       padding: 0 20px;
+      max-width: 500px;
       .bidend {
         font-weight: bold;
       }
@@ -58,24 +60,3 @@
     }
   }
 }
-
-// .bidend {
-//   font-weight: bold;
-// }
-// .btn-align {
-//   margin: 20px 0 40px 0;
-// }
-// .MuiPaper-root.preview {
-//   img {
-//     margin: 0 auto;
-//     width: 100%;
-//   }
-//   h2,
-//   p {
-//     margin-left: 10px;
-//   }
-// }
-// .profile-card {
-//   width: 90vw;
-//   margin: 0 auto;
-// }

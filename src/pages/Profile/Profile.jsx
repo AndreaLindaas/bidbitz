@@ -77,11 +77,15 @@ export default function Profile() {
   const renderMyListings = () => {
     return listings.map((listing) => {
       return (
-        <div key={listing.id}>
+        <div className="relative" key={listing.id}>
           <Listing listing={listing} />
-          <div>
-            <Link to={`/listing/edit/${listing.id}`}>Edit</Link>
-            <Button variant="contained" size="small">
+          <div className="edit-delete-btn">
+            <Link to={`/listing/edit/${listing.id}`}>
+              <Button variant="contained" size="small" className="primary">
+                Edit
+              </Button>
+            </Link>
+            <Button variant="contained" size="small" className="delete">
               Delete
             </Button>
           </div>

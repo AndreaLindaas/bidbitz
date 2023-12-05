@@ -6,24 +6,25 @@ import "./CreateListing.scss";
 import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { DatePicker } from "@mui/x-date-pickers";
+import moment from "moment";
 
 export default function CreateListing() {
   const navigate = useNavigate();
   const [media, setMedia] = useState([]);
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
-  const [datePreview, setDatePreview] = useState("");
+  const [datePreview, setDatePreview] = useState(null);
 
   const createTheListing = (event) => {
     event.preventDefault();
 
-    const { title, description, date } = event.target.elements;
+    const { title, description } = event.target.elements;
 
     const payload = {
       title: title.value,
       media: media,
       description: description.value,
-      endsAt: date,
+      endsAt: moment(datePreview).toDate(),
     };
 
     const accessToken = localStorage.getItem("access_token");
@@ -37,8 +38,6 @@ export default function CreateListing() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("her er data", data);
-
         navigate("/listing/" + data.id);
       })
       .catch((error) => {
@@ -91,8 +90,7 @@ export default function CreateListing() {
     setDescriptionPreview(description);
   };
 
-  const dateDescription = (event) => {
-    const date = event.format("DD-MM-YYYY");
+  const dateDescription = (date) => {
     setDatePreview(date);
   };
 
@@ -182,7 +180,7 @@ export default function CreateListing() {
           <div className="description-date">
             <p>{descriptionPreview}</p>
 
-            <p>{datePreview}</p>
+            <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
           </div>
         </Card>
       )}

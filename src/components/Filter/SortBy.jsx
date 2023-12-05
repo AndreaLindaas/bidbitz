@@ -36,6 +36,7 @@ export default function SortBy(props) {
         label="Sort by"
         onChange={sortByChanged}
         className="filter"
+        variant="filled"
       >
         {showSortByFilter()}
       </TextField>

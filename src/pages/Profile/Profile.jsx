@@ -15,6 +15,7 @@ export default function Profile() {
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -60,6 +61,12 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
+  const deleteModalOpen = () => {
+    setIsDeleteModalOpen(true);
+  };
+  const deleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
   // const deleteListing = () => {
   //   console.log("hei");
   //   const accessToken = localStorage.getItem("access_token");
@@ -85,7 +92,12 @@ export default function Profile() {
                 Edit
               </Button>
             </Link>
-            <Button variant="contained" size="small" className="delete">
+            <Button
+              variant="contained"
+              size="small"
+              className="delete"
+              onClick={deleteModalOpen}
+            >
               Delete
             </Button>
           </div>
@@ -142,7 +154,12 @@ export default function Profile() {
           >
             {profile.name}
           </Typography>
-          <Button variant="contained" size="small" onClick={avatarModalOpen}>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={avatarModalOpen}
+            className="primary"
+          >
             Change Avatar
           </Button>
 
@@ -176,25 +193,32 @@ export default function Profile() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Change Avatar
           </Typography>
+
           <Avatar
             alt=""
             src={newProfileAvatar}
             sx={{ width: 70, height: 70 }}
           />
+
           <form onSubmit={changeAvatarUrl}>
             <TextField
               onChange={avatarUrlChanged}
-              id="standard-basic"
-              label="Avatar url"
+              id="filled-basic"
               type="text"
-              variant="standard"
+              variant="filled"
               fullWidth
               name="urlChange"
               defaultValue={profile.avatar}
+              multiline
             />
 
             <div>
-              <Button type="submit" variant="contained" size="small">
+              <Button
+                type="submit"
+                variant="contained"
+                size="small"
+                className="primary"
+              >
                 Change Avatar
               </Button>
 
@@ -208,6 +232,24 @@ export default function Profile() {
               </Button>
             </div>
           </form>
+        </Box>
+      </Modal>
+      <Modal
+        open={isDeleteModalOpen}
+        onClose={deleteModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="delete-modal">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+          <Button variant="contained" size="small" className="delete">
+            Delete
+          </Button>
         </Box>
       </Modal>
     </>

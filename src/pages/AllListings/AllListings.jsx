@@ -18,11 +18,13 @@ export default function AllListings() {
   };
   return (
     <>
-      <div className="search">
-        <Search doSearch={search} />
-      </div>
-      <div className="filter">
-        <Filter sortBy={sortBy} sortOrder={sortOrder} />{" "}
+      <div className="filter-container">
+        <div className="search">
+          <Search doSearch={search} />
+        </div>
+        <div className="filter">
+          <Filter sortBy={sortBy} sortOrder={sortOrder} />{" "}
+        </div>
       </div>
       <Listings
         limit={100}

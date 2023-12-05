@@ -9,11 +9,11 @@ export default function SortOrder(props) {
     const sortItems = [
       {
         value: "asc",
-        label: "↑ Ascending",
+        label: "  ↑ Ascending",
       },
       {
         value: "desc",
-        label: "↓ Descending",
+        label: "   ↓ Descending",
       },
     ];
     return sortItems.map((option) => (
@@ -36,6 +36,7 @@ export default function SortOrder(props) {
         label="Sort order"
         onChange={sortOrderChanged}
         className="filter"
+        variant="filled"
       >
         {showSortOrderFilter()}
       </TextField>

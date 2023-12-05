@@ -13,10 +13,11 @@ export default function Search(props) {
     <>
       <TextField
         name="search"
-        id="outlined-basic"
+        id="filled-basic"
         label="Search"
-        variant="outlined"
+        variant="filled"
         onKeyUp={preformSearch}
+        className="search-field"
       />
     </>
   );

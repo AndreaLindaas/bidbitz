@@ -13,7 +13,7 @@ Listings.propTypes = {
 export default function Listings(props) {
   const [listings, setListings] = useState([]);
   const { searchWord, limit, sortByFilter, sortOrderFilter } = props;
-  console.log(sortByFilter);
+
   useEffect(() => {
     fetch(
       `${API_URL}/listings/?_bids=true&limit=${limit ? limit : 10}&sort=${

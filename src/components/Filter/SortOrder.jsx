@@ -34,7 +34,7 @@ export default function SortOrder(props) {
         select
         defaultValue={"asc" || ""}
         onChange={sortOrderChanged}
-        className="filter"
+        className="sort-filter"
         variant="filled"
       >
         {showSortOrderFilter()}

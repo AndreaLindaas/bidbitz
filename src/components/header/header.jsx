@@ -30,7 +30,8 @@ export default function Header() {
 
         <li>
           <Link to="/">
-            <span> Home</span> <Home />
+            <span> Home</span>
+            {!isDesktop && <Home />}
           </Link>
         </li>
 

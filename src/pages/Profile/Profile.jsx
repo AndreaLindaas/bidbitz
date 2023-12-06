@@ -17,6 +17,8 @@ export default function Profile() {
   const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
+  const [listingToDelete, setListingToDelete] = useState("");
+
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
@@ -41,6 +43,7 @@ export default function Profile() {
           .then((response) => response.json())
           .then((a) => {
             setListings(a);
+
             setIsLoading(false);
           });
       });
@@ -61,29 +64,32 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
-  const deleteModalOpen = () => {
+  const deleteModalOpen = (event) => {
+    const index = event.target.dataset.index;
+    setListingToDelete(index);
     setIsDeleteModalOpen(true);
   };
   const deleteModalClose = () => {
     setIsDeleteModalOpen(false);
   };
-  // const deleteListing = () => {
-  //   console.log("hei");
-  //   const accessToken = localStorage.getItem("access_token");
-  //   fetch(`${API_URL}/listings/${listing.id}`, {
-  //     method: "Delete",
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   }).then((response) => {
-  //     if (response.status < 300) {
-  //       // navigate({ to: "/" });
-  //     }
-  //   });
-  // };
+  const deleteListing = () => {
+    const accessToken = localStorage.getItem("access_token");
+
+    console.log(listingToDelete);
+
+    fetch(`${API_URL}/listings/${listingToDelete}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
+      if (response.status < 300) {
+        // navigate({ to: "/" });
+      }
+    });
+  };
   const renderMyListings = () => {
     return listings.map((listing) => {
-      console.log(listing);
       return (
         <div className="relative" key={listing.id}>
           <Listing listing={listing} />
@@ -98,6 +104,7 @@ export default function Profile() {
               size="small"
               className="delete"
               onClick={deleteModalOpen}
+              data-index={listing.id}
             >
               Delete
             </Button>
@@ -156,9 +163,7 @@ export default function Profile() {
     }
     return (
       <>
-        {" "}
         <div className="my-auctions">
-          {" "}
           <h2>You have not made any auctions jet</h2>
         </div>
       </>
@@ -264,15 +269,26 @@ export default function Profile() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="delete-modal">
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
+        <Box className="modal">
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Sure you want to delete this listing?
           </Typography>
-          <Button variant="contained" size="small" className="delete">
+          <Button
+            variant="contained"
+            size="small"
+            className="delete"
+            onClick={deleteListing}
+            // data-index={i}
+          >
             Delete
+          </Button>
+          <Button
+            variant="contained"
+            className="secondary"
+            size="small"
+            onClick={deleteModalClose}
+          >
+            Close
           </Button>
         </Box>
       </Modal>

@@ -34,8 +34,8 @@ export default function SortBy(props) {
         select
         defaultValue={"endsAt" || ""}
         onChange={sortByChanged}
-        className="filter"
         variant="filled"
+        className="sort-filter"
       >
         {showSortByFilter()}
       </TextField>

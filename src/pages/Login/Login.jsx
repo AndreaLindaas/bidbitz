@@ -68,10 +68,11 @@ export default function Login() {
               fullWidth
             />
           </div>
-
-          <Button type="submit" variant="contained" className="primary">
-            Login
-          </Button>
+          <div className="login-button">
+            <Button type="submit" variant="contained" className="primary">
+              Login
+            </Button>
+          </div>
         </form>
         <p className="text-login">
           Don't have an account?

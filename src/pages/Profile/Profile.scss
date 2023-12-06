@@ -1,10 +1,8 @@
 .MuiPaper-root {
   &.profile-card {
     background-color: var(--jet);
-    color: var(--hot-pink);
-    width: 90vw;
-    margin: 0 auto;
-    margin-top: 20px;
+    border-radius: 0;
+    color: #fff;
   }
   .MuiAvatar-root.MuiAvatar-circular {
     margin: 0 auto;
@@ -27,7 +25,7 @@
         color: black;
         margin-top: 20px;
         font-size: 20px;
-        color: var(--hot-pink);
+        color: #fff;
       }
     }
     .credit-won-result {
@@ -50,6 +48,16 @@
     button {
       margin-right: 5px;
     }
+  }
+}
+.my-auctions {
+  background-color: var(--jet);
+  color: #fff;
+  padding: 40px;
+  text-align: center;
+  margin-top: 2px;
+  h2 {
+    margin: 0;
   }
 }
 .modal {

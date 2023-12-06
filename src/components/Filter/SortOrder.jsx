@@ -33,7 +33,6 @@ export default function SortOrder(props) {
         id="outlined-select-currency"
         select
         defaultValue={"asc" || ""}
-        label="Sort order"
         onChange={sortOrderChanged}
         className="filter"
         variant="filled"

@@ -32,6 +32,9 @@ export default function AllListings() {
         sortByFilter={sortByFilter}
         sortOrderFilter={sortOrderFilter}
       />
+      <div className="see-more">
+        <p>See more...</p>
+      </div>
     </>
   );
 }

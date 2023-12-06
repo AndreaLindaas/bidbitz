@@ -83,6 +83,7 @@ export default function Profile() {
   // };
   const renderMyListings = () => {
     return listings.map((listing) => {
+      console.log(listing);
       return (
         <div className="relative" key={listing.id}>
           <Listing listing={listing} />
@@ -140,7 +141,29 @@ export default function Profile() {
   if (isLoading) {
     return <div></div>;
   }
-
+  const myAuctions = () => {
+    if (listings.length > 0) {
+      return (
+        <>
+          <div className="my-auctions">
+            <h2>
+              Here are your <span className="highlight">{listings.length}</span>{" "}
+              auctions
+            </h2>
+          </div>
+        </>
+      );
+    }
+    return (
+      <>
+        {" "}
+        <div className="my-auctions">
+          {" "}
+          <h2>You have not made any auctions jet</h2>
+        </div>
+      </>
+    );
+  };
   return (
     <>
       <Card className="profile-card">
@@ -182,6 +205,7 @@ export default function Profile() {
           </div>
         </CardContent>
       </Card>
+      <div> {myAuctions()}</div>
       <div className="listings-container">{renderMyListings()}</div>
       <Modal
         open={isChangeModalAvatarOpen}

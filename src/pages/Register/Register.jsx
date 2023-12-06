@@ -81,9 +81,11 @@ export default function Register() {
               fullWidth
             />
           </div>
-          <Button type="submit" variant="contained" className="primary">
-            Sign up
-          </Button>
+          <div className="signup-button">
+            <Button type="submit" variant="contained" className="primary">
+              Sign up
+            </Button>
+          </div>
         </form>
         {errorMessage}
         <p className="text-register">

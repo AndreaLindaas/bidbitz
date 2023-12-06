@@ -33,7 +33,6 @@ export default function SortBy(props) {
         id="outlined-select-currency"
         select
         defaultValue={"endsAt" || ""}
-        label="Sort by"
         onChange={sortByChanged}
         className="filter"
         variant="filled"

@@ -95,7 +95,7 @@ export default function ListingPage() {
         <Link to="#">
           <div className="seller">
             <img src={sellerImage()} alt="" />
-            <div>{listing.seller.name}</div>
+            <div className="highlight">{listing.seller.name}</div>
           </div>
         </Link>
       </div>

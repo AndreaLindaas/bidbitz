@@ -44,10 +44,11 @@
   }
 
   .seller-container {
-    border-bottom: solid 1px var(--jet);
-    border-top: solid 1px var(--jet);
+    background-color: var(--jet);
+    color: #fff;
+    width: 320px;
     padding: 20px 0;
-    margin-bottom: 30px;
+    margin: 10px auto;
   }
   .seller-bold {
     font-weight: bold;

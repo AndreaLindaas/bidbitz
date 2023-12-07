@@ -3,6 +3,7 @@ import Listings from "../../components/listings/listings";
 import { useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import "./AllListings.scss";
+import { Button } from "@mui/material";
 export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
@@ -33,7 +34,7 @@ export default function AllListings() {
         sortOrderFilter={sortOrderFilter}
       />
       <div className="see-more">
-        <p>See more...</p>
+        <Button className="primary">Show more</Button>
       </div>
     </>
   );

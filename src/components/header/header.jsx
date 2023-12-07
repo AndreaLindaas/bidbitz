@@ -23,7 +23,7 @@ export default function Header() {
           <li>
             <Link to="/login">
               <span> Login</span>
-              <Login />
+              {!isDesktop && <Login />}
             </Link>
           </li>
         )}
@@ -37,7 +37,8 @@ export default function Header() {
 
         <li>
           <Link to="/all-listings">
-            <span> All Auctions</span> <Gavel />
+            <span> All Auctions</span>
+            {!isDesktop && <Gavel />}
           </Link>
         </li>
 
@@ -45,20 +46,22 @@ export default function Header() {
           <>
             <li>
               <Link to="/profile">
-                <span> Profile</span> <Person />
+                <span> Profile</span>
+                {!isDesktop && <Person />}
               </Link>
             </li>
 
             <li>
               <Link to="/create">
                 <span> Sell items</span>
-                <Sell />
+                {!isDesktop && <Sell />}
               </Link>
             </li>
             <li>
               <Link to="/logout">
                 <span> Logout</span>
-                <Logout />
+
+                {!isDesktop && <Logout />}
               </Link>
             </li>
           </>

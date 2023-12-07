@@ -1,9 +1,18 @@
 .introduction-container {
   background-color: var(--yellow);
   padding: 80px 10px;
+  .auctionman-image {
+    margin: 0 auto;
+    width: 300px;
+    img {
+      width: 200px;
+    }
+  }
+
   .introduction {
     width: 300px;
     margin: 0 auto;
+
     h1 {
       margin: 0;
     }

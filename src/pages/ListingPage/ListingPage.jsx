@@ -90,15 +90,7 @@ export default function ListingPage() {
     <div className="listing-container">
       <Carousel height={300}>{renderImages()}</Carousel>
       <h1>{listing.title}</h1>
-      <div className="seller-container">
-        <div className="seller-bold">Seller</div>
-        <Link to="#">
-          <div className="seller">
-            <img src={sellerImage()} alt="" />
-            <div className="highlight">{listing.seller.name}</div>
-          </div>
-        </Link>
-      </div>
+
       <div className="bid-ends">
         <div>Ends at</div>
         <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
@@ -111,6 +103,15 @@ export default function ListingPage() {
           {listing._count.bids} <span> Bids</span>
         </div>
         {listing.seller.email !== email && <PlaceBid highestBid={highestBid} />}
+      </div>
+      <div className="seller-container">
+        <div className="seller-bold">Seller</div>
+        <Link to="#">
+          <div className="seller">
+            <img src={sellerImage()} alt="" />
+            <div className="highlight">{listing.seller.name}</div>
+          </div>
+        </Link>
       </div>
       <div className="description">
         <h2>Description</h2>

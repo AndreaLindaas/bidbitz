@@ -45,6 +45,9 @@ export default function Home() {
         <title>BidBitz</title>
       </Helmet>
       <div className="introduction-container">
+        <div className="auctionman-image">
+          <img src="../src/assets/media/images/auction_man.png" alt="" />
+        </div>
         <div className="introduction">
           <p>Bidding with a bit of fun</p>
           <h1>BidBitz</h1>

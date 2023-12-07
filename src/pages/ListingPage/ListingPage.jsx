@@ -117,6 +117,7 @@ export default function ListingPage() {
         <h2>Description</h2>
         <p>{listing.description}</p>
       </div>
+
       <div className="bids">
         <h3>All bids</h3>
         <ul>{allBids()}</ul>

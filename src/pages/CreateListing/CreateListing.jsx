@@ -14,7 +14,7 @@ export default function CreateListing() {
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
   const [datePreview, setDatePreview] = useState(null);
-
+  const [count, setCount] = useState(0);
   const createTheListing = (event) => {
     event.preventDefault();
 
@@ -43,6 +43,22 @@ export default function CreateListing() {
       .catch((error) => {
         console.log("noe gikk galt", error);
       });
+  };
+
+  const validateForm = () => {
+    if (count > 280) {
+      return false;
+    }
+
+    if (titlePreview.length === 0 || titlePreview.length > 280) {
+      return false;
+    }
+
+    if (!datePreview) {
+      return false;
+    }
+
+    return true;
   };
 
   const addImage = (event) => {
@@ -88,6 +104,7 @@ export default function CreateListing() {
   const previewDescription = (event) => {
     const description = event.target.value;
     setDescriptionPreview(description);
+    setCount(description.length);
   };
 
   const dateDescription = (date) => {
@@ -148,6 +165,7 @@ export default function CreateListing() {
               margin="dense"
               onChange={previewDescription}
             />
+            <div className={count > 280 ? "highlight" : ""}>{count}/280</div>
           </div>
           <div className="bidend">Auction ends at:</div>
           <div>
@@ -163,7 +181,12 @@ export default function CreateListing() {
             /> */}
           </div>
           <div className="btn-align">
-            <Button variant="contained" type="submit" className="primary">
+            <Button
+              variant="contained"
+              disabled={!validateForm()}
+              type="submit"
+              className="primary"
+            >
               Save
             </Button>
           </div>

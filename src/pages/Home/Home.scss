@@ -5,7 +5,7 @@
     margin: 0 auto;
     width: 300px;
     img {
-      width: 200px;
+      width: 100px;
     }
   }
 
@@ -42,8 +42,18 @@
 }
 @media screen and (min-width: 768px) {
   .introduction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .auctionman-image {
+      margin: 0;
+      img {
+        width: 200px;
+      }
+    }
     .introduction {
       width: 500px;
+      margin: 0;
     }
   }
 }

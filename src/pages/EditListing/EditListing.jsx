@@ -47,7 +47,7 @@ export default function EditListing() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // navigate("/listing/" + data.id);
+        navigate("/listing/" + data.id);
       });
   };
   const addImage = (event) => {

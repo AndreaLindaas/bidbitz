@@ -14,7 +14,8 @@ export default function CreateListing() {
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
   const [datePreview, setDatePreview] = useState(null);
-  const [count, setCount] = useState(0);
+  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [titleCount, setTitleCount] = useState(0);
   const createTheListing = (event) => {
     event.preventDefault();
 
@@ -46,10 +47,12 @@ export default function CreateListing() {
   };
 
   const validateForm = () => {
-    if (count > 280) {
+    if (descriptionCount > 280) {
       return false;
     }
-
+    if (titleCount > 280) {
+      return false;
+    }
     if (titlePreview.length === 0 || titlePreview.length > 280) {
       return false;
     }
@@ -100,11 +103,12 @@ export default function CreateListing() {
   const previewTitle = (event) => {
     const title = event.target.value;
     setTitlePreview(title);
+    setTitleCount(title.length);
   };
   const previewDescription = (event) => {
     const description = event.target.value;
     setDescriptionPreview(description);
-    setCount(description.length);
+    setDescriptionCount(description.length);
   };
 
   const dateDescription = (date) => {
@@ -150,7 +154,11 @@ export default function CreateListing() {
               fullWidth
               margin="dense"
               onChange={previewTitle}
+              multiline
             />
+            <div className={titleCount > 280 ? "error" : ""}>
+              {titleCount}/280
+            </div>
           </div>
           <div>
             <TextField
@@ -165,20 +173,15 @@ export default function CreateListing() {
               margin="dense"
               onChange={previewDescription}
             />
-            <div className={count > 280 ? "highlight" : ""}>{count}/280</div>
+            <div className={descriptionCount > 280 ? "error" : ""}>
+              {descriptionCount}/280
+            </div>
           </div>
-          <div className="bidend">Auction ends at:</div>
-          <div>
-            <DatePicker required onChange={dateDescription} />
-            {/* <TextField
-              id="filled-basic"
-              variant="filled"
-              type="date"
-              name="date"
-              required
-              margin="dense"
-             
-            /> */}
+          <div className="bidend">
+            Auction ends at:
+            <div>
+              <DatePicker required onChange={dateDescription} />
+            </div>
           </div>
           <div className="btn-align">
             <Button

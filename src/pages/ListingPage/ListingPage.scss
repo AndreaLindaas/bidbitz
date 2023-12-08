@@ -1,8 +1,13 @@
 .listing-container {
   text-align: center;
-  margin-top: 30px;
+  .css-ohwg9z {
+    overflow: hidden;
+  }
   img {
     width: 80%;
+  }
+  .css-ktslay-MuiButtonBase-root-MuiIconButton-root {
+    opacity: 1;
   }
   .bid-ends {
     background-color: var(--yellow);

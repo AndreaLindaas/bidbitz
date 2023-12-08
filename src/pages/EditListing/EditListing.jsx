@@ -11,6 +11,8 @@ export default function EditListing() {
   const [listing, setListing] = useState({});
   const [showEdit, setShowEdit] = useState(false);
   const [media, setMedia] = useState([]);
+  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [titleCount, setTitleCount] = useState(0);
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}`, {
@@ -23,6 +25,8 @@ export default function EditListing() {
       .then((result) => {
         setListing(result);
         setMedia(result.media);
+        setTitleCount(result.title.length);
+        setDescriptionCount(result.description.length);
         console.log(result);
         setShowEdit(true);
       });
@@ -79,6 +83,26 @@ export default function EditListing() {
       );
     });
   };
+  const CountDescription = (event) => {
+    const description = event.target.value;
+    setDescriptionCount(description.length);
+  };
+  const countTitle = (event) => {
+    const title = event.target.value;
+    setTitleCount(title.length);
+  };
+  const validateForm = () => {
+    if (descriptionCount > 280) {
+      return false;
+    }
+    // if (titleCount > 280) {
+    //   return false;
+    // }
+    if (titleCount === 0 || titleCount > 280) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className="edit-listing">
       <h1>Edit Listing</h1>
@@ -115,7 +139,12 @@ export default function EditListing() {
               fullWidth
               margin="dense"
               defaultValue={listing.title}
+              onChange={countTitle}
+              multiline
             />
+            <div className={titleCount > 280 ? "error" : ""}>
+              {titleCount}/280
+            </div>
             <TextField
               id="filled-basic"
               label="Description"
@@ -126,9 +155,17 @@ export default function EditListing() {
               margin="dense"
               defaultValue={listing.description}
               multiline
+              onChange={CountDescription}
             />
-
-            <Button variant="contained" type="submit" className="primary">
+            <div className={descriptionCount > 280 ? "error" : ""}>
+              {descriptionCount}/280
+            </div>
+            <Button
+              variant="contained"
+              type="submit"
+              className="primary"
+              disabled={!validateForm()}
+            >
               Save
             </Button>
           </form>

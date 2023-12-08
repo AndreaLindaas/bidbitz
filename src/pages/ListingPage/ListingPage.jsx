@@ -7,6 +7,7 @@ import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
 import Carousel from "react-material-ui-carousel";
 import { Gavel } from "@mui/icons-material";
+import { useMediaQuery } from "@mui/material";
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +15,7 @@ export default function ListingPage() {
   const params = useParams();
   const email = localStorage.getItem("user_email");
   const name = localStorage.getItem("name");
+  const isDesktop = useMediaQuery("(min-width:768px)");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}/?_bids=true&_seller=true`)
       .then((response) => response.json())
@@ -96,44 +98,71 @@ export default function ListingPage() {
 
   return (
     <div className="listing-container">
-      <Carousel className="carousel" height={300}>
-        {renderImages()}
-      </Carousel>
-      <h1>{listing.title}</h1>
+      {isDesktop && <h1>{listing.title}</h1>}
+      <div className="content-container">
+        <div>
+          <Carousel className="carousel" height={300}>
+            {renderImages()}
+          </Carousel>
+          {isDesktop && (
+            <div className="description">
+              <h2>Description</h2>
+              <p>{listing.description}</p>
+            </div>
+          )}
+        </div>
+        <div className="content-flex">
+          {!isDesktop && <h1>{listing.title}</h1>}
 
-      <div className="bid-ends">
-        <div>Ends at</div>
-        <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
-      </div>
-      <div className="bid">
-        <Gavel />
-        <div className="highlight">
-          {highestBid.amount} <span> credits</span>
-        </div>
-        <div className="highlight">
-          {listing._count.bids}{" "}
-          <span>{listing._count.bids == 1 ? "bid" : "bids"} </span>
-        </div>
-        {listing.seller.email !== email && <PlaceBid highestBid={highestBid} />}
-      </div>
-      <div className="seller-container">
-        <div className="seller-bold">Seller</div>
-        <Link to="#">
-          <div className="seller">
-            <img src={sellerImage()} alt="" />
-            <div className="highlight">{listing.seller.name}</div>
+          <div className="bid-ends">
+            <div>Ends at</div>
+            <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
           </div>
-        </Link>
-      </div>
-      <div className="description">
-        <h2>Description</h2>
-        <p>{listing.description}</p>
+          <div className="bid">
+            <Gavel />
+            <div className="highlight">
+              {highestBid.amount} <span> credits</span>
+            </div>
+            <div className="highlight">
+              {listing._count.bids}{" "}
+              <span>{listing._count.bids == 1 ? "bid" : "bids"} </span>
+            </div>
+            {listing.seller.email !== email && (
+              <PlaceBid highestBid={highestBid} />
+            )}
+          </div>
+          <div className="seller-container">
+            <div className="seller-bold">Seller</div>
+            <Link to="#">
+              <div className="seller">
+                <img src={sellerImage()} alt="" />
+                <div className="highlight">{listing.seller.name}</div>
+              </div>
+            </Link>
+          </div>
+          {isDesktop && (
+            <div className="bids">
+              <h3>All bids</h3>
+              <ul>{allBids()}</ul>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="bids">
-        <h3>All bids</h3>
-        <ul>{allBids()}</ul>
+      <div className="description">
+        {!isDesktop && (
+          <>
+            <h2>Description</h2>
+            <p>{listing.description}</p>
+          </>
+        )}
       </div>
+      {!isDesktop && (
+        <div className="bids">
+          <h3>All bids</h3>
+          <ul>{allBids()}</ul>
+        </div>
+      )}
     </div>
   );
 }

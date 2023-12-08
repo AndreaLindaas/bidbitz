@@ -1,4 +1,17 @@
 .create-listing {
+  .carousel {
+    .slide {
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+    .MuiButtonBase-root.MuiIconButton-root {
+      opacity: 1;
+    }
+  }
   h1 {
     text-align: center;
 

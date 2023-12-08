@@ -6,13 +6,14 @@ import "./ListingPage.scss";
 import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
 import Carousel from "react-material-ui-carousel";
-
+import { Gavel } from "@mui/icons-material";
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [highestBid, setHighestBid] = useState(0);
+  const [highestBid, setHighestBid] = useState({});
   const params = useParams();
   const email = localStorage.getItem("user_email");
+  const name = localStorage.getItem("name");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}/?_bids=true&_seller=true`)
       .then((response) => response.json())
@@ -30,7 +31,11 @@ export default function ListingPage() {
   const renderImages = () => {
     if (listing.media && listing.media.length > 0) {
       return listing.media.map((image, i) => {
-        return <img src={image} key={i} />;
+        return (
+          <div className="slide" key={i}>
+            <img src={image} />
+          </div>
+        );
       });
     }
     return (
@@ -47,7 +52,7 @@ export default function ListingPage() {
     const lastBid = listing.bids[listing.bids.length - 1];
 
     if (lastBid) {
-      setHighestBid(lastBid.amount);
+      setHighestBid(lastBid);
       return (
         <div>
           <span className="cb-color">Current Bid:</span>
@@ -64,10 +69,10 @@ export default function ListingPage() {
     }
     const bids = listing.bids.map((bid) => {
       return (
-        <li key={bid.id}>
+        <li className={bid.bidderName == name ? "user" : ""} key={bid.id}>
           <span className="single-bid">
             <span className="bold-credit"> {bid.amount} Credits</span>
-            <span> {bid.bidderName}</span>
+            <span className="name"> {bid.bidderName}</span>
           </span>
           <span className="bid-date">
             <Moment format="HH:mm DD.MM.YYYY">{bid.created}</Moment>
@@ -91,7 +96,9 @@ export default function ListingPage() {
 
   return (
     <div className="listing-container">
-      <Carousel height={300}>{renderImages()}</Carousel>
+      <Carousel className="carousel" height={300}>
+        {renderImages()}
+      </Carousel>
       <h1>{listing.title}</h1>
 
       <div className="bid-ends">
@@ -99,11 +106,13 @@ export default function ListingPage() {
         <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
       </div>
       <div className="bid">
+        <Gavel />
         <div className="highlight">
-          {highestBid} <span> Credits</span>
+          {highestBid.amount} <span> credits</span>
         </div>
         <div className="highlight">
-          {listing._count.bids} <span> Bids</span>
+          {listing._count.bids}{" "}
+          <span>{listing._count.bids == 1 ? "bid" : "bids"} </span>
         </div>
         {listing.seller.email !== email && <PlaceBid highestBid={highestBid} />}
       </div>

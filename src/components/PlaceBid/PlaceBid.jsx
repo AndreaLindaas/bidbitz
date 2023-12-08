@@ -6,11 +6,12 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 PlaceBid.propTypes = {
-  highestBid: PropTypes.number,
+  highestBid: PropTypes.object,
 };
 
 export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");
+  const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
   const [errorMessage, setErrorMessage] = useState("");
   const params = useParams();
@@ -19,9 +20,8 @@ export default function PlaceBid(props) {
     event.preventDefault();
     const amount = event.target.elements;
     const bidAmount = amount.amount.value;
-    console.log(props);
 
-    if (bidAmount <= props.highestBid) {
+    if (bidAmount <= props.highestBid.amount) {
       return;
     }
 
@@ -46,6 +46,14 @@ export default function PlaceBid(props) {
       console.warn("An error occurred", error);
     }
   };
+
+  if (props.highestBid.bidderName == name) {
+    return (
+      <div className="winning">
+        <span className="highlight">Hooray!</span> You are #winning
+      </div>
+    );
+  }
 
   if (userEmail) {
     return (

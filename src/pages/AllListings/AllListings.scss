@@ -2,9 +2,14 @@
   background-color: var(--jet);
   padding: 30px;
   .search {
-    margin: 0 auto;
-    width: 200px;
+    // margin: 0 auto;
+    // width: 200px;
+    // padding: 30px 0;
+    text-align: center;
     padding: 30px 0;
+    .MuiFormControl-root {
+      width: 270px;
+    }
     .MuiInputBase-root.MuiOutlinedInput-root {
       background-color: #fff;
       height: 40px;
@@ -12,6 +17,9 @@
   }
   .filter {
     text-align: center;
+    .MuiFormControl-root {
+      border-radius: 4px;
+    }
     .MuiFormControl-root {
       margin: 5px;
 

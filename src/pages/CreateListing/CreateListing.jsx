@@ -96,7 +96,11 @@ export default function CreateListing() {
   const previewImage = () => {
     if (media && media.length > 0) {
       return media.map((image, i) => {
-        return <img src={image} key={i} />;
+        return (
+          <div className="slide" key={i}>
+            <img src={image} />
+          </div>
+        );
       });
     }
   };
@@ -201,7 +205,9 @@ export default function CreateListing() {
         media.length > 0) && (
         <Card variant="outlined" className="preview">
           <h2>Preview</h2>
-          <Carousel height={300}>{previewImage()}</Carousel>
+          <Carousel className="carousel" height={300}>
+            {previewImage()}
+          </Carousel>
           <h2>{titlePreview}</h2>
           <div className="description-date">
             <p>{descriptionPreview}</p>

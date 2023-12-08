@@ -3,10 +3,12 @@ import { Drawer } from "@mui/material";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./header.scss";
-
+import { useMediaQuery } from "@mui/material";
+import { Home, Person, Gavel, Logout, Login, Sell } from "@mui/icons-material";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("access_token");
+  const isDesktop = useMediaQuery("(min-width:768px)");
   const toggleMenu = () => {
     if (menuOpen) {
       setMenuOpen(false);
@@ -14,64 +16,91 @@ export default function Header() {
       setMenuOpen(true);
     }
   };
+  const renderMenuList = () => {
+    return (
+      <ul className="menu-list">
+        {!accessToken && (
+          <li>
+            <Link to="/login">
+              <span> Login</span>
+              {!isDesktop && <Login />}
+            </Link>
+          </li>
+        )}
+
+        <li>
+          <Link to="/">
+            <span> Home</span>
+            {!isDesktop && <Home />}
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/all-listings">
+            <span> All Auctions</span>
+            {!isDesktop && <Gavel />}
+          </Link>
+        </li>
+
+        {accessToken && (
+          <>
+            <li>
+              <Link to="/profile">
+                <span> Profile</span>
+                {!isDesktop && <Person />}
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/create">
+                <span> Sell items</span>
+                {!isDesktop && <Sell />}
+              </Link>
+            </li>
+            <li>
+              <Link to="/logout">
+                <span> Logout</span>
+
+                {!isDesktop && <Logout />}
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
+    );
+  };
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
-  if (accessToken) {
-    return (
-      <div>
-        <nav>
-          <Link to="/">
-            <span className="logo">BidBitz</span>
-          </Link>
 
-          <div className="menu-bar" onClick={toggleMenu}>
-            <MenuIcon />
-          </div>
+  return (
+    <div>
+      <nav>
+        <Link to="/">
+          <span className="logo">BidBitz</span>
+        </Link>
 
-          <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
-            <div className="menu-list">
-              <div>
-                <Link to="/">Home</Link>
-              </div>
-              <div>
-                <Link to="/profile">Profile</Link>
-              </div>
-              <div>
-                <Link to="/create">Sell items</Link>
-              </div>
-              <div>
-                <Link to="/logout">Logout</Link>
-              </div>
+        {isDesktop && (
+          <>
+            <div className="menu-bar">{renderMenuList()}</div>
+          </>
+        )}
+
+        {!isDesktop && (
+          <>
+            <div className="menu-bar" onClick={toggleMenu}>
+              <MenuIcon />
             </div>
-          </Drawer>
-        </nav>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <nav>
-          <Link to="/">
-            <span className="logo">BidBitz</span>
-          </Link>
 
-          <div className="menu-bar" onClick={toggleMenu}>
-            <MenuIcon />
-          </div>
-          <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
-            <div className="menu-list">
-              <div>
-                <Link to="/login">Login</Link>
+            <Drawer anchor="top" open={menuOpen} onClose={closeMenu}>
+              <div className="menu-mobile" onClick={closeMenu}>
+                {renderMenuList()}
               </div>
-              <div>
-                <Link to="/">Home</Link>
-              </div>
-            </div>
-          </Drawer>
-        </nav>
-      </div>
-    );
-  }
+            </Drawer>
+          </>
+        )}
+      </nav>
+    </div>
+  );
 }

@@ -1,12 +1,25 @@
 .listing-container {
   text-align: center;
-  img {
-    width: 100%;
+  .carousel {
+    .slide {
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+    .MuiButtonBase-root.MuiIconButton-root {
+      opacity: 1;
+    }
   }
+
   .bid-ends {
-    background-color: var(--background);
+    background-color: var(--yellow);
+    color: var(--jet);
     padding: 30px 0;
     margin: 0 auto;
+    width: 320px;
   }
   .cb-color {
     color: grey;
@@ -17,19 +30,46 @@
   }
 
   .bid {
-    background-color: var(--bid);
+    background-color: var(--jet);
     padding: 30px 0 50px 0;
-    margin: 0px auto 30px auto;
+    margin: 0px auto 10px auto;
+    width: 320px;
+    svg {
+      color: #fff;
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    span {
+      color: #fff;
+    }
+    .winning {
+      color: #fff;
+      .highlight {
+        color: var(--hot-pink);
+      }
+    }
+    .want-tobid {
+      color: #fff;
+      margin-top: 10px;
+    }
+  }
+  .MuiFormControl-root.MuiTextField-root {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
   }
 
   .primary.bid-btn {
     margin-top: 30px;
+    color: var(--jet);
   }
+
   .seller-container {
-    border-bottom: solid 1px var(--background);
-    border-top: solid 1px var(--background);
+    background-color: var(--jet);
+    color: #fff;
+    width: 320px;
     padding: 20px 0;
-    margin-bottom: 30px;
+    margin: 10px auto;
   }
   .seller-bold {
     font-weight: bold;
@@ -45,6 +85,13 @@
       width: 60px;
     }
   }
+  .description {
+    width: 320px;
+    margin: 0 auto;
+    p {
+      text-align: left;
+    }
+  }
   .single-bid {
     display: flex;
     justify-content: space-between;
@@ -56,13 +103,24 @@
     h3 {
       text-align: center;
     }
+    .no-bids {
+      text-align: center;
+    }
     ul {
       padding: 0;
       li {
         padding: 10px;
       }
+
       li:nth-child(odd) {
-        background: var(--bid);
+        background: #f8f9fb;
+      }
+      li.user {
+        background-color: var(--jet);
+        color: #fff;
+        .name {
+          color: var(--hot-pink);
+        }
       }
     }
     .bold-credit {
@@ -73,4 +131,6 @@
     color: grey;
     font-size: 14px;
   }
+}
+@media screen and (min-width: 768px) {
 }

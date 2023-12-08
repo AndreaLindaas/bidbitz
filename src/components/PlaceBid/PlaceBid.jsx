@@ -4,25 +4,24 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 PlaceBid.propTypes = {
-  highestBid: PropTypes.string,
+  highestBid: PropTypes.object,
 };
+
 export default function PlaceBid(props) {
   const userEmail = localStorage.getItem("user_email");
+  const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
   const params = useParams();
 
   const placeBidClicked = async (event) => {
     event.preventDefault();
     const amount = event.target.elements;
     const bidAmount = amount.amount.value;
-    console.log(props);
 
-    if (bidAmount <= props.highestBid) {
+    if (bidAmount <= props.highestBid.amount) {
       return;
     }
 
@@ -41,22 +40,30 @@ export default function PlaceBid(props) {
       if (data.statusCode > 300) {
         setErrorMessage(data.errors[0].message);
       } else {
-        navigate("#");
+        window.location.reload();
       }
     } catch (error) {
       console.warn("An error occurred", error);
     }
   };
 
+  if (props.highestBid.bidderName == name) {
+    return (
+      <div className="winning">
+        <span className="highlight">Hooray!</span> You are #winning
+      </div>
+    );
+  }
+
   if (userEmail) {
     return (
       <>
         <form onSubmit={placeBidClicked}>
           <TextField
-            id="standard-basic"
+            id="filled-basic"
             label="Amount"
             name="amount"
-            variant="standard"
+            variant="filled"
             type="number"
           />
           <div>
@@ -74,7 +81,9 @@ export default function PlaceBid(props) {
   }
   return (
     <>
-      <div>Do you want to bid on this item? Login to place a bid!</div>
+      <div className="want-tobid">
+        Do you want to bid on this item? Login to place a bid!
+      </div>
       <div>
         <Link to="/login">
           <Button className="primary bid-btn" variant="contained">

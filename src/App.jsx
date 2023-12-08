@@ -10,6 +10,9 @@ import CreateListing from "./pages/CreateListing/CreateListing";
 import Logout from "./pages/Logout/Logout";
 import EditListing from "./pages/EditListing/EditListing";
 import Profile from "./pages/Profile/Profile";
+import AllListings from "./pages/AllListings/AllListings";
+import Footer from "./components/Footer/Footer";
+
 function App() {
   return (
     <>
@@ -23,14 +26,15 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/all-listings" element={<AllListings />} />
             <Route path="/listing/:listingId" element={<ListingPage />} />
             <Route path="/listing/edit/:listingId" element={<EditListing />} />
           </Routes>
         </main>
+        <Footer />
       </BrowserRouter>
     </>
   );
-
 }
 
 export default App;

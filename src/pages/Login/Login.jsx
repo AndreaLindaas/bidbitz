@@ -1,13 +1,11 @@
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import "./Login.scss";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -31,14 +29,13 @@ export default function Login() {
       if (data.statusCode > 300) {
         setErrorMessage(data.errors[0].message);
       } else {
-        navigate("/");
+        localStorage.setItem("access_token", data.accessToken);
+        localStorage.setItem("user_email", data.email);
+        localStorage.setItem("credits", data.credits);
+        localStorage.setItem("avatar", data.avatar);
+        localStorage.setItem("name", data.name);
+        window.location.href = "/";
       }
-
-      localStorage.setItem("access_token", data.accessToken);
-      localStorage.setItem("user_email", data.email);
-      localStorage.setItem("credits", data.credits);
-      localStorage.setItem("avatar", data.avatar);
-      localStorage.setItem("name", data.name);
     } catch (error) {
       console.warn("An error occurred", error);
     }
@@ -46,42 +43,45 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleOnSubmit}>
-        <div>
-          <TextField
-            id="standard-basic"
-            name="email"
-            label="Email"
-            type="email"
-            placeholder="...@stud.noroff.no"
-            variant="standard"
-            fullWidth
-          />
-        </div>
-        <div>
-          <TextField
-            id="standard-basic"
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Password"
-            variant="standard"
-            fullWidth
-          />
-        </div>
-
-        <Button type="submit" variant="contained">
-          Login
-        </Button>
-      </form>
-      <p className="text-login">
-        Don't have an account?
-        <Link to="/register">
-          <span>Sign up here!</span>
-        </Link>
-      </p>
-      {errorMessage}
+      <div className="login">
+        <h1 className="login">Login</h1>
+        <form onSubmit={handleOnSubmit}>
+          <div>
+            <TextField
+              id="filled-basic"
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="...@stud.noroff.no"
+              variant="filled"
+              fullWidth
+            />
+          </div>
+          <div>
+            <TextField
+              id="filled-basic"
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="Password"
+              variant="filled"
+              fullWidth
+            />
+          </div>
+          <div className="login-button">
+            <Button type="submit" variant="contained" className="primary">
+              Login
+            </Button>
+          </div>
+        </form>
+        <p className="text-login">
+          Don't have an account?
+          <Link to="/register">
+            <span className="highlight"> Sign up here!</span>
+          </Link>
+        </p>
+        {errorMessage}
+      </div>
     </>
   );
 }

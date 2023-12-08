@@ -19,7 +19,11 @@ export default function Listing(props) {
       const lastBid = listing.bids[listing.bids.length - 1];
 
       if (lastBid) {
-        return <span>{lastBid.amount} Credits</span>;
+        return (
+          <span>
+            <span className="highlight">{lastBid.amount}</span> Credits
+          </span>
+        );
       }
     }
     return null;
@@ -33,13 +37,9 @@ export default function Listing(props) {
   };
 
   return (
-    <Link to={`/listing/${listing.id}`}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image={getImage()}
-          title="green iguana"
-        />
+    <Link className="listing-link" to={`/listing/${listing.id}`}>
+      <Card>
+        <CardMedia image={getImage()} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {listing.title}
@@ -49,7 +49,7 @@ export default function Listing(props) {
           </Typography>
           {listing._count && (
             <Typography variant="body2" color="text.secondary">
-              {listing._count.bids} Bids
+              <span className="highlight"> {listing._count.bids} </span> Bids
             </Typography>
           )}
         </CardContent>

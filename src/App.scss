@@ -1,23 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 :root {
-  --background: #dde9f6;
-  --button: #669bd9;
-  --bid: #f7f8fa;
+  --yellow: #ffd700;
+  --jet: #333;
+  --hot-pink: #ff96b4;
+  --seasalt: #f8f9fb;
+  --red: #e75c3c;
 }
 body {
   margin: 0;
+  font-family: "Poppins", sans-serif;
 }
-main {
-  margin: 20px;
+a {
+  text-decoration: none;
 }
 li {
   list-style-type: none;
 }
+.highlight {
+  color: var(--hot-pink);
+}
+.error {
+  color: var(--red);
+}
+
 .MuiButton-root.MuiButtonBase-root {
   &.primary {
-    background-color: var(--button);
+    background-color: var(--yellow);
+    color: var(--jet);
   }
 
   &.secondary {
     background-color: grey;
+  }
+
+  &.delete {
+    background-color: #e75c3c;
+  }
+
+  &.Mui-disabled {
+    opacity: 0.3;
   }
 }

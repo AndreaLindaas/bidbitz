@@ -9,16 +9,21 @@ import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
 
+import { Link } from "react-router-dom";
 export default function Profile() {
   const [profile, setProfile] = useState({});
+  const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isChangeModalAvatarOpen, setIsChangeModalAvatarOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [newProfileAvatar, setNewProfileAvatar] = useState("");
+  const [listingToDelete, setListingToDelete] = useState("");
 
   useEffect(() => {
     const name = localStorage.getItem("name");
     const accessToken = localStorage.getItem("access_token");
 
-    fetch(`${API_URL}/profiles/${name}?_listings=true`, {
+    fetch(`${API_URL}/profiles/${name}`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${accessToken}`,
@@ -27,8 +32,20 @@ export default function Profile() {
       .then((response) => response.json())
       .then((l) => {
         setProfile(l);
-        setIsLoading(false);
-        console.log(l);
+        setNewProfileAvatar(l.avatar);
+
+        fetch(`${API_URL}/profiles/${name}/listings/?_bids=true`, {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((a) => {
+            setListings(a);
+
+            setIsLoading(false);
+          });
       });
   }, []);
   const profileImage = () => {
@@ -47,26 +64,114 @@ export default function Profile() {
     const wins = profile.wins.length;
     return wins;
   };
+  const deleteModalOpen = (event) => {
+    const index = event.target.dataset.index;
+    setListingToDelete(index);
+    setIsDeleteModalOpen(true);
+  };
+  const deleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+  const deleteListing = () => {
+    const accessToken = localStorage.getItem("access_token");
 
-  const renderMyListings = () => {
-    return profile.listings.map((listing) => {
-      return <Listing listing={listing} key={listing.id} />;
+    console.log(listingToDelete);
+
+    fetch(`${API_URL}/listings/${listingToDelete}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
+      if (response.status < 300) {
+        // navigate({ to: "/" });
+      }
     });
+  };
+  const renderMyListings = () => {
+    return listings.map((listing) => {
+      return (
+        <div className="relative" key={listing.id}>
+          <Listing listing={listing} />
+          <div className="edit-delete-btn">
+            <Link to={`/listing/edit/${listing.id}`}>
+              <Button variant="contained" size="small" className="primary">
+                Edit
+              </Button>
+            </Link>
+            <Button
+              variant="contained"
+              size="small"
+              className="delete"
+              onClick={deleteModalOpen}
+              data-index={listing.id}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const avatarUrlChanged = (event) => {
+    setNewProfileAvatar(event.target.value);
   };
 
   const changeAvatarUrl = (event) => {
     event.preventDefault();
     const urlChange = event.target.elements.urlChange;
-    console.log(urlChange.value);
+
+    const payload = {
+      avatar: urlChange.value,
+    };
+
+    const accessToken = localStorage.getItem("access_token");
+    fetch(`${API_URL}/profiles/${profile.name}/media`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        localStorage.setItem("avatar", result.avatar);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log("noe gikk galt", error);
+      });
   };
 
   if (isLoading) {
     return <div></div>;
   }
-
+  const myAuctions = () => {
+    if (listings.length > 0) {
+      return (
+        <>
+          <div className="my-auctions">
+            <h2>
+              Here are your <span className="highlight">{listings.length}</span>{" "}
+              auctions
+            </h2>
+          </div>
+        </>
+      );
+    }
+    return (
+      <>
+        <div className="my-auctions">
+          <h2>You have not made any auctions jet</h2>
+        </div>
+      </>
+    );
+  };
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card className="profile-card">
         <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
         <CardContent>
           <Typography
@@ -77,7 +182,12 @@ export default function Profile() {
           >
             {profile.name}
           </Typography>
-          <Button variant="contained" size="small" onClick={avatarModalOpen}>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={avatarModalOpen}
+            className="primary"
+          >
             Change Avatar
           </Button>
 
@@ -100,7 +210,8 @@ export default function Profile() {
           </div>
         </CardContent>
       </Card>
-      {renderMyListings()}
+      <div> {myAuctions()}</div>
+      <div className="listings-container">{renderMyListings()}</div>
       <Modal
         open={isChangeModalAvatarOpen}
         onClose={avatarModalClose}
@@ -109,20 +220,34 @@ export default function Profile() {
       >
         <Box className="modal">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Change Avatar url
+            Change Avatar
           </Typography>
+
+          <Avatar
+            alt=""
+            src={newProfileAvatar}
+            sx={{ width: 70, height: 70 }}
+          />
+
           <form onSubmit={changeAvatarUrl}>
             <TextField
-              id="standard-basic"
-              label="Avatar url"
+              onChange={avatarUrlChanged}
+              id="filled-basic"
               type="text"
-              variant="standard"
+              variant="filled"
               fullWidth
               name="urlChange"
+              defaultValue={profile.avatar}
+              multiline
             />
 
             <div>
-              <Button type="submit" variant="contained" size="small">
+              <Button
+                type="submit"
+                variant="contained"
+                size="small"
+                className="primary"
+              >
                 Change Avatar
               </Button>
 
@@ -136,6 +261,35 @@ export default function Profile() {
               </Button>
             </div>
           </form>
+        </Box>
+      </Modal>
+      <Modal
+        open={isDeleteModalOpen}
+        onClose={deleteModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modal">
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Sure you want to delete this listing?
+          </Typography>
+          <Button
+            variant="contained"
+            size="small"
+            className="delete"
+            onClick={deleteListing}
+            // data-index={i}
+          >
+            Delete
+          </Button>
+          <Button
+            variant="contained"
+            className="secondary"
+            size="small"
+            onClick={deleteModalClose}
+          >
+            Close
+          </Button>
         </Box>
       </Modal>
     </>

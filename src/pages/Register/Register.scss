@@ -1,7 +1,7 @@
-.login {
+.register {
   background-color: var(--jet);
   color: #fff;
-  h1.login {
+  h1 {
     text-align: center;
     margin: 0;
     padding: 30px 0;
@@ -9,7 +9,7 @@
   form {
     margin: 0 auto;
     width: 270px;
-    .login-button {
+    .signup-button {
       text-align: center;
     }
     div {
@@ -20,15 +20,15 @@
       }
     }
   }
-  .text-login {
+  .text-register {
     text-align: center;
     margin: 0;
     padding: 20px 0 30px 0;
   }
 }
 @media screen and (min-width: 768px) {
-  .login {
-    h1.login {
+  .register {
+    h1 {
       padding-top: 100px;
     }
   }

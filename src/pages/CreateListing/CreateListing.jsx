@@ -1,27 +1,31 @@
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { API_URL } from "../../lib/constants";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import "./CreateListing.scss";
 import { useState } from "react";
+import Carousel from "react-material-ui-carousel";
+import { DatePicker } from "@mui/x-date-pickers";
+import moment from "moment";
 
 export default function CreateListing() {
   const navigate = useNavigate();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [media, setMedia] = useState([]);
   const [titlePreview, setTitlePreview] = useState("");
   const [descriptionPreview, setDescriptionPreview] = useState("");
-  const [datePreview, setDatePreview] = useState("");
+  const [datePreview, setDatePreview] = useState(null);
+  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [titleCount, setTitleCount] = useState(0);
   const createTheListing = (event) => {
     event.preventDefault();
 
-    const { title, imageUrl, description, date } = event.target.elements;
+    const { title, description } = event.target.elements;
 
     const payload = {
       title: title.value,
-      media: [imageUrl.value],
+      media: media,
       description: description.value,
-      endsAt: date.value,
+      endsAt: moment(datePreview).toDate(),
     };
 
     const accessToken = localStorage.getItem("access_token");
@@ -35,102 +39,183 @@ export default function CreateListing() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("her er data", data);
-
         navigate("/listing/" + data.id);
       })
       .catch((error) => {
         console.log("noe gikk galt", error);
       });
   };
-  const previewImage = (event) => {
-    const imageUrl = event.target.value;
 
-    setImagePreviewUrl(imageUrl);
+  const validateForm = () => {
+    if (descriptionCount > 280) {
+      return false;
+    }
+    if (titleCount > 280) {
+      return false;
+    }
+    if (titlePreview.length === 0 || titlePreview.length > 280) {
+      return false;
+    }
+
+    if (!datePreview) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const addImage = (event) => {
+    event.preventDefault();
+
+    const { imageUrl } = event.target.elements;
+
+    setMedia([...media, imageUrl.value]);
+  };
+  const removeItem = (event) => {
+    const index = event.target.dataset.index;
+    setMedia(media.filter((m, i) => i != index));
+  };
+  const showMediaUrl = () => {
+    return media.map((url, i) => {
+      return (
+        <li key={i}>
+          <img src={url} />
+          <Button
+            variant="contained"
+            className="delete"
+            data-index={i}
+            size="small"
+            onClick={removeItem}
+          >
+            delete
+          </Button>
+        </li>
+      );
+    });
+  };
+  const previewImage = () => {
+    if (media && media.length > 0) {
+      return media.map((image, i) => {
+        return (
+          <div className="slide" key={i}>
+            <img src={image} />
+          </div>
+        );
+      });
+    }
   };
   const previewTitle = (event) => {
     const title = event.target.value;
     setTitlePreview(title);
+    setTitleCount(title.length);
   };
   const previewDescription = (event) => {
     const description = event.target.value;
     setDescriptionPreview(description);
+    setDescriptionCount(description.length);
   };
-  const dateDescription = (event) => {
-    const date = event.target.value;
+
+  const dateDescription = (date) => {
     setDatePreview(date);
   };
+
   return (
-    <>
-      <h1>Create Listing</h1>
+    <div className="create-listing">
       <Card variant="outlined">
+        <h1>Create Listing</h1>
+        <form onSubmit={addImage}>
+          <div>
+            <TextField
+              id="filled-basic"
+              label="Pictures"
+              variant="filled"
+              type="text"
+              name="imageUrl"
+              fullWidth
+              margin="dense"
+              multiline
+            />
+          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            className="primary"
+            size="small"
+          >
+            Add
+          </Button>
+        </form>
+        <ul className="show-media">{showMediaUrl()}</ul>
         <form onSubmit={createTheListing}>
           <div>
             <TextField
-              id="standard-basic"
-              label="Image-url"
-              variant="standard"
-              type="text"
-              name="imageUrl"
-              required
-              fullWidth
-              margin="dense"
-              onChange={previewImage}
-            />
-          </div>
-          <div>
-            <TextField
-              id="standard-basic"
+              id="filled-basic"
               label="Title"
-              variant="standard"
+              variant="filled"
               type="text"
               name="title"
               required
               fullWidth
               margin="dense"
               onChange={previewTitle}
+              multiline
             />
+            <div className={titleCount > 280 ? "error" : ""}>
+              {titleCount}/280
+            </div>
           </div>
           <div>
             <TextField
-              id="standard-multiline-static"
+              id="filled-multiline-static"
               label="Description"
               multiline
               rows={4}
-              variant="standard"
+              variant="filled"
               type="text"
               name="description"
-              required
               fullWidth
               margin="dense"
               onChange={previewDescription}
             />
+            <div className={descriptionCount > 280 ? "error" : ""}>
+              {descriptionCount}/280
+            </div>
           </div>
-          <div className="bidend">Bid ends at:</div>
-          <div>
-            <TextField
-              id="standard-basic"
-              variant="standard"
-              type="date"
-              name="date"
-              required
-              margin="dense"
-              onChange={dateDescription}
-            />
+          <div className="bidend">
+            Auction ends at:
+            <div>
+              <DatePicker required onChange={dateDescription} />
+            </div>
           </div>
           <div className="btn-align">
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              disabled={!validateForm()}
+              type="submit"
+              className="primary"
+            >
               Save
             </Button>
           </div>
         </form>
       </Card>
-      <Card variant="outlined" className="preview">
-        <img src={imagePreviewUrl} alt="" />
-        <h2>{titlePreview}</h2>
-        <p>{descriptionPreview}</p>
-        <p>{datePreview}</p>
-      </Card>
-    </>
+      {(titlePreview ||
+        descriptionPreview ||
+        datePreview ||
+        media.length > 0) && (
+        <Card variant="outlined" className="preview">
+          <h2>Preview</h2>
+          <Carousel className="carousel" height={300}>
+            {previewImage()}
+          </Carousel>
+          <h2>{titlePreview}</h2>
+          <div className="description-date">
+            <p>{descriptionPreview}</p>
+
+            <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
+          </div>
+        </Card>
+      )}
+    </div>
   );
 }

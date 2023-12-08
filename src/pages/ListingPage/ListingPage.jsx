@@ -59,6 +59,9 @@ export default function ListingPage() {
   };
 
   const allBids = () => {
+    if (!listing.bids || listing.bids.length == 0) {
+      return <div className="no-bids">There are no bids yet</div>;
+    }
     const bids = listing.bids.map((bid) => {
       return (
         <li key={bid.id}>

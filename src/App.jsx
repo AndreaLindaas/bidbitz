@@ -12,7 +12,7 @@ import EditListing from "./pages/EditListing/EditListing";
 import Profile from "./pages/Profile/Profile";
 import AllListings from "./pages/AllListings/AllListings";
 import Footer from "./components/Footer/Footer";
-
+import OtherProfiles from "./pages/OtherProfiles/OtherProfiles";
 function App() {
   return (
     <>
@@ -26,6 +26,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:username" element={<OtherProfiles />} />
             <Route path="/all-listings" element={<AllListings />} />
             <Route path="/listing/:listingId" element={<ListingPage />} />
             <Route path="/listing/edit/:listingId" element={<EditListing />} />

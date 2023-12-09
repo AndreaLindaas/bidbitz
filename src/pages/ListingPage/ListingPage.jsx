@@ -139,7 +139,8 @@ export default function ListingPage() {
             </div>
             <div className="seller-container">
               <div className="seller-bold">Seller</div>
-              <Link to="#">
+
+              <Link to={`/profile/${listing.seller.name}`}>
                 <div className="seller">
                   <img src={sellerImage()} alt="" />
                   <div className="highlight">{listing.seller.name}</div>

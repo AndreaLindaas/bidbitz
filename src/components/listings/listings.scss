@@ -35,8 +35,29 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    a div.MuiPaper-root {
-      width: 345px;
+    a {
+      flex-basis: 31%;
+
+      div.MuiPaper-root {
+        width: 100%;
+        margin: 20px auto;
+        max-width: 500px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .listings-container {
+    a {
+      flex-basis: 23%;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .listings-container {
+    a {
+      flex-basis: 19%;
     }
   }
 }

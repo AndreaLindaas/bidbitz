@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 export default function Logout() {
   useEffect(() => {
     localStorage.removeItem("access_token");
@@ -8,5 +9,12 @@ export default function Logout() {
     localStorage.removeItem("name");
     window.location.href = "/";
   });
-  return <div>Logging you out.</div>;
+  return (
+    <>
+      <Helmet>
+        <title>BidBitz - Logout</title>
+      </Helmet>
+      <div>Logging you out.</div>;
+    </>
+  );
 }

@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
 import { Helmet } from "react-helmet";
+import { useMediaQuery } from "@mui/material";
+
 export default function Home() {
   const [info, setInfo] = useState({});
   const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
+  const isDesktop = useMediaQuery("(min-width:768px)");
 
   useEffect(() => {
     fetch(`${API_URL}/profiles/${name}?_listings=true`, {
@@ -45,9 +48,12 @@ export default function Home() {
         <title>BidBitz</title>
       </Helmet>
       <div className="introduction-container">
-        <div className="auctionman-image">
-          <img src="../src/assets/media/images/auction_man.png" alt="" />
-        </div>
+        {isDesktop && (
+          <div className="auctionman-image">
+            <img src="./assets/media/images/auction_man.png" alt="" />
+          </div>
+        )}
+
         <div className="introduction">
           <p>Bidding with a bit of fun</p>
           <h1>BidBitz</h1>

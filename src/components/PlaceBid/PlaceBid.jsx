@@ -47,7 +47,7 @@ export default function PlaceBid(props) {
     }
   };
 
-  if (props.highestBid.bidderName == name) {
+  if (name != null && props.highestBid.bidderName == name) {
     return (
       <div className="winning">
         <span className="highlight">Hooray!</span> You are #winning

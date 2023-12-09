@@ -4,6 +4,7 @@ import { useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import "./AllListings.scss";
 import { Button } from "@mui/material";
+import { Helmet } from "react-helmet";
 export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
@@ -19,6 +20,9 @@ export default function AllListings() {
   };
   return (
     <>
+      <Helmet>
+        <title>BidBitz - All Auctions</title>
+      </Helmet>
       <div className="filter-container">
         <div className="search">
           <Search doSearch={search} />

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 export default function EditListing() {
   const navigate = useNavigate();
   const params = useParams();
@@ -104,73 +105,78 @@ export default function EditListing() {
     return true;
   };
   return (
-    <div className="edit-listing">
-      <h1>Edit Listing</h1>
-      {showEdit && (
-        <>
-          <ul>{showMediaUrl()}</ul>
-          <form onSubmit={addImage}>
-            <TextField
-              id="filled-basic"
-              label="Url"
-              variant="filled"
-              type="text"
-              name="imageUrl"
-              fullWidth
-              margin="dense"
-              multiline
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              className="primary"
-              size="small"
-            >
-              Add
-            </Button>
-          </form>
-          <form onSubmit={editListing}>
-            <TextField
-              id="filled-basic"
-              label="Title"
-              variant="filled"
-              type="text"
-              name="title"
-              fullWidth
-              margin="dense"
-              defaultValue={listing.title}
-              onChange={countTitle}
-              multiline
-            />
-            <div className={titleCount > 280 ? "error" : ""}>
-              {titleCount}/280
-            </div>
-            <TextField
-              id="filled-basic"
-              label="Description"
-              variant="filled"
-              type="text"
-              name="description"
-              fullWidth
-              margin="dense"
-              defaultValue={listing.description}
-              multiline
-              onChange={CountDescription}
-            />
-            <div className={descriptionCount > 280 ? "error" : ""}>
-              {descriptionCount}/280
-            </div>
-            <Button
-              variant="contained"
-              type="submit"
-              className="primary"
-              disabled={!validateForm()}
-            >
-              Save
-            </Button>
-          </form>
-        </>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>BidBitz - Edit Listing</title>
+      </Helmet>
+      <div className="edit-listing">
+        <h1>Edit Listing</h1>
+        {showEdit && (
+          <>
+            <ul>{showMediaUrl()}</ul>
+            <form onSubmit={addImage}>
+              <TextField
+                id="filled-basic"
+                label="Url"
+                variant="filled"
+                type="text"
+                name="imageUrl"
+                fullWidth
+                margin="dense"
+                multiline
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                className="primary"
+                size="small"
+              >
+                Add
+              </Button>
+            </form>
+            <form onSubmit={editListing}>
+              <TextField
+                id="filled-basic"
+                label="Title"
+                variant="filled"
+                type="text"
+                name="title"
+                fullWidth
+                margin="dense"
+                defaultValue={listing.title}
+                onChange={countTitle}
+                multiline
+              />
+              <div className={titleCount > 280 ? "error" : ""}>
+                {titleCount}/280
+              </div>
+              <TextField
+                id="filled-basic"
+                label="Description"
+                variant="filled"
+                type="text"
+                name="description"
+                fullWidth
+                margin="dense"
+                defaultValue={listing.description}
+                multiline
+                onChange={CountDescription}
+              />
+              <div className={descriptionCount > 280 ? "error" : ""}>
+                {descriptionCount}/280
+              </div>
+              <Button
+                variant="contained"
+                type="submit"
+                className="primary"
+                disabled={!validateForm()}
+              >
+                Save
+              </Button>
+            </form>
+          </>
+        )}
+      </div>
+    </>
   );
 }

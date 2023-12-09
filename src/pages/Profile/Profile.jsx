@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./Profile.scss";
 import Listing from "../../components/listing/listing";
-
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 export default function Profile() {
   const [profile, setProfile] = useState({});
@@ -171,6 +171,9 @@ export default function Profile() {
   };
   return (
     <>
+      <Helmet>
+        <title>BidBitz - {profile.name}</title>
+      </Helmet>
       <Card className="profile-card">
         <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
         <CardContent>

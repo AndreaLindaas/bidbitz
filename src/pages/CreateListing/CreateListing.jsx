@@ -7,7 +7,7 @@ import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { DatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
-
+import { Helmet } from "react-helmet";
 export default function CreateListing() {
   const navigate = useNavigate();
   const [media, setMedia] = useState([]);
@@ -120,102 +120,107 @@ export default function CreateListing() {
   };
 
   return (
-    <div className="create-listing">
-      <Card variant="outlined">
-        <h1>Create Listing</h1>
-        <form onSubmit={addImage}>
-          <div>
-            <TextField
-              id="filled-basic"
-              label="Pictures"
-              variant="filled"
-              type="text"
-              name="imageUrl"
-              fullWidth
-              margin="dense"
-              multiline
-            />
-          </div>
-          <Button
-            type="submit"
-            variant="contained"
-            className="primary"
-            size="small"
-          >
-            Add
-          </Button>
-        </form>
-        <ul className="show-media">{showMediaUrl()}</ul>
-        <form onSubmit={createTheListing}>
-          <div>
-            <TextField
-              id="filled-basic"
-              label="Title"
-              variant="filled"
-              type="text"
-              name="title"
-              required
-              fullWidth
-              margin="dense"
-              onChange={previewTitle}
-              multiline
-            />
-            <div className={titleCount > 280 ? "error" : ""}>
-              {titleCount}/280
-            </div>
-          </div>
-          <div>
-            <TextField
-              id="filled-multiline-static"
-              label="Description"
-              multiline
-              rows={4}
-              variant="filled"
-              type="text"
-              name="description"
-              fullWidth
-              margin="dense"
-              onChange={previewDescription}
-            />
-            <div className={descriptionCount > 280 ? "error" : ""}>
-              {descriptionCount}/280
-            </div>
-          </div>
-          <div className="bidend">
-            Auction ends at:
+    <>
+      <Helmet>
+        <title>BidBitz - Create Listing</title>
+      </Helmet>
+      <div className="create-listing">
+        <Card variant="outlined">
+          <h1>Create Listing</h1>
+          <form onSubmit={addImage}>
             <div>
-              <DatePicker required onChange={dateDescription} />
+              <TextField
+                id="filled-basic"
+                label="Pictures"
+                variant="filled"
+                type="text"
+                name="imageUrl"
+                fullWidth
+                margin="dense"
+                multiline
+              />
             </div>
-          </div>
-          <div className="btn-align">
             <Button
-              variant="contained"
-              disabled={!validateForm()}
               type="submit"
+              variant="contained"
               className="primary"
+              size="small"
             >
-              Save
+              Add
             </Button>
-          </div>
-        </form>
-      </Card>
-      {(titlePreview ||
-        descriptionPreview ||
-        datePreview ||
-        media.length > 0) && (
-        <Card variant="outlined" className="preview">
-          <h2>Preview</h2>
-          <Carousel className="carousel" height={300}>
-            {previewImage()}
-          </Carousel>
-          <h2>{titlePreview}</h2>
-          <div className="description-date">
-            <p>{descriptionPreview}</p>
-
-            <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
-          </div>
+          </form>
+          <ul className="show-media">{showMediaUrl()}</ul>
+          <form onSubmit={createTheListing}>
+            <div>
+              <TextField
+                id="filled-basic"
+                label="Title"
+                variant="filled"
+                type="text"
+                name="title"
+                required
+                fullWidth
+                margin="dense"
+                onChange={previewTitle}
+                multiline
+              />
+              <div className={titleCount > 280 ? "error" : ""}>
+                {titleCount}/280
+              </div>
+            </div>
+            <div>
+              <TextField
+                id="filled-multiline-static"
+                label="Description"
+                multiline
+                rows={4}
+                variant="filled"
+                type="text"
+                name="description"
+                fullWidth
+                margin="dense"
+                onChange={previewDescription}
+              />
+              <div className={descriptionCount > 280 ? "error" : ""}>
+                {descriptionCount}/280
+              </div>
+            </div>
+            <div className="bidend">
+              Auction ends at:
+              <div>
+                <DatePicker required onChange={dateDescription} />
+              </div>
+            </div>
+            <div className="btn-align">
+              <Button
+                variant="contained"
+                disabled={!validateForm()}
+                type="submit"
+                className="primary"
+              >
+                Save
+              </Button>
+            </div>
+          </form>
         </Card>
-      )}
-    </div>
+        {(titlePreview ||
+          descriptionPreview ||
+          datePreview ||
+          media.length > 0) && (
+          <Card variant="outlined" className="preview">
+            <h2>Preview</h2>
+            <Carousel className="carousel" height={300}>
+              {previewImage()}
+            </Carousel>
+            <h2>{titlePreview}</h2>
+            <div className="description-date">
+              <p>{descriptionPreview}</p>
+
+              <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
+            </div>
+          </Card>
+        )}
+      </div>
+    </>
   );
 }

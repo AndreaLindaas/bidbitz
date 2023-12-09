@@ -3,7 +3,7 @@ import "./Login.scss";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
 import { useState } from "react";
-
+import { Helmet } from "react-helmet";
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -43,6 +43,9 @@ export default function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>BidBitz - Login</title>
+      </Helmet>
       <div className="login">
         <h1 className="login">Login</h1>
         <form onSubmit={handleOnSubmit}>

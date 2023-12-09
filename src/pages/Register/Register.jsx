@@ -4,6 +4,7 @@ import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.scss";
+import { Helmet } from "react-helmet";
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -40,6 +41,9 @@ export default function Register() {
 
   return (
     <>
+      <Helmet>
+        <title>BidBitz - Register</title>
+      </Helmet>
       <div className="register">
         <h1>Sign up</h1>
         <form onSubmit={handleOnSubmit}>

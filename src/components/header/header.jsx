@@ -36,7 +36,7 @@ export default function Header() {
         </li>
 
         <li>
-          <Link to="/all-listings">
+          <Link to="/all-listings" className="auctions-link">
             <span> All Auctions</span>
             {!isDesktop && <Gavel />}
           </Link>

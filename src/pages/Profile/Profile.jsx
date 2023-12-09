@@ -145,9 +145,6 @@ export default function Profile() {
       });
   };
 
-  if (isLoading) {
-    return <div></div>;
-  }
   const myAuctions = () => {
     if (listings.length > 0) {
       return (
@@ -169,6 +166,9 @@ export default function Profile() {
       </>
     );
   };
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <>
       <Helmet>

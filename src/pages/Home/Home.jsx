@@ -12,16 +12,18 @@ export default function Home() {
   const isDesktop = useMediaQuery("(min-width:768px)");
 
   useEffect(() => {
-    fetch(`${API_URL}/profiles/${name}?_listings=true`, {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((l) => {
-        setInfo(l);
-      });
+    if (name) {
+      fetch(`${API_URL}/profiles/${name}?_listings=true`, {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((l) => {
+          setInfo(l);
+        });
+    }
   }, []);
 
   const showInfoOnHomePage = () => {

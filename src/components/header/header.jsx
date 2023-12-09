@@ -21,7 +21,7 @@ export default function Header() {
       <ul className="menu-list">
         {!accessToken && (
           <li>
-            <Link to="/login">
+            <Link to="/login" className="login-link">
               <span> Login</span>
               {!isDesktop && <Login />}
             </Link>
@@ -36,7 +36,7 @@ export default function Header() {
         </li>
 
         <li>
-          <Link to="/all-listings">
+          <Link to="/all-listings" className="auctions-link">
             <span> All Auctions</span>
             {!isDesktop && <Gavel />}
           </Link>

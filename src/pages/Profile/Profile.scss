@@ -41,6 +41,7 @@
 .listings-container {
   .relative {
     position: relative;
+    flex-basis: 31%;
   }
   .edit-delete-btn {
     position: absolute;
@@ -93,5 +94,21 @@
   }
   button {
     margin: 20px 5px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .listings-container {
+    .relative {
+      flex-basis: 23%;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .listings-container {
+    .relative {
+      flex-basis: 19%;
+    }
   }
 }

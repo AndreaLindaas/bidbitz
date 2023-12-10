@@ -65,6 +65,7 @@ export default function PlaceBid(props) {
             name="amount"
             variant="filled"
             type="number"
+            className="bid-input"
           />
           <div>
             <Button

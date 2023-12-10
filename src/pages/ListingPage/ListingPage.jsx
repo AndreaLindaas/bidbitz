@@ -7,8 +7,9 @@ import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
 import Carousel from "react-material-ui-carousel";
 import { Gavel } from "@mui/icons-material";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, Avatar } from "@mui/material";
 import { Helmet } from "react-helmet";
+
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -41,11 +42,7 @@ export default function ListingPage() {
         );
       });
     }
-    return (
-      <div>
-        <img src="https://www.crazychap.com/uploads/no-banner.jpg" />
-      </div>
-    );
+    return <div className="no-image">This listing does not have any image</div>;
   };
 
   const lastBid = () => {
@@ -90,7 +87,6 @@ export default function ListingPage() {
     if (listing.seller.avatar) {
       return listing.seller.avatar;
     }
-    return "https://www.crazychap.com/uploads/no-banner.jpg";
   };
 
   if (isLoading) {
@@ -142,7 +138,7 @@ export default function ListingPage() {
 
               <Link to={`/profile/${listing.seller.name}`}>
                 <div className="seller">
-                  <img src={sellerImage()} alt="" />
+                  <Avatar src={sellerImage()} />
                   <div className="highlight">{listing.seller.name}</div>
                 </div>
               </Link>

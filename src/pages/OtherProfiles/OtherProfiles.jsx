@@ -27,7 +27,6 @@ export default function OtherProfiles() {
     if (profile.avatar) {
       return profile.avatar;
     }
-    return "https://www.kindpng.com/picc/m/9-93879_computer-icons-user-image-person-silhouette-user-silhouettes.png";
   };
 
   const renderListings = () => {

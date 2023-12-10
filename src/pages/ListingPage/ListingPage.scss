@@ -2,6 +2,9 @@
   text-align: center;
 
   .carousel {
+    .no-image {
+      line-height: 300px;
+    }
     .slide {
       height: 300px;
       overflow: hidden;

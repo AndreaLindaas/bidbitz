@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, Box, Modal, TextField } from "@mui/material";
+import { Avatar, Box, CircularProgress, Modal, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { API_URL } from "../../lib/constants";
 import { useEffect } from "react";
@@ -18,6 +18,7 @@ export default function Profile() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
   const [listingToDelete, setListingToDelete] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -43,7 +44,6 @@ export default function Profile() {
           .then((response) => response.json())
           .then((a) => {
             setListings(a);
-
             setIsLoading(false);
           });
       });
@@ -57,6 +57,7 @@ export default function Profile() {
     setIsChangeModalAvatarOpen(true);
   };
   const avatarModalClose = () => {
+    setError("");
     setIsChangeModalAvatarOpen(false);
   };
   const showWins = () => {
@@ -74,8 +75,6 @@ export default function Profile() {
   const deleteListing = () => {
     const accessToken = localStorage.getItem("access_token");
 
-    console.log(listingToDelete);
-
     fetch(`${API_URL}/listings/${listingToDelete}`, {
       method: "DELETE",
       headers: {
@@ -83,7 +82,7 @@ export default function Profile() {
       },
     }).then((response) => {
       if (response.status < 300) {
-        // navigate({ to: "/" });
+        window.location.reload();
       }
     });
   };
@@ -140,7 +139,7 @@ export default function Profile() {
         window.location.reload();
       })
       .catch((error) => {
-        console.log("noe gikk galt", error);
+        setError("Something went wrong. Please try again.");
       });
   };
 
@@ -160,13 +159,17 @@ export default function Profile() {
     return (
       <>
         <div className="my-auctions">
-          <h2>You have not made any auctions jet</h2>
+          <h2>You have not made any auctions yet</h2>
         </div>
       </>
     );
   };
   if (isLoading) {
-    return <div></div>;
+    return (
+      <div className="spinner">
+        <CircularProgress />
+      </div>
+    );
   }
   return (
     <>
@@ -262,6 +265,7 @@ export default function Profile() {
                 Close
               </Button>
             </div>
+            <div className="error">{error}</div>
           </form>
         </Box>
       </Modal>

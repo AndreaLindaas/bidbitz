@@ -28,7 +28,6 @@ export default function EditListing() {
         setMedia(result.media);
         setTitleCount(result.title.length);
         setDescriptionCount(result.description.length);
-        console.log(result);
         setShowEdit(true);
       });
   }, []);

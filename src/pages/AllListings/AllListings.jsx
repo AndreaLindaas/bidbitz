@@ -1,6 +1,6 @@
 import Search from "../../components/search/search";
 import Listings from "../../components/listings/listings";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import "./AllListings.scss";
 import { Button } from "@mui/material";
@@ -9,6 +9,8 @@ export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
   const [sortOrderFilter, setSortOrderFilter] = useState("asc");
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(40);
   const search = (searchWord) => {
     setSearchWord(searchWord);
   };
@@ -18,6 +20,11 @@ export default function AllListings() {
   const sortOrder = (selectedSortOrderFilter) => {
     setSortOrderFilter(selectedSortOrderFilter);
   };
+  const showMore = () => {
+    setOffset(offset + limit);
+  };
+
+  useEffect(() => {}, [offset]);
   return (
     <>
       <Helmet>
@@ -28,17 +35,20 @@ export default function AllListings() {
           <Search doSearch={search} />
         </div>
         <div className="filter">
-          <Filter sortBy={sortBy} sortOrder={sortOrder} />{" "}
+          <Filter sortBy={sortBy} sortOrder={sortOrder} />
         </div>
       </div>
       <Listings
-        limit={100}
+        limit={limit}
+        offset={offset}
         searchWord={searchWord}
         sortByFilter={sortByFilter}
         sortOrderFilter={sortOrderFilter}
       />
       <div className="see-more">
-        <Button className="primary">Show more</Button>
+        <Button className="primary" onClick={showMore}>
+          Show {limit} more
+        </Button>
       </div>
     </>
   );

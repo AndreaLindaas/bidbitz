@@ -18,7 +18,9 @@ export default function Profile() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
   const [listingToDelete, setListingToDelete] = useState("");
+  const [errorAvatar, setErrorAvatar] = useState("");
   const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -45,7 +47,15 @@ export default function Profile() {
           .then((a) => {
             setListings(a);
             setIsLoading(false);
+          })
+          .catch((error) => {
+            setError("Could not fetch listings. Please try again.");
+            setShowError(true);
           });
+      })
+      .catch((error) => {
+        setError("Could not fetch profile. Please try again.");
+        setShowError(true);
       });
   }, []);
   const profileImage = () => {
@@ -57,7 +67,7 @@ export default function Profile() {
     setIsChangeModalAvatarOpen(true);
   };
   const avatarModalClose = () => {
-    setError("");
+    setErrorAvatar("");
     setIsChangeModalAvatarOpen(false);
   };
   const showWins = () => {
@@ -80,11 +90,16 @@ export default function Profile() {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }).then((response) => {
-      if (response.status < 300) {
-        window.location.reload();
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status < 300) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        setError("Could not fetch listings. Please try again.");
+        setShowError(true);
+      });
   };
   const renderMyListings = () => {
     return listings.map((listing) => {
@@ -139,7 +154,7 @@ export default function Profile() {
         window.location.reload();
       })
       .catch((error) => {
-        setError("Something went wrong. Please try again.");
+        setErrorAvatar("Could not change avatar. Please try again.");
       });
   };
 
@@ -170,6 +185,9 @@ export default function Profile() {
         <CircularProgress />
       </div>
     );
+  }
+  if (showError) {
+    return <div className="error-message">{error}</div>;
   }
   return (
     <>
@@ -215,7 +233,9 @@ export default function Profile() {
           </div>
         </CardContent>
       </Card>
+
       <div> {myAuctions()}</div>
+      <div>{error}</div>
       <div className="listings-container">{renderMyListings()}</div>
       <Modal
         open={isChangeModalAvatarOpen}
@@ -265,7 +285,7 @@ export default function Profile() {
                 Close
               </Button>
             </div>
-            <div className="error">{error}</div>
+            <div className="error">{errorAvatar}</div>
           </form>
         </Box>
       </Modal>

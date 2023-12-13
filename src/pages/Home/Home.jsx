@@ -74,7 +74,7 @@ export default function Home() {
           soon.
         </p>
       </div>
-      <Listings />
+      <Listings limit={10} />
     </>
   );
 }

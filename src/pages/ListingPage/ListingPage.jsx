@@ -14,6 +14,7 @@ export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [highestBid, setHighestBid] = useState({});
+  const [showError, setShowError] = useState(false);
   const params = useParams();
   const email = localStorage.getItem("user_email");
   const name = localStorage.getItem("name");
@@ -26,6 +27,9 @@ export default function ListingPage() {
         setlisting(l);
 
         setIsLoading(false);
+      })
+      .catch((error) => {
+        setShowError(true);
       });
   }, []);
 
@@ -97,7 +101,13 @@ export default function ListingPage() {
       return listing.seller.avatar;
     }
   };
-
+  if (showError) {
+    return (
+      <div className="error-message">
+        Problem with fetching listing. Please try again.
+      </div>
+    );
+  }
   if (isLoading) {
     return (
       <div className="spinner">

@@ -9,8 +9,7 @@ export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
   const [sortOrderFilter, setSortOrderFilter] = useState("asc");
-  const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(40);
+  const [limitFilter, setLimitFilter] = useState(10);
   const search = (searchWord) => {
     setSearchWord(searchWord);
   };
@@ -20,11 +19,10 @@ export default function AllListings() {
   const sortOrder = (selectedSortOrderFilter) => {
     setSortOrderFilter(selectedSortOrderFilter);
   };
-  const showMore = () => {
-    setOffset(offset + limit);
-  };
 
-  useEffect(() => {}, [offset]);
+  const sortLimit = (selectedLimit) => {
+    setLimitFilter(selectedLimit);
+  };
   return (
     <>
       <Helmet>
@@ -35,21 +33,15 @@ export default function AllListings() {
           <Search doSearch={search} />
         </div>
         <div className="filter">
-          <Filter sortBy={sortBy} sortOrder={sortOrder} />
+          <Filter sortLimit={sortLimit} sortBy={sortBy} sortOrder={sortOrder} />
         </div>
       </div>
       <Listings
-        limit={limit}
-        offset={offset}
         searchWord={searchWord}
         sortByFilter={sortByFilter}
         sortOrderFilter={sortOrderFilter}
+        limit={limitFilter}
       />
-      <div className="see-more">
-        <Button className="primary" onClick={showMore}>
-          Show {limit} more
-        </Button>
-      </div>
     </>
   );
 }

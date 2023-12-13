@@ -16,6 +16,8 @@ export default function CreateListing() {
   const [datePreview, setDatePreview] = useState(null);
   const [descriptionCount, setDescriptionCount] = useState(0);
   const [titleCount, setTitleCount] = useState(0);
+  const [showError, setShowError] = useState(false);
+  const [imageUrlCount, setImageUrlCount] = useState(0);
   const createTheListing = (event) => {
     event.preventDefault();
 
@@ -42,7 +44,7 @@ export default function CreateListing() {
         navigate("/listing/" + data.id);
       })
       .catch((error) => {
-        console.log("noe gikk galt", error);
+        setShowError(true);
       });
   };
 
@@ -93,7 +95,7 @@ export default function CreateListing() {
       );
     });
   };
-  const previewImage = () => {
+  const previewImage = (event) => {
     if (media && media.length > 0) {
       return media.map((image, i) => {
         return (
@@ -118,7 +120,23 @@ export default function CreateListing() {
   const dateDescription = (date) => {
     setDatePreview(date);
   };
-
+  const imageUrlOnChange = (event) => {
+    const url = event.target.value;
+    setImageUrlCount(url.length);
+  };
+  const validateUrlImage = () => {
+    if (imageUrlCount > 4) {
+      return true;
+    }
+    return false;
+  };
+  if (showError) {
+    return (
+      <div className="error-message">
+        Could not save your listing. Please try again.
+      </div>
+    );
+  }
   return (
     <>
       <Helmet>
@@ -138,6 +156,7 @@ export default function CreateListing() {
                 fullWidth
                 margin="dense"
                 multiline
+                onChange={imageUrlOnChange}
               />
             </div>
             <Button
@@ -145,6 +164,7 @@ export default function CreateListing() {
               variant="contained"
               className="primary"
               size="small"
+              disabled={!validateUrlImage()}
             >
               Add
             </Button>

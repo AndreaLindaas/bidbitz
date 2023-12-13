@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import "./Register.scss";
 import { Helmet } from "react-helmet";
 export default function Register() {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState([]);
   const navigate = useNavigate();
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     const { email, password, name, avatar } = event.target.elements;
-    console.log(event.target.elements);
 
     const payload = {
       name: name.value,
@@ -30,13 +29,20 @@ export default function Register() {
       const resJSON = await res.json();
 
       if (resJSON.statusCode > 300) {
-        setErrorMessage(resJSON.errors[0].message);
+        setErrorMessages(resJSON.errors);
       } else {
         navigate("/login");
       }
     } catch (error) {
-      console.warn("An error occurred", error);
+      setErrorMessages([
+        { message: "Something went wrong. Please try again." },
+      ]);
     }
+  };
+  const showErrorMessages = () => {
+    return errorMessages.map((message) => {
+      return <li>- {message.message}</li>;
+    });
   };
 
   return (
@@ -80,10 +86,13 @@ export default function Register() {
             <TextField
               id="filled-basic"
               name="avatar"
-              label="Url"
+              label="Avatar url"
               variant="filled"
               fullWidth
             />
+          </div>
+          <div className="error-message">
+            <ul>{showErrorMessages()}</ul>
           </div>
           <div className="signup-button">
             <Button type="submit" variant="contained" className="primary">
@@ -91,7 +100,7 @@ export default function Register() {
             </Button>
           </div>
         </form>
-        {errorMessage}
+
         <p className="text-register">
           Allredy have an account?
           <Link to="/login">

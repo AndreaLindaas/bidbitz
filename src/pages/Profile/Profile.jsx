@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, Box, Modal, TextField } from "@mui/material";
+import { Avatar, Box, CircularProgress, Modal, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { API_URL } from "../../lib/constants";
 import { useEffect } from "react";
@@ -18,6 +18,9 @@ export default function Profile() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newProfileAvatar, setNewProfileAvatar] = useState("");
   const [listingToDelete, setListingToDelete] = useState("");
+  const [errorAvatar, setErrorAvatar] = useState("");
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -43,21 +46,28 @@ export default function Profile() {
           .then((response) => response.json())
           .then((a) => {
             setListings(a);
-
             setIsLoading(false);
+          })
+          .catch((error) => {
+            setError("Could not fetch listings. Please try again.");
+            setShowError(true);
           });
+      })
+      .catch((error) => {
+        setError("Could not fetch profile. Please try again.");
+        setShowError(true);
       });
   }, []);
   const profileImage = () => {
     if (profile.avatar) {
       return profile.avatar;
     }
-    return "https://www.kindpng.com/picc/m/9-93879_computer-icons-user-image-person-silhouette-user-silhouettes.png";
   };
   const avatarModalOpen = () => {
     setIsChangeModalAvatarOpen(true);
   };
   const avatarModalClose = () => {
+    setErrorAvatar("");
     setIsChangeModalAvatarOpen(false);
   };
   const showWins = () => {
@@ -75,18 +85,21 @@ export default function Profile() {
   const deleteListing = () => {
     const accessToken = localStorage.getItem("access_token");
 
-    console.log(listingToDelete);
-
     fetch(`${API_URL}/listings/${listingToDelete}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }).then((response) => {
-      if (response.status < 300) {
-        // navigate({ to: "/" });
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status < 300) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        setError("Could not fetch listings. Please try again.");
+        setShowError(true);
+      });
   };
   const renderMyListings = () => {
     return listings.map((listing) => {
@@ -141,7 +154,7 @@ export default function Profile() {
         window.location.reload();
       })
       .catch((error) => {
-        console.log("noe gikk galt", error);
+        setErrorAvatar("Could not change avatar. Please try again.");
       });
   };
 
@@ -161,13 +174,20 @@ export default function Profile() {
     return (
       <>
         <div className="my-auctions">
-          <h2>You have not made any auctions jet</h2>
+          <h2>You have not made any auctions yet</h2>
         </div>
       </>
     );
   };
   if (isLoading) {
-    return <div></div>;
+    return (
+      <div className="spinner">
+        <CircularProgress />
+      </div>
+    );
+  }
+  if (showError) {
+    return <div className="error-message">{error}</div>;
   }
   return (
     <>
@@ -213,7 +233,9 @@ export default function Profile() {
           </div>
         </CardContent>
       </Card>
+
       <div> {myAuctions()}</div>
+      <div>{error}</div>
       <div className="listings-container">{renderMyListings()}</div>
       <Modal
         open={isChangeModalAvatarOpen}
@@ -263,6 +285,7 @@ export default function Profile() {
                 Close
               </Button>
             </div>
+            <div className="error">{errorAvatar}</div>
           </form>
         </Box>
       </Modal>

@@ -8,7 +8,10 @@
     > div {
       margin: 20px 0;
       width: 90vw;
-
+      .no-image-avaliable {
+        line-height: 200px;
+        text-align: center;
+      }
       .MuiCardMedia-root {
         height: 200px;
       }
@@ -23,6 +26,7 @@
       .MuiTypography-root.MuiTypography-h5 {
         height: 64px;
         overflow: hidden;
+        word-break: break-all;
       }
     }
   }

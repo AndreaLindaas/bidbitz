@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../lib/constants";
-import { Card, CardContent, Typography, Avatar } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+  CircularProgress,
+} from "@mui/material";
 import { useState } from "react";
 import Listing from "../../components/listing/listing";
+import "./OtherProfiles.scss";
 export default function OtherProfiles() {
   const params = useParams();
   const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
     fetch(`${API_URL}/profiles/${params.username}?_listings=true`, {
@@ -19,7 +27,6 @@ export default function OtherProfiles() {
       .then((response) => response.json())
       .then((result) => {
         setProfile(result);
-        console.log(result);
         setIsLoading(false);
       });
   }, []);
@@ -27,7 +34,6 @@ export default function OtherProfiles() {
     if (profile.avatar) {
       return profile.avatar;
     }
-    return "https://www.kindpng.com/picc/m/9-93879_computer-icons-user-image-person-silhouette-user-silhouettes.png";
   };
 
   const renderListings = () => {
@@ -43,8 +49,20 @@ export default function OtherProfiles() {
     const wins = profile.wins.length;
     return wins;
   };
+  const numberOfAuctions = () => {
+    return (
+      <h2>
+        {profile.name} has{" "}
+        <span className="highlight">{profile._count.listings}</span> auctions
+      </h2>
+    );
+  };
   if (isLoading) {
-    return <div></div>;
+    return (
+      <div className="spinner">
+        <CircularProgress />
+      </div>
+    );
   }
   return (
     <>
@@ -72,9 +90,8 @@ export default function OtherProfiles() {
           <div className="credit-won-result">
             <Typography variant="body2" color="text.secondary">
               <a href={"mailto:" + profile.email} className="highlight">
-                Send email
+                Email
               </a>
-              {/* {profile.email} */}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {showWins()}
@@ -82,6 +99,11 @@ export default function OtherProfiles() {
           </div>
         </CardContent>
       </Card>
+
+      <div className="other-profile-auctions">
+        <div>{numberOfAuctions()}</div>
+      </div>
+
       <div className="listings-container">{renderListings()}</div>
     </>
   );

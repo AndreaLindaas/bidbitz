@@ -7,16 +7,19 @@ import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import Moment from "react-moment";
 import Carousel from "react-material-ui-carousel";
 import { Gavel } from "@mui/icons-material";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, Avatar, CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [highestBid, setHighestBid] = useState({});
+  const [showError, setShowError] = useState(false);
   const params = useParams();
   const email = localStorage.getItem("user_email");
   const name = localStorage.getItem("name");
   const isDesktop = useMediaQuery("(min-width:768px)");
+
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}/?_bids=true&_seller=true`)
       .then((response) => response.json())
@@ -24,6 +27,9 @@ export default function ListingPage() {
         setlisting(l);
 
         setIsLoading(false);
+      })
+      .catch((error) => {
+        setShowError(true);
       });
   }, []);
 
@@ -41,11 +47,7 @@ export default function ListingPage() {
         );
       });
     }
-    return (
-      <div>
-        <img src="https://www.crazychap.com/uploads/no-banner.jpg" />
-      </div>
-    );
+    return <div className="no-image">This listing does not have any image</div>;
   };
 
   const lastBid = () => {
@@ -86,15 +88,32 @@ export default function ListingPage() {
     return bids.reverse();
   };
 
+  const sellerUrl = () => {
+    if (listing.seller.name == name) {
+      return `/profile`;
+    }
+
+    return `/profile/${listing.seller.name}`;
+  };
+
   const sellerImage = () => {
     if (listing.seller.avatar) {
       return listing.seller.avatar;
     }
-    return "https://www.crazychap.com/uploads/no-banner.jpg";
   };
-
+  if (showError) {
+    return (
+      <div className="error-message">
+        Problem with fetching listing. Please try again.
+      </div>
+    );
+  }
   if (isLoading) {
-    return <div></div>;
+    return (
+      <div className="spinner">
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
@@ -140,9 +159,9 @@ export default function ListingPage() {
             <div className="seller-container">
               <div className="seller-bold">Seller</div>
 
-              <Link to={`/profile/${listing.seller.name}`}>
+              <Link to={sellerUrl()}>
                 <div className="seller">
-                  <img src={sellerImage()} alt="" />
+                  <Avatar src={sellerImage()} />
                   <div className="highlight">{listing.seller.name}</div>
                 </div>
               </Link>

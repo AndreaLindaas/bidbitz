@@ -5,7 +5,7 @@ import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 export default function Login() {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +27,7 @@ export default function Login() {
       const data = await res.json();
 
       if (data.statusCode > 300) {
-        setErrorMessage(data.errors[0].message);
+        setErrorMessages(data.errors);
       } else {
         localStorage.setItem("access_token", data.accessToken);
         localStorage.setItem("user_email", data.email);
@@ -37,10 +37,16 @@ export default function Login() {
         window.location.href = "/";
       }
     } catch (error) {
-      console.warn("An error occurred", error);
+      setErrorMessages([
+        { message: "Something went wrong. Please try again." },
+      ]);
     }
   };
-
+  const showErrorMessages = () => {
+    return errorMessages.map((message, i) => {
+      return <li key={i}>- {message.message}</li>;
+    });
+  };
   return (
     <>
       <Helmet>
@@ -71,6 +77,10 @@ export default function Login() {
               fullWidth
             />
           </div>
+          <div className="error-message">
+            {" "}
+            <ul>{showErrorMessages()}</ul>
+          </div>
           <div className="login-button">
             <Button type="submit" variant="contained" className="primary">
               Login
@@ -83,7 +93,6 @@ export default function Login() {
             <span className="highlight"> Sign up here!</span>
           </Link>
         </p>
-        {errorMessage}
       </div>
     </>
   );

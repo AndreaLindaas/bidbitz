@@ -30,16 +30,16 @@ export default function Listing(props) {
   };
   const getImage = () => {
     if (listing.media && listing.media.length > 0) {
-      return listing.media[0];
+      return <CardMedia image={listing.media[0]} />;
     }
 
-    return "https://www.crazychap.com/uploads/no-banner.jpg";
+    return <div className="no-image-avaliable">No image avaliable</div>;
   };
 
   return (
     <Link className="listing-link" to={`/listing/${listing.id}`}>
       <Card>
-        <CardMedia image={getImage()} />
+        {getImage()}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {listing.title}

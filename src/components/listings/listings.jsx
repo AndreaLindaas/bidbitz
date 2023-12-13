@@ -3,29 +3,57 @@ import { API_URL } from "../../lib/constants";
 import { useState } from "react";
 import Listing from "../listing/listing";
 import PropTypes from "prop-types";
+
 import "./listings.scss";
+import { CircularProgress, Button } from "@mui/material";
 Listings.propTypes = {
   searchWord: PropTypes.string,
-  limit: PropTypes.number,
   sortByFilter: PropTypes.string,
   sortOrderFilter: PropTypes.string,
 };
 export default function Listings(props) {
   const [listings, setListings] = useState([]);
-  const { searchWord, limit, sortByFilter, sortOrderFilter } = props;
+  const [showError, setShowError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const { searchWord, sortByFilter, sortOrderFilter, limit } = props;
 
   useEffect(() => {
     fetch(
-      `${API_URL}/listings/?_bids=true&limit=${limit ? limit : 10}&sort=${
+      `${API_URL}/listings/?_bids=true&limit=${limit}&offset=${offset}&sort=${
         sortByFilter ? sortByFilter : "endsAt"
       }&sortOrder=${sortOrderFilter ? sortOrderFilter : "asc"}&_active=true`,
       {}
     )
       .then((response) => response.json())
-      .then((listings) => {
-        setListings(listings);
+      .then((newListings) => {
+        setListings(newListings);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowError(true);
       });
-  }, [sortByFilter, sortOrderFilter]);
+  }, [sortByFilter, sortOrderFilter, limit]);
+
+  useEffect(() => {
+    fetch(
+      `${API_URL}/listings/?_bids=true&limit=${limit}&offset=${offset}&sort=${
+        sortByFilter ? sortByFilter : "endsAt"
+      }&sortOrder=${sortOrderFilter ? sortOrderFilter : "asc"}&_active=true`,
+      {}
+    )
+      .then((response) => response.json())
+      .then((newListings) => {
+        setListings([...listings, ...newListings]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowError(true);
+      });
+  }, [offset]);
+
   const renderListings = () => {
     return listings.map((listing) => {
       if (searchWord) {
@@ -37,5 +65,29 @@ export default function Listings(props) {
       }
     });
   };
-  return <div className="listings-container">{renderListings()}</div>;
+  const showMore = () => {
+    setOffset(offset + limit);
+  };
+
+  if (showError) {
+    return <div className="error-message">Problem with fetching listings.</div>;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="spinner">
+        <CircularProgress />
+      </div>
+    );
+  }
+  return (
+    <>
+      <div className="listings-container">{renderListings()}</div>
+      <div className="see-more">
+        <Button className="primary" onClick={showMore}>
+          Show {limit} more
+        </Button>
+      </div>
+    </>
+  );
 }

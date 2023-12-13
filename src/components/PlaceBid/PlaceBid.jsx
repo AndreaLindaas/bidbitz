@@ -14,6 +14,7 @@ export default function PlaceBid(props) {
   const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isBidButtonDisabled, setIsBidButtonDisabled] = useState(true);
   const params = useParams();
 
   const placeBidClicked = async (event) => {
@@ -43,7 +44,7 @@ export default function PlaceBid(props) {
         window.location.reload();
       }
     } catch (error) {
-      console.warn("An error occurred", error);
+      // errorMessage("something went wrong.");
     }
   };
 
@@ -54,7 +55,17 @@ export default function PlaceBid(props) {
       </div>
     );
   }
+  const amountOnChange = (event) => {
+    const amount = event.target.value;
 
+    if (amount > props.highestBid.amount) {
+      setIsBidButtonDisabled(false);
+      setErrorMessage("");
+    } else {
+      setIsBidButtonDisabled(true);
+      setErrorMessage("Your bid is too low");
+    }
+  };
   if (userEmail) {
     return (
       <>
@@ -64,13 +75,22 @@ export default function PlaceBid(props) {
             label="Amount"
             name="amount"
             variant="filled"
+            onChange={amountOnChange}
             type="number"
+            className="bid-input"
           />
+          <div
+            className="error-message
+          "
+          >
+            {errorMessage}
+          </div>
           <div>
             <Button
               className="primary bid-btn"
               variant="contained"
               type="submit"
+              disabled={isBidButtonDisabled}
             >
               Place bid
             </Button>

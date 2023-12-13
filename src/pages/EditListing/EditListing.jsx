@@ -14,6 +14,8 @@ export default function EditListing() {
   const [media, setMedia] = useState([]);
   const [descriptionCount, setDescriptionCount] = useState(0);
   const [titleCount, setTitleCount] = useState(0);
+  const [showError, setShowError] = useState(false);
+  const [imageUrlCount, setImageUrlCount] = useState(0);
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}`, {
@@ -28,8 +30,10 @@ export default function EditListing() {
         setMedia(result.media);
         setTitleCount(result.title.length);
         setDescriptionCount(result.description.length);
-        console.log(result);
         setShowEdit(true);
+      })
+      .catch((error) => {
+        setShowError(true);
       });
   }, []);
   const editListing = (event) => {
@@ -53,6 +57,9 @@ export default function EditListing() {
       .then((response) => response.json())
       .then((data) => {
         navigate("/listing/" + data.id);
+      })
+      .catch((error) => {
+        setShowError(true);
       });
   };
   const addImage = (event) => {
@@ -104,6 +111,25 @@ export default function EditListing() {
     }
     return true;
   };
+  const imageUrlOnChange = (event) => {
+    const url = event.target.value;
+    setImageUrlCount(url.length);
+  };
+  const validateUrlImage = () => {
+    if (imageUrlCount > 4) {
+      return true;
+    }
+    return false;
+  };
+
+  if (showError) {
+    return (
+      <div className="error-message">
+        Something went wrong. Please try again.
+      </div>
+    );
+  }
+
   return (
     <>
       <Helmet>
@@ -124,12 +150,14 @@ export default function EditListing() {
                 fullWidth
                 margin="dense"
                 multiline
+                onChange={imageUrlOnChange}
               />
               <Button
                 type="submit"
                 variant="contained"
                 className="primary"
                 size="small"
+                disabled={!validateUrlImage()}
               >
                 Add
               </Button>

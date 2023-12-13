@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("bidbitz", () => {
+describe("bidbitz - listings", () => {
   beforeEach(() => {
     cy.visit("localhost:5174");
   });

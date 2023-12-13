@@ -49,6 +49,7 @@ export default function Register() {
     <>
       <Helmet>
         <title>BidBitz - Register</title>
+        <meta name="description" content="Here you can register for BidBitz" />
       </Helmet>
       <div className="register">
         <h1>Sign up</h1>

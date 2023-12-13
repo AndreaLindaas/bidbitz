@@ -193,6 +193,7 @@ export default function Profile() {
     <>
       <Helmet>
         <title>BidBitz - {profile.name}</title>
+        <meta name="description" content="Her is the user profile page" />
       </Helmet>
       <Card className="profile-card">
         <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />

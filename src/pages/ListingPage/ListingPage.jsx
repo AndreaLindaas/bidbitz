@@ -120,6 +120,7 @@ export default function ListingPage() {
     <>
       <Helmet>
         <title>BidBitz - {listing.title}</title>
+        <meta name="description" content={"bid on " + listing.title} />
       </Helmet>
 
       <div className="listing-container">

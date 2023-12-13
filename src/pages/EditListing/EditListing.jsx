@@ -134,6 +134,7 @@ export default function EditListing() {
     <>
       <Helmet>
         <title>BidBitz - Edit Listing</title>
+        <meta name="description" content="Here you can edit your listings" />
       </Helmet>
       <div className="edit-listing">
         <h1>Edit Listing</h1>

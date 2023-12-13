@@ -141,6 +141,10 @@ export default function CreateListing() {
     <>
       <Helmet>
         <title>BidBitz - Create Listing</title>
+        <meta
+          name="description"
+          content="Here you can create and sell your items."
+        />
       </Helmet>
       <div className="create-listing">
         <Card variant="outlined">

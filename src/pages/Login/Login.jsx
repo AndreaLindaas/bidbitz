@@ -51,6 +51,7 @@ export default function Login() {
     <>
       <Helmet>
         <title>BidBitz - Login</title>
+        <meta name="description" content="Here you can login to BidBitz" />
       </Helmet>
       <div className="login">
         <h1 className="login">Login</h1>

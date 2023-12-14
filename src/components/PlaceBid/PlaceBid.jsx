@@ -58,7 +58,10 @@ export default function PlaceBid(props) {
   const amountOnChange = (event) => {
     const amount = event.target.value;
     console.log(props);
-    if (!props.highestBid.amount && amount > props.highestBid.amount) {
+    if (
+      (!props.highestBid.amount || amount > props.highestBid.amount) &&
+      amount > 0
+    ) {
       setIsBidButtonDisabled(false);
       setErrorMessage("");
     } else {

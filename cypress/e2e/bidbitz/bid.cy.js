@@ -2,7 +2,7 @@
 
 describe("bidbitz - bidding", () => {
   beforeEach(() => {
-    cy.visit("localhost:5174");
+    cy.visit("https://bidbitz-staging.netlify.app/");
   });
   it("can bid on another users listing ", () => {
     cy.get(".login-link").click();

@@ -46,6 +46,10 @@ li {
   margin-top: 50px;
 }
 .error-message {
-  text-align: center;
+  margin: 0 auto;
+  width: 300px;
   color: var(--red);
+  ul {
+    padding: 0;
+  }
 }

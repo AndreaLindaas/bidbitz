@@ -81,7 +81,7 @@ export default function CreateListing() {
     return media.map((url, i) => {
       return (
         <li key={i}>
-          <img src={url} />
+          <img src={url} alt="auction image" />
           <Button
             variant="contained"
             className="delete"
@@ -100,7 +100,7 @@ export default function CreateListing() {
       return media.map((image, i) => {
         return (
           <div className="slide" key={i}>
-            <img src={image} />
+            <img src={image} alt="auction image" />
           </div>
         );
       });
@@ -141,6 +141,10 @@ export default function CreateListing() {
     <>
       <Helmet>
         <title>BidBitz - Create Listing</title>
+        <meta
+          name="description"
+          content="Here you can create and sell your items."
+        />
       </Helmet>
       <div className="create-listing">
         <Card variant="outlined">

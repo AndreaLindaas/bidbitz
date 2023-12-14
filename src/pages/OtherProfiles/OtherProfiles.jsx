@@ -66,8 +66,19 @@ export default function OtherProfiles() {
   }
   return (
     <>
+      <Helmet>
+        <title>BidBitz - Login</title>
+        <meta
+          name="description"
+          content="Here you can see the users profiles"
+        />
+      </Helmet>
       <Card className="profile-card">
-        <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
+        <Avatar
+          alt="profile image"
+          src={profileImage()}
+          sx={{ width: 70, height: 70 }}
+        />
         <CardContent>
           <Typography
             className="name"

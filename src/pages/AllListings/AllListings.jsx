@@ -26,7 +26,8 @@ export default function AllListings() {
   return (
     <>
       <Helmet>
-        <title>BidBitz - All Auctions</title>
+        <title>BidBitz - All Auctions</title>{" "}
+        <meta name="description" content="Here you can see all listings" />
       </Helmet>
       <div className="filter-container">
         <div className="search">

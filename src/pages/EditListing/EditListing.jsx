@@ -77,7 +77,7 @@ export default function EditListing() {
     return media.map((url, i) => {
       return (
         <li key={i}>
-          <img src={url} />
+          <img src={url} alt="auction image" />
           <Button
             variant="contained"
             className="delete"
@@ -134,6 +134,7 @@ export default function EditListing() {
     <>
       <Helmet>
         <title>BidBitz - Edit Listing</title>
+        <meta name="description" content="Here you can edit your listings" />
       </Helmet>
       <div className="edit-listing">
         <h1>Edit Listing</h1>
@@ -143,7 +144,7 @@ export default function EditListing() {
             <form onSubmit={addImage}>
               <TextField
                 id="filled-basic"
-                label="Url"
+                label="Pictures"
                 variant="filled"
                 type="text"
                 name="imageUrl"

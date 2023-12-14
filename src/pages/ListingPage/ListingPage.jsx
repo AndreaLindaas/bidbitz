@@ -42,7 +42,7 @@ export default function ListingPage() {
       return listing.media.map((image, i) => {
         return (
           <div className="slide" key={i}>
-            <img src={image} />
+            <img src={image} alt="auction image" />
           </div>
         );
       });
@@ -120,6 +120,7 @@ export default function ListingPage() {
     <>
       <Helmet>
         <title>BidBitz - {listing.title}</title>
+        <meta name="description" content={"bid on " + listing.title} />
       </Helmet>
 
       <div className="listing-container">
@@ -161,7 +162,7 @@ export default function ListingPage() {
 
               <Link to={sellerUrl()}>
                 <div className="seller">
-                  <Avatar src={sellerImage()} />
+                  <Avatar src={sellerImage()} alt="profile image" />
                   <div className="highlight">{listing.seller.name}</div>
                 </div>
               </Link>

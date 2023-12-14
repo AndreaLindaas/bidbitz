@@ -56,7 +56,10 @@ export default function Home() {
       <div className="introduction-container">
         {isDesktop && (
           <div className="auctionman-image">
-            <img src="./assets/media/images/auction_man.png" alt="" />
+            <img
+              src="./assets/media/images/auction_man.png"
+              alt="Bidbitz logo of an auction man"
+            />
           </div>
         )}
 

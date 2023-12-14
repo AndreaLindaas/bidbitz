@@ -61,6 +61,7 @@ export default function Register() {
               label="Name"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div>
@@ -71,6 +72,7 @@ export default function Register() {
               placeholder="...@stud.noroff.no"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div>
@@ -81,6 +83,7 @@ export default function Register() {
               type="password"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div>
@@ -90,6 +93,7 @@ export default function Register() {
               label="Avatar url"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div className="error-message">

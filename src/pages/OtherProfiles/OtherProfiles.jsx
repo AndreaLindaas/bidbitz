@@ -74,7 +74,11 @@ export default function OtherProfiles() {
         />
       </Helmet>
       <Card className="profile-card">
-        <Avatar alt="" src={profileImage()} sx={{ width: 70, height: 70 }} />
+        <Avatar
+          alt="profile image"
+          src={profileImage()}
+          sx={{ width: 70, height: 70 }}
+        />
         <CardContent>
           <Typography
             className="name"

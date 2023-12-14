@@ -1,4 +1,3 @@
-# React + Vite
+# BidBitz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-th
+[![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml)

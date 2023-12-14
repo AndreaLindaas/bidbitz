@@ -65,6 +65,7 @@ export default function Login() {
               placeholder="...@stud.noroff.no"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div>
@@ -76,6 +77,7 @@ export default function Login() {
               placeholder="Password"
               variant="filled"
               fullWidth
+              autoComplete="on"
             />
           </div>
           <div className="error-message">

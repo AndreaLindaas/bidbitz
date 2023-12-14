@@ -31,7 +31,6 @@ export default function Listings(props) {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setShowError(true);
       });
   }, [sortByFilter, sortOrderFilter, limit]);
@@ -49,7 +48,6 @@ export default function Listings(props) {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setShowError(true);
       });
   }, [offset]);

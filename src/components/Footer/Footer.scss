@@ -1,0 +1,34 @@
+footer {
+  background-color: var(--jet);
+  color: #fff;
+  text-align: center;
+  h2 {
+    padding-top: 30px;
+    margin: 0;
+  }
+  .copyright {
+    border-top: 1px solid var(--yellow);
+    width: 200px;
+    margin: 10px auto 0 auto;
+    padding: 10px;
+  }
+}
+@media screen and (min-width: 768px) {
+  footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    align-items: center;
+    div {
+      border-right: 1px solid var(--yellow);
+      width: 300px;
+      text-align: center;
+    }
+    div:last-child {
+      border-right: 0px;
+    }
+    .copyright {
+      border-top: 0;
+    }
+  }
+}

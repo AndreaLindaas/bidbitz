@@ -1,0 +1,67 @@
+.listings-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+
+  a.listing-link {
+    > div {
+      margin: 20px 0;
+      width: 90vw;
+      .no-image-avaliable {
+        line-height: 200px;
+        text-align: center;
+      }
+      .MuiCardMedia-root {
+        height: 200px;
+      }
+      .MuiCardContent-root {
+        background-color: var(--jet);
+        color: #fff;
+        height: 106px;
+      }
+      p {
+        color: #fff;
+      }
+      .MuiTypography-root.MuiTypography-h5 {
+        height: 64px;
+        overflow: hidden;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .listings-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    a {
+      flex-basis: 31%;
+
+      div.MuiPaper-root {
+        width: 100%;
+        margin: 20px auto;
+        max-width: 500px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .listings-container {
+    a {
+      flex-basis: 23%;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .listings-container {
+    a {
+      flex-basis: 19%;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.register {
+  background-color: var(--jet);
+  color: #fff;
+  h1 {
+    text-align: center;
+    margin: 0;
+    padding: 30px 0;
+  }
+  form {
+    margin: 0 auto;
+    width: 270px;
+    .signup-button {
+      text-align: center;
+    }
+    div {
+      margin-bottom: 10px;
+      #filled-basic {
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+  }
+  .text-register {
+    text-align: center;
+    margin: 0;
+    padding: 20px 0 30px 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .register {
+    h1 {
+      padding-top: 100px;
+    }
+  }
+}

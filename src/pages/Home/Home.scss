@@ -1,0 +1,59 @@
+.introduction-container {
+  background-color: var(--yellow);
+  padding: 80px 10px;
+  .auctionman-image {
+    margin: 0 auto;
+    width: 300px;
+    img {
+      width: 100px;
+    }
+  }
+
+  .introduction {
+    width: 300px;
+    margin: 0 auto;
+
+    h1 {
+      margin: 0;
+    }
+    p {
+      margin: 10px 0 0 0;
+    }
+  }
+}
+.hurry {
+  background-color: var(--jet);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  p {
+    margin: 0;
+  }
+}
+.info-home {
+  display: flex;
+  justify-content: space-evenly;
+  height: 18px;
+  padding: 30px;
+  background-color: var(--jet);
+  color: #fff;
+  margin-bottom: 1px;
+}
+@media screen and (min-width: 768px) {
+  .introduction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .auctionman-image {
+      margin: 0;
+      img {
+        width: 200px;
+      }
+    }
+    .introduction {
+      width: 500px;
+      margin: 0;
+    }
+  }
+}

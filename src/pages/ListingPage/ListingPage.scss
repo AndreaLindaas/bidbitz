@@ -1,0 +1,167 @@
+.listing-container {
+  text-align: center;
+
+  .carousel {
+    .no-image {
+      line-height: 300px;
+    }
+    .slide {
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        border-radius: 3px;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .MuiButtonBase-root.MuiIconButton-root {
+      opacity: 1;
+    }
+  }
+
+  .bid-ends {
+    background-color: var(--yellow);
+    color: var(--jet);
+    padding: 30px 0;
+    margin: 0 auto;
+    width: 320px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .cb-color {
+    color: grey;
+  }
+  .credit-nr {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .bid {
+    background-color: var(--jet);
+    padding: 30px 0 50px 0;
+    margin: 0px auto 10px auto;
+    width: 320px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    svg {
+      color: #fff;
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    span {
+      color: #fff;
+    }
+    .winning {
+      color: #fff;
+      .highlight {
+        color: var(--hot-pink);
+      }
+    }
+    .want-tobid {
+      color: #fff;
+      margin-top: 10px;
+    }
+  }
+  .MuiFormControl-root.MuiTextField-root {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+
+  .primary.bid-btn {
+    margin-top: 30px;
+    color: var(--jet);
+  }
+
+  .seller-container {
+    background-color: var(--jet);
+    color: #fff;
+    width: 320px;
+    padding: 20px 0;
+    margin: 10px auto;
+    border-radius: 3px;
+  }
+  .seller-bold {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  .seller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 60px;
+    }
+  }
+  .description {
+    width: 320px;
+    margin: 0 auto;
+    p {
+      text-align: left;
+    }
+  }
+  .single-bid {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bids {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    h3 {
+      text-align: center;
+    }
+    .no-bids {
+      text-align: center;
+    }
+    ul {
+      padding: 0;
+      li {
+        padding: 10px;
+      }
+
+      li:nth-child(odd) {
+        background: #f8f9fb;
+      }
+      li.user {
+        background-color: var(--jet);
+        color: #fff;
+        .name {
+          color: var(--hot-pink);
+        }
+      }
+    }
+    .bold-credit {
+      font-weight: bold;
+    }
+  }
+  .bid-date {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .listing-container {
+    background-color: var(--jet);
+    h1 {
+      background-color: var(--jet);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      margin: 2px 0;
+    }
+    .content-container {
+      display: grid;
+      grid-template-columns: auto 320px;
+      gap: 10px;
+      background: white;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 3px;
+    }
+  }
+}

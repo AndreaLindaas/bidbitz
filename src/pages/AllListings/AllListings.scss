@@ -1,0 +1,36 @@
+.filter-container {
+  background-color: var(--jet);
+  padding: 30px;
+  margin: 2px 0;
+  .search {
+    text-align: center;
+    padding: 8px 0;
+    .MuiFormControl-root {
+      width: 270px;
+    }
+    .MuiInputBase-root.MuiOutlinedInput-root {
+      background-color: #fff;
+      height: 40px;
+    }
+  }
+  .filter {
+    text-align: center;
+    padding-top: 4px;
+    .MuiFormControl-root {
+      border-radius: 4px;
+    }
+    .MuiFormControl-root {
+      margin: 5px;
+
+      background-color: #fff;
+
+      .MuiInputBase-root .MuiSelect-select.MuiInputBase-input {
+        padding: 5px;
+      }
+    }
+  }
+}
+.see-more {
+  text-align: center;
+  margin-bottom: 20px;
+}

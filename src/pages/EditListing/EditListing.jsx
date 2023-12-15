@@ -103,9 +103,7 @@ export default function EditListing() {
     if (descriptionCount > 280) {
       return false;
     }
-    // if (titleCount > 280) {
-    //   return false;
-    // }
+
     if (titleCount === 0 || titleCount > 280) {
       return false;
     }

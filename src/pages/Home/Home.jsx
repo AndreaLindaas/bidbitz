@@ -4,7 +4,6 @@ import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
 import { Helmet } from "react-helmet";
 import { useMediaQuery } from "@mui/material";
-
 export default function Home() {
   const [info, setInfo] = useState({});
   const name = localStorage.getItem("name");

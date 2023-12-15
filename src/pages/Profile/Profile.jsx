@@ -309,7 +309,6 @@ export default function Profile() {
             size="small"
             className="delete"
             onClick={deleteListing}
-            // data-index={i}
           >
             Delete
           </Button>

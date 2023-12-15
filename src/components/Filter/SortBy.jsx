@@ -30,8 +30,9 @@ export default function SortBy(props) {
   return (
     <>
       <TextField
-        id="outlined-select-currency"
         select
+        name="sortby"
+        aria-label="sortby"
         defaultValue={"endsAt" || ""}
         onChange={sortByChanged}
         variant="filled"

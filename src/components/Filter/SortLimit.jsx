@@ -39,6 +39,8 @@ export default function SortLimit(props) {
         className="sort-filter limit"
         defaultValue={10}
         onChange={sortLimitChanged}
+        name="limit"
+        aria-label="limit"
       >
         {showSortLimitFilter()}
       </TextField>

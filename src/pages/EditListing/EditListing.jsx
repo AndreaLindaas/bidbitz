@@ -143,7 +143,6 @@ export default function EditListing() {
             <ul>{showMediaUrl()}</ul>
             <form onSubmit={addImage}>
               <TextField
-                id="filled-basic"
                 label="Pictures"
                 variant="filled"
                 type="text"
@@ -165,7 +164,6 @@ export default function EditListing() {
             </form>
             <form onSubmit={editListing}>
               <TextField
-                id="filled-basic"
                 label="Title"
                 variant="filled"
                 type="text"
@@ -180,7 +178,6 @@ export default function EditListing() {
                 {titleCount}/280
               </div>
               <TextField
-                id="filled-basic"
                 label="Description"
                 variant="filled"
                 type="text"

@@ -1,7 +1,8 @@
 .login {
   background-color: var(--jet);
   color: #fff;
-  h1.login {
+  min-height: 85vh;
+  h1 {
     text-align: center;
     margin: 0;
     padding: 30px 0;
@@ -29,7 +30,7 @@
 }
 @media screen and (min-width: 768px) {
   .login {
-    h1.login {
+    h1 {
       padding-top: 100px;
     }
   }

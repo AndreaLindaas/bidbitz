@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import Listing from "../../components/listing/listing";
 import "./OtherProfiles.scss";
+import { Helmet } from "react-helmet";
 export default function OtherProfiles() {
   const params = useParams();
   const [profile, setProfile] = useState({});

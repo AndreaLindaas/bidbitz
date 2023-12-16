@@ -1,3 +1,3 @@
 # BidBitz
 
-[![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml)
+[![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml/badge.svg)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml)

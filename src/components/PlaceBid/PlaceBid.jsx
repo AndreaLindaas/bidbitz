@@ -44,7 +44,7 @@ export default function PlaceBid(props) {
         window.location.reload();
       }
     } catch (error) {
-      // errorMessage("something went wrong.");
+      setErrorMessage("something went wrong.");
     }
   };
 
@@ -57,7 +57,7 @@ export default function PlaceBid(props) {
   }
   const amountOnChange = (event) => {
     const amount = event.target.value;
-    console.log(props);
+
     if (
       (!props.highestBid.amount || amount > props.highestBid.amount) &&
       amount > 0

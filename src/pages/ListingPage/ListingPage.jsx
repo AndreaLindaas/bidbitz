@@ -9,6 +9,7 @@ import Carousel from "react-material-ui-carousel";
 import { Gavel } from "@mui/icons-material";
 import { useMediaQuery, Avatar, CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+import Timer from "../../components/Timer/Timer";
 
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
@@ -101,6 +102,7 @@ export default function ListingPage() {
       return listing.seller.avatar;
     }
   };
+
   if (showError) {
     return (
       <div className="error-message">
@@ -141,8 +143,7 @@ export default function ListingPage() {
             {!isDesktop && <h1>{listing.title}</h1>}
 
             <div className="bid-ends">
-              <div>Ends at</div>
-              <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
+              <Timer endsAt={listing.endsAt} />
             </div>
             <div className="bid">
               <Gavel />

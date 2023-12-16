@@ -54,7 +54,7 @@ export default function Login() {
         <meta name="description" content="Here you can login to BidBitz" />
       </Helmet>
       <div className="login">
-        <h1 className="login">Login</h1>
+        <h1>Login</h1>
         <form onSubmit={handleOnSubmit}>
           <div>
             <TextField

@@ -232,15 +232,17 @@ export default function CreateListing() {
           datePreview ||
           media.length > 0) && (
           <Card variant="outlined" className="preview">
-            <h2>Preview</h2>
-            <Carousel className="carousel" height={300}>
-              {previewImage()}
-            </Carousel>
-            <h2>{titlePreview}</h2>
-            <div className="description-date">
-              <p>{descriptionPreview}</p>
+            <div className="preview-content">
+              <h2>Preview</h2>
+              <Carousel className="carousel" height={300}>
+                {previewImage()}
+              </Carousel>
+              <h2>{titlePreview}</h2>
+              <div className="description-date">
+                <p>{descriptionPreview}</p>
 
-              <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
+                <p>{datePreview && datePreview.format("DD-MM-YYYY")}</p>
+              </div>
             </div>
           </Card>
         )}

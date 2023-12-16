@@ -9,12 +9,14 @@ import Carousel from "react-material-ui-carousel";
 import { Gavel } from "@mui/icons-material";
 import { useMediaQuery, Avatar, CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+import Timer from "../../components/Timer/Timer";
 
 export default function ListingPage() {
   const [listing, setlisting] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [highestBid, setHighestBid] = useState({});
   const [showError, setShowError] = useState(false);
+  const [sortedBidList, setSortedBidList] = useState([]);
   const params = useParams();
   const email = localStorage.getItem("user_email");
   const name = localStorage.getItem("name");
@@ -34,7 +36,7 @@ export default function ListingPage() {
   }, []);
 
   useEffect(() => {
-    lastBid();
+    sortBids();
   }, [listing]);
 
   const renderImages = () => {
@@ -50,18 +52,20 @@ export default function ListingPage() {
     return <div className="no-image">This listing does not have any image</div>;
   };
 
-  const lastBid = () => {
+  const sortBids = () => {
     if (!listing.bids) {
       return null;
     }
-    const lastBid = listing.bids[listing.bids.length - 1];
+    const sortedBids = listing.bids.sort((a, b) => b.amount - a.amount);
+    setSortedBidList(sortedBids);
+    const bid = sortedBids[0];
 
-    if (lastBid) {
-      setHighestBid(lastBid);
+    if (bid) {
+      setHighestBid(bid);
       return (
         <div>
           <span className="cb-color">Current Bid:</span>
-          <span className="credit-nr"> {lastBid.amount} Credits</span>
+          <span className="credit-nr"> {bid.amount} Credits</span>
         </div>
       );
     }
@@ -72,7 +76,8 @@ export default function ListingPage() {
     if (!listing.bids || listing.bids.length == 0) {
       return <div className="no-bids">There are no bids yet</div>;
     }
-    const bids = listing.bids.map((bid) => {
+
+    const bids = sortedBidList.map((bid) => {
       return (
         <li className={bid.bidderName == name ? "user" : ""} key={bid.id}>
           <span className="single-bid">
@@ -85,7 +90,7 @@ export default function ListingPage() {
         </li>
       );
     });
-    return bids.reverse();
+    return bids;
   };
 
   const sellerUrl = () => {
@@ -101,6 +106,7 @@ export default function ListingPage() {
       return listing.seller.avatar;
     }
   };
+
   if (showError) {
     return (
       <div className="error-message">
@@ -141,8 +147,7 @@ export default function ListingPage() {
             {!isDesktop && <h1>{listing.title}</h1>}
 
             <div className="bid-ends">
-              <div>Ends at</div>
-              <Moment format="HH:mm DD.MM.YYYY">{listing.endsAt}</Moment>
+              <Timer endsAt={listing.endsAt} />
             </div>
             <div className="bid">
               <Gavel />

@@ -1,6 +1,7 @@
 .listing-container {
   text-align: center;
-
+  min-height: 100vh;
+  height: 100%;
   .carousel {
     .no-image {
       line-height: 300px;

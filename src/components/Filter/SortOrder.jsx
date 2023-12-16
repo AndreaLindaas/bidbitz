@@ -30,12 +30,13 @@ export default function SortOrder(props) {
   return (
     <>
       <TextField
-        id="outlined-select-currency"
+        name="sortorder"
         select
         defaultValue={"asc" || ""}
         onChange={sortOrderChanged}
         className="sort-filter"
         variant="filled"
+        aria-label="sortorder"
       >
         {showSortOrderFilter()}
       </TextField>

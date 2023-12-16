@@ -1,6 +1,6 @@
 import Search from "../../components/search/search";
 import Listings from "../../components/listings/listings";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import "./AllListings.scss";
 import { Button } from "@mui/material";

@@ -16,6 +16,7 @@ export default function EditListing() {
   const [titleCount, setTitleCount] = useState(0);
   const [showError, setShowError] = useState(false);
   const [imageUrlCount, setImageUrlCount] = useState(0);
+  const [imageUrlValue, setImageUrlValue] = useState("");
   const accessToken = localStorage.getItem("access_token");
   useEffect(() => {
     fetch(`${API_URL}/listings/${params.listingId}`, {
@@ -68,6 +69,7 @@ export default function EditListing() {
     const { imageUrl } = event.target.elements;
 
     setMedia([...media, imageUrl.value]);
+    setImageUrlValue("");
   };
   const removeItem = (event) => {
     const index = event.target.dataset.index;
@@ -112,6 +114,7 @@ export default function EditListing() {
   const imageUrlOnChange = (event) => {
     const url = event.target.value;
     setImageUrlCount(url.length);
+    setImageUrlValue(url);
   };
   const validateUrlImage = () => {
     if (imageUrlCount > 4) {
@@ -148,6 +151,7 @@ export default function EditListing() {
                 fullWidth
                 margin="dense"
                 multiline
+                value={imageUrlValue}
                 onChange={imageUrlOnChange}
               />
               <Button

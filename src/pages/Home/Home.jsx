@@ -8,7 +8,6 @@ import AnimatedNumbers from "react-animated-numbers";
 
 export default function Home() {
   const [info, setInfo] = useState({});
-  const [credits, setCredits] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
@@ -25,7 +24,6 @@ export default function Home() {
         .then((response) => response.json())
         .then((l) => {
           setInfo(l);
-          setCredits(l.credits);
           setIsLoading(false);
         });
     }
@@ -47,7 +45,7 @@ export default function Home() {
                     type: "spring",
                     duration: index + 0.3,
                   })}
-                  animateToNumber={credits}
+                  animateToNumber={info.credits}
                 />
               </span>
               credits

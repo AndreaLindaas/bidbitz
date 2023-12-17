@@ -37,7 +37,7 @@ export default function SortLimit(props) {
         select
         variant="filled"
         className="sort-filter limit"
-        defaultValue={10}
+        defaultValue={50}
         onChange={sortLimitChanged}
         name="limit"
         aria-label="limit"

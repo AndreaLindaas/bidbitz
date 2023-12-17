@@ -12,6 +12,8 @@ describe("bidbitz - bidding", () => {
     cy.contains("Hello Fjono").should("exist");
     cy.get(".auctions-link").click();
 
+    cy.get(".see-more button").click();
+
     cy.contains("0 Bids").first().click();
     cy.get(".bid-input input").type("1");
     cy.get(".bid-btn").click();

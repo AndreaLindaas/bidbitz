@@ -27,6 +27,34 @@
   p {
     margin: 0;
   }
+
+  // https://unused-css.com/blog/css-shake-animation/
+
+  span.skew-shake-y {
+    animation: skew-y-shake 3s infinite;
+    display: inline-block;
+  }
+
+  @keyframes skew-y-shake {
+    0% {
+      transform: skewY(-3deg);
+    }
+    5% {
+      transform: skewY(3deg);
+    }
+    10% {
+      transform: skewY(-2deg);
+    }
+    15% {
+      transform: skewY(2deg);
+    }
+    20% {
+      transform: skewY(0deg);
+    }
+    100% {
+      transform: skewY(0deg);
+    }
+  }
 }
 .info-home {
   display: flex;

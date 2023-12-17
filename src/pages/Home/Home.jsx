@@ -4,8 +4,12 @@ import Listings from "../../components/listings/listings";
 import { API_URL } from "../../lib/constants";
 import { Helmet } from "react-helmet";
 import { useMediaQuery } from "@mui/material";
+import AnimatedNumbers from "react-animated-numbers";
+
 export default function Home() {
   const [info, setInfo] = useState({});
+  const [credits, setCredits] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const name = localStorage.getItem("name");
   const accessToken = localStorage.getItem("access_token");
   const isDesktop = useMediaQuery("(min-width:768px)");
@@ -21,20 +25,32 @@ export default function Home() {
         .then((response) => response.json())
         .then((l) => {
           setInfo(l);
+          setCredits(l.credits);
+          setIsLoading(false);
         });
     }
   }, []);
 
   const showInfoOnHomePage = () => {
-    if (accessToken) {
+    if (accessToken && !isLoading) {
       return (
         <>
           <div className="info-home">
             <div>
               Hello <span className="highlight">{info.name}</span>
             </div>
-            <div>
-              You have <span className="highlight">{info.credits}</span> credits
+            <div className="credits-container">
+              You have
+              <span className="highlight">
+                <AnimatedNumbers
+                  transitions={(index) => ({
+                    type: "spring",
+                    duration: index + 0.3,
+                  })}
+                  animateToNumber={credits}
+                />
+              </span>
+              credits
             </div>
           </div>
         </>
@@ -76,8 +92,8 @@ export default function Home() {
       <div>{showInfoOnHomePage()}</div>
       <div className="hurry">
         <p>
-          <span className="highlight">Hurry up!</span> These items are ending
-          soon.
+          <span className="highlight skew-shake-y">Hurry up!</span> These items
+          are ending soon.
         </p>
       </div>
       <Listings limit={10} />

@@ -9,7 +9,7 @@ export default function AllListings() {
   const [searchWord, setSearchWord] = useState("");
   const [sortByFilter, setSortByFilter] = useState("endsAt");
   const [sortOrderFilter, setSortOrderFilter] = useState("asc");
-  const [limitFilter, setLimitFilter] = useState(10);
+  const [limitFilter, setLimitFilter] = useState(50);
   const search = (searchWord) => {
     setSearchWord(searchWord);
   };

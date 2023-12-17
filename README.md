@@ -5,4 +5,6 @@ Develop
 
 Staging [![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml/badge.svg?branch=staging)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml)
 
-Main [![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test.yml)
+Main [![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test-main.yml/badge.svg?branch=main)](https://github.com/AndreaLindaas/bidbitz/actions/workflows/test-main.yml)
+
+    

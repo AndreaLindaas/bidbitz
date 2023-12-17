@@ -15,6 +15,8 @@ Main [![Cypress Tests](https://github.com/AndreaLindaas/bidbitz/actions/workflow
 
 Bidbitz is my semester project for the third semester. It is supposed to show my skills learned over the past three semesters. The goal is to create a auction site from scratch with only API`s provided by the school.
 
+Read more in the report delivered in Moodle.
+
 ## Technical
 
 Some of the technologies used in this project.
@@ -41,3 +43,9 @@ Some of the technologies used in this project.
 ### Run Cypress testing
 
 1.      npm run test
+
+### Links
+
+Production: https://bidbitz.netlify.app/  
+Staging: https://staging--bidbitz-staging.netlify.app/  
+Figma: https://www.figma.com/file/9LuutiE2DCWcu7jSUxcGlD/Bidbitz?type=design&node-id=10%3A107&mode=design&t=IKG0C6lgHzv0byrd-1

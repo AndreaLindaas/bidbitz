@@ -18,6 +18,7 @@ export default function CreateListing() {
   const [titleCount, setTitleCount] = useState(0);
   const [showError, setShowError] = useState(false);
   const [imageUrlCount, setImageUrlCount] = useState(0);
+  const [imageUrlValue, setImageUrlValue] = useState("");
   const createTheListing = (event) => {
     event.preventDefault();
 
@@ -72,6 +73,7 @@ export default function CreateListing() {
     const { imageUrl } = event.target.elements;
 
     setMedia([...media, imageUrl.value]);
+    setImageUrlValue("");
   };
   const removeItem = (event) => {
     const index = event.target.dataset.index;
@@ -123,6 +125,7 @@ export default function CreateListing() {
   const imageUrlOnChange = (event) => {
     const url = event.target.value;
     setImageUrlCount(url.length);
+    setImageUrlValue(url);
   };
   const validateUrlImage = () => {
     if (imageUrlCount > 4) {
@@ -160,6 +163,7 @@ export default function CreateListing() {
                 fullWidth
                 margin="dense"
                 multiline
+                value={imageUrlValue}
                 onChange={imageUrlOnChange}
               />
             </div>

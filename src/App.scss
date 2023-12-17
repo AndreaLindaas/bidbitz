@@ -20,6 +20,12 @@ a {
 li {
   list-style-type: none;
 }
+
+.credits-container {
+  display: flex;
+  gap: 4px;
+}
+
 .highlight {
   color: var(--hot-pink);
 }

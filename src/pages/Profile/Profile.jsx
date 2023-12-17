@@ -10,6 +10,7 @@ import "./Profile.scss";
 import Listing from "../../components/listing/listing";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import AnimatedNumbers from "react-animated-numbers";
 export default function Profile() {
   const [profile, setProfile] = useState({});
   const [listings, setListings] = useState([]);
@@ -230,7 +231,13 @@ export default function Profile() {
           </div>
           <div className="credit-won-result">
             <Typography variant="body2" color="text.secondary">
-              {profile.credits}
+              <AnimatedNumbers
+                transitions={(index) => ({
+                  type: "spring",
+                  duration: index + 0.3,
+                })}
+                animateToNumber={profile.credits}
+              />
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {showWins()}
